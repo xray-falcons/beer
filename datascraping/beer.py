@@ -15,10 +15,14 @@ soup.prettify()
 
 def get_all_beers(soup):
     beers = []
-    all_h2 = soup.findAll('h2')
-    for beer in all_h2:
-        if beer.text:
-            print beer.text
+    all_h2 = soup.find_all('h2')
+    all_p = soup.find_all('p')
+    for i in range(len(all_h2)):
+        beer_entry = {
+            'name': all_h2[i].text,
+            'description': all_p[i].text
+        }
+        beers.append(beer_entry)
     #     if is_beer_entry(table_row):
     #         row_cells = table_row.findAll("td")
     #         beer_entry = {
@@ -31,8 +35,8 @@ def get_all_beers(soup):
     #             "abv": row_cells[6].text,
     #             "ibu": row_cells[7].text
     #         }
-    #         beers.append(beer_entry)
-    # return beers
+    #
+    return beers
     # print all_h2
+print get_all_beers(soup)
 
-get_all_beers(soup)
