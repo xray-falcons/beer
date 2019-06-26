@@ -2,7 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import SignUpView from './components/sign-up'
 import {LinearGradient} from "expo-linear-gradient";
-
+import {styles} from "./style/styles";
+import SignInView from './components/sign-in';
 
 export default class App extends React.Component {
     constructor(props){
@@ -11,24 +12,13 @@ export default class App extends React.Component {
             isLoadingComplete: false
         };
 
-
-
     }
   render () {
         return (
-          <View
-              style={styles.container}
-          >
+          <View style={styles.container} >
               <LinearGradient
                   colors={['#c36f09', '#eeba0b']}
-                  style={{
-                      position: 'absolute',
-                      left: 0,
-                      right: 0,
-                      top: 0,
-                      //CHECK DOCS!!!!! cause this could not work on different devices
-                      height: 1000,
-                  }}
+                  style={styles.linearGradient}
               >
                   <SignUpView/>
               </LinearGradient>
@@ -36,12 +26,3 @@ export default class App extends React.Component {
       );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    // flex: 1,
-    // backgroundColor: '#c36f09',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

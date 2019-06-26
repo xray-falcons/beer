@@ -12,12 +12,11 @@ import {
 } from 'react-native';
 
 
-export default class SignUpView extends Component {
+export default class SignInView extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            fullName: '',
             email   : '',
             password: '',
         }
@@ -33,15 +32,6 @@ export default class SignUpView extends Component {
         return (
             <View style={styles.container}>
 
-                <View style={styles.inputContainer}>
-
-                    <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/male-user/ultraviolet/50/3498db'}}/>
-                    <TextInput style={styles.inputs}
-                               placeholder="Full name"
-                               keyboardType="email-address"
-                               underlineColorAndroid='transparent'
-                               onChangeText={(fullName) => this.setState({fullName})}/>
-                </View>
 
                 <View style={styles.inputContainer}>
                     <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
@@ -62,15 +52,15 @@ export default class SignUpView extends Component {
                 </View>
 
                 <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.onClickListener('sign_up')}>
-                    <Text style={styles.signUpText}>Sign up</Text>
+                    <Text style={styles.signUpText}>Sign in</Text>
                 </TouchableHighlight>
 
                 <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.onClickListener('sign_up')}>
-                    <Text style={styles.signUpText}>Sign up with Google</Text>
+                    <Text style={styles.signUpText}>Sign in with Google</Text>
                 </TouchableHighlight>
 
                 <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.onClickListener('sign_up')}>
-                    <Text style={styles.signUpText}>Sign up with Facebook</Text>
+                    <Text style={styles.signUpText}>Sign in with Facebook</Text>
                 </TouchableHighlight>
             </View>
         );
