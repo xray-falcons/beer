@@ -5,6 +5,11 @@ import {LinearGradient} from "expo-linear-gradient";
 import {styles} from "./style/styles";
 import SignInView from './components/sign-in';
 
+import {Provider} from 'react-redux'
+import store from './redux/index'
+
+
+
 export default class App extends React.Component {
     constructor(props){
         super(props);
@@ -15,6 +20,7 @@ export default class App extends React.Component {
     }
   render () {
         return (
+            <Provider store={store}>
           <View style={styles.container} >
               <LinearGradient
                   colors={['#c36f09', '#eeba0b']}
@@ -25,6 +31,7 @@ export default class App extends React.Component {
 
               </LinearGradient>
           </View>
+            </Provider>
       );
   }
 }
