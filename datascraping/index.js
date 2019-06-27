@@ -1,13 +1,16 @@
 const axios = require('axios');
-const $ = require('cheerio');
+const jsonfile = require('jsonfile');
 // const url = 'https://brooklynbrewery.com/brooklyn-beers/perennial-brews';
-const beerParse = require('./beerParse');
+// const beerParse = require('./beerParse');
 
 async function beerScrape(url) {
   try {
-    let html = await axios.get(url);
-    let names = $('h2 > .sqs-block html-block sqs-block-html');
-    console.log('we got names!', names, 'length: ', names.length);
+    let { data } = await axios.get(url);
+    for (let key in data){
+      beer.findOrCreat()
+    }
+
+    console.log('data', data);
   } catch (error) {
     console.log('we have a problem', error);
   }
@@ -36,4 +39,6 @@ async function beerScrape(url) {
 //     console.log('got error')
 //   });
 
-beerScrape(`https://www.folksbier.com/old-bavarian-lager`);
+beerScrape(
+  `https://sandbox-api.brewerydb.com/v2/beers/?p=1&key=f2bea26fda6949376193a495216ceab8`
+);

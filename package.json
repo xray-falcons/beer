@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "expo": "^33.0.0",
+    "jsonfile": "^5.0.0",
     "expo-linear-gradient": "^5.0.1",
     "firebase": "^6.2.3",
     "react": "16.8.3",
