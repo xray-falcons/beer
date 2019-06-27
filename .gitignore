@@ -10,3 +10,4 @@ web-build/
 web-report/
 .serviceAcctKey.json
 .ds_store
+data-sandbox.json
