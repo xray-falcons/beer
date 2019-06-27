@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import SignUpView from './components/sign-up'
 import {LinearGradient} from "expo-linear-gradient";
 import {styles} from "./style/styles";
@@ -21,6 +21,8 @@ export default class App extends React.Component {
                   style={styles.linearGradient}
               >
                   <SignUpView/>
+
+
               </LinearGradient>
           </View>
       );

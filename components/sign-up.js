@@ -5,7 +5,6 @@ import {
     Text,
     View,
     TextInput,
-    Button,
     TouchableHighlight,
     Image,
     Alert
@@ -32,7 +31,8 @@ export default class SignUpView extends Component {
     render() {
         return (
             <View style={styles.container}>
-
+                <Image source={require('../style/StumblrLogo.png')} style={styles.image}
+            />
                 <View style={styles.inputContainer}>
 
                     <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/male-user/ultraviolet/50/3498db'}}/>
@@ -120,7 +120,15 @@ const styles = StyleSheet.create({
     },
     signUpText: {
         color: 'white',
-    }
+    },
+    image:{
+        width:200,
+        height:200,
+        marginBottom: 20,
+        borderRadius: 100
+
+
+    },
 });
 
 

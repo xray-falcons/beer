@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
         // backgroundColor: '#c36f09',
         alignItems: 'center',
         justifyContent: 'center',
+        flexDirection: 'column'
     },
     linearGradient: {
         position: 'absolute',
@@ -14,5 +15,9 @@ export const styles = StyleSheet.create({
         top: 0,
         //CHECK DOCS!!!!! cause this could not work on different devices
         height: 1000,
+    },
+    logo: {
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 });
