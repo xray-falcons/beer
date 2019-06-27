@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "expo": "^33.0.0",
+    "firebase-admin": "^8.2.0",
     "jsonfile": "^5.0.0",
     "react": "16.8.3",
     "react-dom": "^16.8.6",
