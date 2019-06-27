@@ -49031,6 +49031,13 @@ const beers = [
     "updateDate": "2015-04-07 15:42:48"
     }
 }
-
 ]
+
+const data = {}
+
+beers.map((beer,i) => {
+	data[i+1] = beer
+})
+
+module.exports = data
 
