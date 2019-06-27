@@ -11,6 +11,7 @@ import {
     Alert
 } from 'react-native';
 import {signUpThunk} from "../redux";
+import * as Facebook from 'expo-facebook';
 
 
 export default class SignUpView extends Component {
@@ -28,7 +29,10 @@ export default class SignUpView extends Component {
     }
 
     signUp = (email, password) => {
-        console.log(5)
+        if (this.state.password < 5) {
+            Alert.alert('Alert', 'Password must be longer than 5 characters')
+            return;
+        }
         try {
             firebase.auth().createUserWithEmailAndPassword(email, password)
             console.log(email, password)
@@ -36,12 +40,27 @@ export default class SignUpView extends Component {
         } catch (err) {
             console.log(err)
         }
+    }
 
-        // firebase
-        //     .auth()
-        //     .createUserWithEmailAndPassword(this.state.email, this.state.password)
-        //     .then(() => this.props.navigation.navigate('Test'))
-        //     .catch(error => this.setState({ errorMessage: error.message }))
+    async logInWithFacebook() {
+        try {
+            console.log(4)
+            const {
+                type,
+                token,
+            } = await Facebook.logInWithReadPermissionsAsync('463520067716247', {
+                permissions: ['public_profile'],
+            });
+            if (type === 'success') {
+                // Get the user's name using Facebook's Graph API
+                //const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
+                Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
+            } else {
+                // type === 'cancel'
+            }
+        } catch ({ message }) {
+            alert(`Facebook Login Error: ${message}`);
+        }
     }
 
     render() {
@@ -81,12 +100,12 @@ export default class SignUpView extends Component {
                     <Text style={styles.signUpText}>Sign up</Text>
                 </TouchableHighlight>
 
-                <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.onClickListener('sign_up')}>
-                    <Text style={styles.signUpText}>Sign up with Google</Text>
+                <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.logInWithFacebook()}>
+                    <Text style={styles.signUpText}>Sign up with Facebook</Text>
                 </TouchableHighlight>
 
                 <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.onClickListener('sign_up')}>
-                    <Text style={styles.signUpText}>Sign up with Facebook</Text>
+                    <Text style={styles.signUpText}>Sign up with Google</Text>
                 </TouchableHighlight>
             </View>
         );

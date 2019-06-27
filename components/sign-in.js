@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import firebase from 'firebase';
 
 import {
     StyleSheet,
@@ -21,6 +22,15 @@ export default class SignInView extends Component {
             password: '',
         }
 
+    }
+    signIn(email, password) {
+        try {
+            firebase.auth().signInWithEmailAndPassword(email, password).then(function (user) {
+                console.log(user)
+            })
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     onClickListener = (viewId) => {
@@ -51,7 +61,7 @@ export default class SignInView extends Component {
                                onChangeText={(password) => this.setState({password})}/>
                 </View>
 
-                <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.onClickListener('sign_up')}>
+                <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.signIn(this.state.email, this.state.password)}>
                     <Text style={styles.signUpText}>Sign in</Text>
                 </TouchableHighlight>
 
