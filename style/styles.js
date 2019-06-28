@@ -2,8 +2,8 @@ import {StyleSheet} from "react-native";
 
 export const styles = StyleSheet.create({
     container: {
-        // flex: 1,
-        // backgroundColor: '#c36f09',
+        flex: 2,
+        backgroundColor: '#c36f09',
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'column'

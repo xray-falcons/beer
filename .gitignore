@@ -9,6 +9,8 @@ npm-debug.*
 web-build/
 web-report/
 .serviceAcctKey.json
+.ds_store
+
+
 configs/
-package.json
 package-lock.json
