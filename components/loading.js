@@ -15,7 +15,6 @@ export default class Loading extends React.Component {
                 this.props.navigation.navigate('TestScreen')
             } else {
                 this.props.navigation.navigate('SignUpScreen')
-
             }
             }
         )
