@@ -11,6 +11,7 @@ admin.initializeApp({
 });
 
 const firestore = admin.firestore();
+
 const settings = { timestampsInSnapshots: true };
 
 firestore.settings(settings);
@@ -43,4 +44,5 @@ if (styles && typeof styles === 'object') {
         console.error('Error writing document: ', error);
       });
   });
+
 }

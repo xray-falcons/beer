@@ -9,7 +9,7 @@ import SingleBeer from "../components/SingleBeer";
 import Category from "../components/choose-category";
 
 const AppSwitchNavigator = createSwitchNavigator({
-  LoadingScreen: Loading,
+  LoadingScreen: SingleBeer,
   SignUpScreen: SignUpView,
   SignInScreen: SignInView,
   TestScreen: Test,
