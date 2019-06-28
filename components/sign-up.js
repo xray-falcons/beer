@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import {signUpThunk} from "../redux";
 import * as Facebook from 'expo-facebook';
-
+import {db} from '../server/db'
 
 export default class SignUpView extends Component {
 
@@ -29,7 +29,7 @@ export default class SignUpView extends Component {
         Alert.alert("Alert", "Button pressed "+viewId);
     }
 
-    signUp = (email, password) => {
+    signUp = (email, password, fullName) => {
         if (this.state.password.length < 5) {
             Alert.alert('Password is invalid', 'Password must be longer than 5 characters')
             return;
@@ -39,11 +39,13 @@ export default class SignUpView extends Component {
             return;
         }
         try {
-            firebase.auth().createUserWithEmailAndPassword(email, password)
+            let user = firebase.auth().createUserWithEmailAndPassword(email, password)
+            console.log(user)
             console.log(email, password)
-
+            db.collection('users').doc(user.uid).set(email, fullName);
         } catch (err) {
             console.log(err)
+
         }
     }
 
@@ -101,7 +103,7 @@ export default class SignUpView extends Component {
                                onChangeText={(password) => this.setState({password})}/>
                 </View>
 
-                <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.signUp(this.state.email, this.state.password)}>
+                <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.signUp(this.state.email, this.state.password, this.state.fullName)}>
                     <Text style={styles.signUpText}>Sign up</Text>
                 </TouchableHighlight>
 

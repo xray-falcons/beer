@@ -28,7 +28,13 @@ export default class SignInView extends Component {
         try {
             firebase.auth().signInWithEmailAndPassword(email, password).then(function (user) {
                 console.log(user)
-                this.props.navigation.navigate('TestScreen')
+                if (user) {
+                    this.props.navigation.navigate('TestScreen')
+
+                } else {
+                    this.props.navigation.navigate('SignUpScreen')
+
+                }
 
             })
         } catch (err) {
@@ -46,7 +52,7 @@ export default class SignInView extends Component {
             });
             if (type === 'success') {
                 // Get the user's name using Facebook's Graph API
-                //const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
+                const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
                 Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
             } else {
                 // type === 'cancel'

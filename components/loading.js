@@ -4,24 +4,26 @@ import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 import firebase from 'firebase';
 
 export default class Loading extends React.Component {
+    //we check if a user has an account in the firebase
     componentDidMount() {
         this.checkIfLoggedIn()
     }
 
     checkIfLoggedIn () {
-        //we check if a user has an account in the firebase
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                this.props.navigation.navigate('TestScreen')
+                this.props.navigation.navigate('Test')
             } else {
-                this.props.navigation.navigate('SignInScreen')
+                this.props.navigation.navigate('SignUpScreen')
+
             }
             }
         )
-
-
     }
-
+    // componentDidMount() {
+    //     firebase.auth().onAuthStateChanged(user => {
+    //         this.props.navigation.navigate(user ? 'Test' : 'SignUp')
+    //     })}
     render() {
         return (
             <View style={styles.container}>

@@ -19,6 +19,7 @@ export default class Test extends Component {
     render(){
         return <View style={styles.container}>
             <Text>HELLO TEST</Text>
+            <Button title='Sign Out' onPress={() => firebase.auth().signOut()}/>
         </View>
     }
 }
