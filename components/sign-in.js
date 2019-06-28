@@ -11,6 +11,7 @@ import {
     Image,
     Alert
 } from 'react-native';
+import * as Facebook from 'expo-facebook';
 
 
 export default class SignInView extends Component {
@@ -27,9 +28,31 @@ export default class SignInView extends Component {
         try {
             firebase.auth().signInWithEmailAndPassword(email, password).then(function (user) {
                 console.log(user)
+                this.props.navigation.navigate('TestScreen')
+
             })
         } catch (err) {
             console.log(err)
+        }
+    }
+    async logInWithFacebook() {
+        try {
+            console.log(4)
+            const {
+                type,
+                token,
+            } = await Facebook.logInWithReadPermissionsAsync('463520067716247', {
+                permissions: ['public_profile'],
+            });
+            if (type === 'success') {
+                // Get the user's name using Facebook's Graph API
+                //const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
+                Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
+            } else {
+                // type === 'cancel'
+            }
+        } catch ({ message }) {
+            alert(`Facebook Login Error: ${message}`);
         }
     }
 
@@ -69,7 +92,7 @@ export default class SignInView extends Component {
                     <Text style={styles.signUpText}>Sign in with Google</Text>
                 </TouchableHighlight>
 
-                <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.onClickListener('sign_up')}>
+                <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.logInWithFacebook()}>
                     <Text style={styles.signUpText}>Sign in with Facebook</Text>
                 </TouchableHighlight>
             </View>
@@ -79,7 +102,7 @@ export default class SignInView extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 0.6,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -88,31 +111,31 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFFFFF',
         borderRadius:30,
         borderBottomWidth: 1,
-        width:250,
-        height:45,
-        marginBottom:10,
+        width: 200,
+        height: 35,
+        marginBottom:2,
         flexDirection: 'row',
         alignItems:'center'
     },
     inputs:{
-        height:45,
+        height:40,
         marginLeft:16,
         borderBottomColor: '#FFFFFF',
         flex:1,
     },
     inputIcon:{
-        width:30,
-        height:30,
+        width:15,
+        height:15,
         marginLeft:15,
         justifyContent: 'center'
     },
     buttonContainer: {
-        height:45,
+        height:25,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 2,
-        width:250,
+        marginBottom: 1,
+        width:200,
         borderRadius:30,
     },
     signupButton: {
@@ -120,7 +143,13 @@ const styles = StyleSheet.create({
     },
     signUpText: {
         color: 'white',
-    }
+    },
+    image:{
+        width:200,
+        height:200,
+        marginBottom: 20,
+        borderRadius: 100
+
+
+    },
 });
-
-

@@ -22,6 +22,7 @@ export default class SignUpView extends Component {
             fullName: '',
             email   : '',
             password: '',
+            age: false
         }
     }
     onClickListener = (viewId) => {
@@ -29,8 +30,12 @@ export default class SignUpView extends Component {
     }
 
     signUp = (email, password) => {
-        if (this.state.password < 5) {
-            Alert.alert('Alert', 'Password must be longer than 5 characters')
+        if (this.state.password.length < 5) {
+            Alert.alert('Password is invalid', 'Password must be longer than 5 characters')
+            return;
+        }
+        if (this.state.fullName === '') {
+            Alert.alert('Full name', 'Please type your full name')
             return;
         }
         try {

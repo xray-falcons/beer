@@ -5,13 +5,27 @@ import firebase from 'firebase';
 
 export default class Loading extends React.Component {
     componentDidMount() {
+        this.checkIfLoggedIn()
+    }
+
+    checkIfLoggedIn () {
+        //we check if a user has an account in the firebase
         firebase.auth().onAuthStateChanged(user => {
-            this.props.navigation.navigate(user ? 'Test' : 'SignUp')
-        })}
+            if (user) {
+                this.props.navigation.navigate('TestScreen')
+            } else {
+                this.props.navigation.navigate('SignInScreen')
+            }
+            }
+        )
+
+
+    }
+
     render() {
         return (
             <View style={styles.container}>
-                <Text>Loading</Text>
+                <Text>Loading your beer!</Text>
                 <ActivityIndicator size="large" />
             </View>
         )

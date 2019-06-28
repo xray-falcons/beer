@@ -1,22 +1,17 @@
 import React from "react";
 import { View, Text } from "react-native";
-import { createStackNavigator, createAppContainer, createBottomTabNavigator,} from "react-navigation";
 import SignUpView from "../components/sign-up";
-import {LinearGradient} from "expo-linear-gradient";
-import { SwitchNavigator } from 'react-navigation'
+import { createSwitchNavigator, createAppContainer } from 'react-navigation'
 import Loading from '../components/loading';
-import SignUp from "../components/sign-in";
 import Test from '../components/test';
+import SignInView from "../components/sign-in";
 
-const Home = SwitchNavigator(
-    {
-        Loading,
-        SignUpView,
-        SignInView,
-        Test
-    },
-    {
-        initialRouteName: 'Loading'
-    }
-)
-export default Home
+ const AppSwitchNavigator = createSwitchNavigator({
+    LoadingScreen: Loading,
+    SignUpScreen: SignUpView,
+     SignInScreen: SignInView,
+    TestScreen: Test
+})
+
+
+export const AppNavigator = createAppContainer(AppSwitchNavigator)

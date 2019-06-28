@@ -15,13 +15,20 @@ import firebase from 'firebase';
 
 
 export default class Test extends Component {
-    componentDidMount() {
-        const { currentUser } = firebase.auth()
-        this.setState({ currentUser })
-    }
+
     render(){
-        return <View>
+        return <View style={styles.container}>
             <Text>HELLO TEST</Text>
         </View>
     }
 }
+
+
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
+})
