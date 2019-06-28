@@ -6,13 +6,15 @@ import Loading from "../components/loading";
 import Test from "../components/test";
 import SignInView from "../components/sign-in";
 import SingleBeer from "../components/SingleBeer";
+import Category from "../components/choose-category";
 
 const AppSwitchNavigator = createSwitchNavigator({
   LoadingScreen: SingleBeer,
   SignUpScreen: SignUpView,
   SignInScreen: SignInView,
   TestScreen: Test,
-  SingleBeer: SingleBeer
+  SingleBeer: SingleBeer,
+  CategoryScreen: Category
 });
 
 export const AppNavigator = createAppContainer(AppSwitchNavigator);
