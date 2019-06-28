@@ -65,6 +65,8 @@ export default class SignUpView extends Component {
                 // Get the user's name using Facebook's Graph API
                 //const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
                 Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
+                this.props.navigation.navigate('TestScreen')
+
             } else {
                 // type === 'cancel'
             }
@@ -114,8 +116,9 @@ export default class SignUpView extends Component {
                     <Text style={styles.signUpText}>Sign up with Facebook</Text>
                 </TouchableHighlight>
 
-                <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.onClickListener('sign_up')}>
-                    <Text style={styles.signUpText}>Sign up with Google</Text>
+                <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.props.navigation.navigate('SignInScreen')
+                }>
+                    <Text style={styles.signUpText}>Have an account? Sign in</Text>
                 </TouchableHighlight>
             </View>
         );
