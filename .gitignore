@@ -12,3 +12,5 @@ web-report/
 .ds_store
 
 
+configs/
+package-lock.json

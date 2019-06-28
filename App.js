@@ -4,6 +4,11 @@ import SignUpView from './components/sign-up'
 import {LinearGradient} from "expo-linear-gradient";
 import {styles} from "./style/styles";
 import SignInView from './components/sign-in';
+import { AppNavigator } from './navigation/navigator'
+import {Provider} from 'react-redux'
+import store from './redux/index'
+
+
 
 export default class App extends React.Component {
     constructor(props){
@@ -15,16 +20,18 @@ export default class App extends React.Component {
     }
   render () {
         return (
+            <Provider store={store}>
           <View style={styles.container} >
               <LinearGradient
                   colors={['#c36f09', '#eeba0b']}
                   style={styles.linearGradient}
               >
-                  <SignUpView/>
+                  <AppNavigator/>
 
 
               </LinearGradient>
           </View>
+            </Provider>
       );
   }
 }
