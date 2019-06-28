@@ -1,13 +1,3 @@
-// const docRef = await db.collection('dogs');
-// const query = await docRef.where('walking', '==', true);
-// let dogs = [];
-// query.get().then(function(querySnapshot){
-//     querySnapshot.forEach(function (doc){
-//         let dog = doc.data();
-//         dog.id = doc.id;
-//         dogs.push(dog);
-
-
 import React, { Component } from 'react';
 
 import {
@@ -27,13 +17,13 @@ import { db } from '../server/db';
 
 
 export default class Category extends Component {
-    query = async () => {
+    query = async (beerStyle) => {
         try {
             console.log(787987)
             const beers = await db.collection('beers');
             // console.log(beers)
             let lager = 'North American Lager';
-            const query = await beers.where('style.category.name', '==', lager);
+            const query = await beers.where('style.category.name', '==', beerStyle);
             let arr =[]
             // console.log('query', query.data)
             query.get().then(function(querySnapshot){
@@ -41,7 +31,7 @@ export default class Category extends Component {
                     let beer = doc.data();
                     // console.log('beeer', beer)
                     arr.push(beer)
-                    console.log(beer.name)
+                    console.log(beer)
                 })
                 console.log(arr.length)
             })
@@ -54,9 +44,14 @@ export default class Category extends Component {
 
     }
     render(){
+        const beerStyles = ["British Origin Ales", "Irish Origin Ales", "North American Origin Ales","German Origin Ales", "Belgian And French Origin Ales","International Ale Styles","European-germanic Lager","North American Lager","Other Lager","International Styles","Hybrid/mixed Beer","Mead, Cider, & Perry","Other Origin","Malternative Beverages"]
         return <View style={styles.container}>
             <Text>HELLO BEER CHOICE</Text>
-            <Button title='check' onPress={() => this.query() }/>
+            {beerStyles.map((elem, idx) => {
+            return  <Button key={idx} title={elem} onPress={() => this.query(elem) }/>
+            })
+            }
+            <Button title='{check}' onPress={() => this.query() }/>
 
             <Button title='LogOUT' onPress={() => firebase.auth().signOut()}/>
         </View>
