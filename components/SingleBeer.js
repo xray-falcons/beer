@@ -1,8 +1,7 @@
-import React, { Component } from "react";
-import { View, Text, ActivityIndicator, StyleSheet, Image } from "react-native";
+import React from "react";
+import { View, Button, Text, ActivityIndicator, StyleSheet, Image } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-const thumbsUp = <Icon name="thumbsup" size={20} color="#005"/>
-const thumbsDown = <Icon name="thumbsdown" size={20} color="#005"/>
+
 
 // import firebase from "firebase";
 // import connect from "react-redux";
@@ -42,18 +41,23 @@ const props = {
       },
       text: {
         fontSize: 20
+      },
+      button: {
+        fontSize:20,
+        backgroundColor:"#640"
       }
     });
 
-const SingleBeer = () => {
-    return (
-      <View style={styles.container}>
+    const SingleBeer = () => {
+      return (
+        <View style={styles.container}>
         <Text style={styles.headText}>{props.beerName}</Text>
         <Image source={{ uri: props.beerImage }} style={styles.image} />
         <Text style={styles.text}>abv:{props.abv}</Text>
         <Text style={styles.text}>{props.description}</Text>
-        <Icon.Button name="thumbs-up" size={20} color="#005"/>
-        <Icon.Button name="thumbs-down" size={20} color="#005"/>
+        <Icon.Button name="thumbs-up" color="#fb0" style={styles.button}/>
+        <Icon.Button name="thumbs-down"
+        color="#b40" style={styles.button} />
       </View>
     );
 }
