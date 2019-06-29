@@ -53,7 +53,9 @@ const props = {
       }
     });
 
-    const SingleBeer = () => {
+
+export default class SingleBeer extends React.Component {
+    render() {
       return (
         <View style={styles.container}>
         <Text style={styles.headText}>{props.beerName}</Text>
@@ -65,20 +67,5 @@ const props = {
         color="#640" style={styles.button} />
       </View>
     );
+  }
 }
-
-
-export default SingleBeer
-
-// Functional component
-// export const SingleBeer = props => {
-//     return (
-//       <View style={styles.container}>
-//         <Text style={styles.headText}>{props.beerName}</Text>
-//         <Image source={{ uri: props.beerImage }} style={styles.image} />
-//         <Text style={styles.text}>abv:{props.abv}</Text>
-//         <Text style={styles.text}>{props.description}</Text>
-//       </View>
-//     );
-// }
-
