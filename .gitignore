@@ -13,7 +13,7 @@ web-report/
 
 
 configs/*
-package-lock.json
+# package-lock.json
 
 # api secrets
 data-sandbox.json
