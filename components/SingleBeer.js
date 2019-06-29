@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Button, Text, ActivityIndicator, StyleSheet, Image } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { NEG_ONE } from "long";
 
 
 // import firebase from "firebase";
@@ -43,8 +44,12 @@ const props = {
         fontSize: 20
       },
       button: {
-        fontSize:20,
-        backgroundColor:"#640"
+        fontSize:25,
+        backgroundColor:"#fb0",
+        padding:10,
+        margin:5,
+        borderStyle:"solid",
+        borderColor:"#fb0"
       }
     });
 
@@ -55,9 +60,9 @@ const props = {
         <Image source={{ uri: props.beerImage }} style={styles.image} />
         <Text style={styles.text}>abv:{props.abv}</Text>
         <Text style={styles.text}>{props.description}</Text>
-        <Icon.Button name="thumbs-up" color="#fb0" style={styles.button}/>
+        <Icon.Button name="thumbs-up" color="#640" style={styles.button}/>
         <Icon.Button name="thumbs-down"
-        color="#b40" style={styles.button} />
+        color="#640" style={styles.button} />
       </View>
     );
 }
