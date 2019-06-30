@@ -13,6 +13,8 @@ import {
 import firebase from 'firebase';
 import 'firebase/firestore';
 import { db } from '../server/db';
+// import { QueryDocumentSnapshot, DocumentSnapshot } from "@google-cloud/firestore";
+// import console = require("console");
 
 export default class BeerList extends Component{
     constructor(){
@@ -26,14 +28,23 @@ export default class BeerList extends Component{
         this.getData()
     }
     getData = async () => {
-        const url = `https://jsonplaceholder.typicode.com/photos?_page=${this.state.page}&_limit=10`
-        fetch(url).then(res => res.json()).then(res => this.setState({data: this.state.data.concat(res)}))
-    }
+        // const url = `https://jsonplaceholder.typicode.com/photos?_page=${this.state.page}&_limit=10`
+        // fetch(url).then(res => res.json()).then(res => this.setState({data: this.state.data.concat(res)}))
+        let query = await db.collection('beers').where('style.category.name', '==', "North American Lager").orderBy('name').limit(6)
+        let arr = [];
+        query.get().then(snapshot => {
+            snapshot.forEach(doc =>{
+                let beer = doc.data();
+                arr.push(beer)
+        })
+        this.setState({data: arr})
+    })
+}
 
     renderRow = ({item}) => {
         return(<View style={styles.item}>
-           <Image source={{url: item.url}} style={styles.itemImage}/>
-            <Text>{item.title}</Text>
+           {/* <Image source={{url: item.url}} style={styles.itemImage}/> */}
+            <Text>{item.name}</Text>
             <Text>{item.id}</Text>
         </View>)
     }
