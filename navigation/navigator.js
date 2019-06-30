@@ -8,9 +8,10 @@ import SignInView from "../components/sign-in";
 import SingleBeer from "../components/SingleBeer";
 import Category from "../components/choose-category";
 import Home from "../components/home"
+import BeerList from '../components/beerlist'
 
 const AppSwitchNavigator = createSwitchNavigator({
-  LoadingScreen: Home,
+  LoadingScreen: BeerList,
   SignUpScreen: SignUpView,
   SignInScreen: SignInView,
   TestScreen: Test,
