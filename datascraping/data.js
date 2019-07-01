@@ -49038,6 +49038,7 @@ const data = {}
 beers.map((beer,i) => {
 	data[i+1] = beer
 })
+console.log(data)
 
-module.exports = data
+// module.exports = data
 
