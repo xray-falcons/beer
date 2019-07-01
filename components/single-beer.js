@@ -63,6 +63,19 @@ export default class SingleBeer extends React.Component {
         const description = this.props.navigation.getParam('description')
         const ibu = this.props.navigation.getParam('ibu')
         const style = this.props.navigation.getParam('style')
+        if (beerImage === undefined) {
+            return (
+                <View style={styles.container}>
+                    <Text style={styles.headText}>{beerName}</Text>
+                    <Image source={{ uri: beerImage}} style={styles.image} />
+                    <Text style={styles.text}>abv:{abv}</Text>
+                    <Text style={styles.text}>{description}</Text>
+                    <Icon.Button name="thumbs-up" color="#640" style={styles.button}/>
+                    <Icon.Button name="thumbs-down"
+                                 color="#640" style={styles.button} />
+                </View>
+            );
+        }
 
         return (
         <View style={styles.container}>

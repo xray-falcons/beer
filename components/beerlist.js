@@ -51,11 +51,20 @@ export default class BeerList extends Component{
 }
 
     renderRow = ({item}) => {
+
+        let beerImage;
+        let description;
+        if (!item.labels) {
+            beerImage = 'https://www.faustbrewing.com/images/beers/types/beerglassthree.png'
+        } else {
+            beerImage = item.labels.large;
+        }
+
             return(
                 <View style={styles.item}>
                     <Button title={item.name} onPress={() => this.props.navigation.navigate('SingleBeer', {
                         beerName: item.name,
-                        beerImage: item.labels.large,
+                        beerImage: beerImage,
                         abv: item.abv,
                         description: item.description,
                         ibu: item.ibu,
