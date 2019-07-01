@@ -10,7 +10,6 @@ import {
     Image,
     Alert
 } from 'react-native';
-import {signUpThunk} from "../redux";
 import * as Facebook from 'expo-facebook';
 import {db} from '../server/db'
 
@@ -42,7 +41,7 @@ export default class SignUpView extends Component {
             let { user } = await firebase.auth().createUserWithEmailAndPassword(email, password)
             await db.collection('users').doc(user.uid).set({email: this.state.email, fullName: this.state.fullName});
             db.collection('users').doc(user.uid).set(email, fullName);
-            this.props.navigation.navigate('HomeScreen')
+            this.props.navigation.navigate('Dashboard')
         } catch (err) {
             console.log(err)
 
