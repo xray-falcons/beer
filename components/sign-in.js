@@ -29,7 +29,7 @@ export default class SignInView extends Component {
             firebase.auth().signInWithEmailAndPassword(email, password).then(function (user) {
                 console.log(user)
             })
-            this.props.navigation.navigate('CategoryScreen')
+            this.props.navigation.navigate('Dashboard')
 
         } catch (err) {
             console.log(err)

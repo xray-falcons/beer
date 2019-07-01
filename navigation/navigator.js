@@ -9,6 +9,7 @@ import SingleBeer from "../components/single-beer";
 import Category from "../components/choose-category";
 import Home from "../components/home"
 import Icon from '@expo/vector-icons/Ionicons';
+import BeerList from "../components/beerlist";
 
 const AuthStack =  createStackNavigator({
         SignUpScreen: SignUpView,
@@ -60,14 +61,19 @@ const AppDrawerNavigator = createDrawerNavigator({
     },
     Beer: {
         screen: SingleBeer
+    },
+    BeerList: {
+        screen: BeerList
     }
 
 });
 
 const AppSwitchNavigator = createSwitchNavigator({
-    LoadingScreen: Loading,
+    // LoadingScreen: Loading,
     Welcome: AuthStack,
-    Dashboard: { screen: AppDrawerNavigator }
+    Dashboard: {
+        screen: AppDrawerNavigator
+    }
 });
 //
 // const AppContainer = createAppContainer(AppSwitchNavigator);

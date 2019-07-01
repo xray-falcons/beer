@@ -62,7 +62,7 @@ export default class SignUpView extends Component {
                 // Get the user's name using Facebook's Graph API
                 //const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
                 Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
-                this.props.navigation.navigate('TestScreen')
+                this.props.navigation.navigate('Dashboard')
 
             } else {
                 // type === 'cancel'
