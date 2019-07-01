@@ -46,14 +46,11 @@ export default class Category extends Component {
     render(){
         const beerStyles = ["British Origin Ales", "Irish Origin Ales", "North American Origin Ales","German Origin Ales", "Belgian And French Origin Ales","International Ale Styles","European-germanic Lager","North American Lager","Other Lager","International Styles","Hybrid/mixed Beer","Mead, Cider, & Perry","Other Origin","Malternative Beverages"]
         return <View style={styles.container}>
-            <Text>HELLO BEER CHOICE</Text>
+            <Text>Choose your  style!</Text>
             {beerStyles.map((elem, idx) => {
             return  <Button key={idx} title={elem} onPress={() => this.query(elem) }/>
             })
             }
-            <Button title='{check}' onPress={() => this.query() }/>
-
-            <Button title='LogOUT' onPress={() => firebase.auth().signOut()}/>
         </View>
     }
 }
