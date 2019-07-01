@@ -12,6 +12,7 @@ export default class Loading extends React.Component {
   checkIfLoggedIn() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
+          console.log(user)
         this.props.navigation.navigate("Dashboard");
       } else {
         this.props.navigation.navigate("Welcome");
@@ -22,7 +23,7 @@ export default class Loading extends React.Component {
   render() {
     return (
       <View>
-        <Text>Loading your beer!</Text>c
+        <Text>Loading your beer!</Text>
         <ActivityIndicator size="large" />
       </View>
     );

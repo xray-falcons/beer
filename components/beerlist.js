@@ -38,10 +38,6 @@ export default class BeerList extends Component{
                 let beer = doc.data();
                 beerArray.push(beer)
             });
-            console.log('BEEROJASF', beerArray.length)
-            console.log('ARRRAAAAAY', beerArray[0])
-            console.log('TYPE', typeof beerArray[0].name)
-
             this.setState({data: beerArray})
 
         } catch (err)  {
@@ -83,7 +79,6 @@ export default class BeerList extends Component{
         this.getData)
     }
     render() {
-        console.log(this.props)
         return(
             <FlatList  data={this.state.data}
         renderItem={this.renderRow}
