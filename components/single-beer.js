@@ -1,47 +1,33 @@
 import React from "react";
-import { View, Button, Text, ActivityIndicator, StyleSheet, Image } from "react-native";
+import { View, Button, Text, StyleSheet, Image, ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { NEG_ONE } from "long";
-
-
-// import firebase from "firebase";
-// import connect from "react-redux";
-// import { db } from "../server/db";
-
-//const beerImage =
-//  "https://brewerydb-images.s3.amazonaws.com/beer/QJZFnY/upload_h8SNgF-contentAwareMedium.png";
-
-// will refactor so that beer info is passed in props
-// will refactor again so that beer info is passed from redux store
-
-// const props = {
-//       beerName: "myname",
-//       beerImage: "https://brewerydb-images.s3.amazonaws.com/beer/QJZFnY/upload_h8SNgF-contentAwareMedium.png",
-//       abv: 10,
-//       description: "hello",
-//       ibu: 20,
-//       // brewery: "mybrewery",
-//       style: "mystyle"
-//     };
 
     const styles = StyleSheet.create({
       container: {
         flex: 0.6,
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+        margin: 20
       },
       image: {
         width: 200,
         height: 200,
         marginTop: 20,
         marginBottom: 20,
-        borderRadius: 100
+        borderRadius: 100,
+        marginLeft: 'auto',
+        marginRight: 'auto'
+
       },
       headText: {
-        fontSize: 48
+        fontSize: 40,
+        fontWeight: "bold",
+        textAlign: 'center'
       },
       text: {
-        fontSize: 20
+        fontSize: 20,
+        textAlign: 'justify'
       },
       button: {
         fontSize:25,
@@ -50,6 +36,11 @@ import { NEG_ONE } from "long";
         margin:5,
         borderStyle:"solid",
         borderColor:"#fb0"
+      },
+      textBold:{
+        fontWeight: "bold",
+        fontStyle: 'italic',
+        textAlign: 'center'
       }
     });
 
@@ -63,29 +54,20 @@ export default class SingleBeer extends React.Component {
         const description = this.props.navigation.getParam('description')
         const ibu = this.props.navigation.getParam('ibu')
         const style = this.props.navigation.getParam('style')
-        if (beerImage === undefined) {
-            return (
-                <View style={styles.container}>
-                    <Text style={styles.headText}>{beerName}</Text>
-                    <Image source={{ uri: beerImage}} style={styles.image} />
-                    <Text style={styles.text}>abv:{abv}</Text>
-                    <Text style={styles.text}>{description}</Text>
-                    <Icon.Button name="thumbs-up" color="#640" style={styles.button}/>
-                    <Icon.Button name="thumbs-down"
-                                 color="#640" style={styles.button} />
-                </View>
-            );
-        }
-
         return (
         <View style={styles.container}>
-        <Text style={styles.headText}>{beerName}</Text>
-        <Image source={{ uri: beerImage }} style={styles.image} />
-        <Text style={styles.text}>abv:{abv}</Text>
-        <Text style={styles.text}>{description}</Text>
-        <Icon.Button name="thumbs-up" color="#640" style={styles.button}/>
-        <Icon.Button name="thumbs-down"
-        color="#640" style={styles.button} />
+          <ScrollView>
+            <Text style={styles.headText}>{beerName}</Text>
+            <Text style={styles.textBold}>{style}</Text>
+            <Text style={styles.textBold}>abv: {abv} ibu: {ibu}</Text>
+            <Image source={{ uri: beerImage }} style={styles.image} />
+            <Text style={styles.text}>{description}</Text>
+            <View style={styles.container}>
+            <Icon.Button name="thumbs-up" color="#640" style={styles.button}/>
+            <Icon.Button name="thumbs-down"
+            color="#640" style={styles.button} />
+            </View>
+          </ScrollView>
       </View>
     );
   }

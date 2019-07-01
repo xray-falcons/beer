@@ -8,11 +8,11 @@ import {
     Button,
     TouchableHighlight,
     Image,
-    Alert
+    Alert, ScrollView
 } from 'react-native';
 import firebase from 'firebase';
 import { db } from '../server/db';
-import BeerList from '../components/beerlist';
+import BeerList from './beer-list';
 
 
 
@@ -21,16 +21,12 @@ export default class Category extends Component {
         try {
             const beers = await db.collection('beers');
             let beerArray =[]
-            const query = await beers.where('style.category.name', '==', beerStyle);
+            const query = await beers.where('style.category.name', '==', beerStyle).limit(15);
             const querySnapshot = await query.get()
             querySnapshot.forEach(function (doc){
                 let beer = doc.data();
                 beerArray.push(beer)
             });
-            console.log(beerArray.length)
-            console.log('ARRRAAAAAY', beerArray[0])
-            this.props.navigation.navigate('BeerList')
-
         } catch (err)  {
             console.log(err)
 
@@ -39,13 +35,15 @@ export default class Category extends Component {
         }
 
     render(){
-        const beerStyles = ["British Origin Ales", "Irish Origin Ales", "North American Origin Ales","German Origin Ales", "Belgian And French Origin Ales","International Ale Styles","European-germanic Lager","North American Lager","Other Lager","International Styles","Hybrid/mixed Beer","Mead, Cider, & Perry","Other Origin","Malternative Beverages"]
+        const beerStyles = ["British Origin Ales", "Irish Origin Ales", "North American Origin Ales","German Origin Ales", "Belgian And French Origin Ales","International Ale Styles","European-germanic Lager","North American Lager", "International Styles","Hybrid/mixed Beer","Mead, Cider, & Perry","Malternative Beverages"]
         return <View style={styles.container}>
-            <Text>Choose your  style!</Text>
+            <ScrollView>
+            <Text style={styles.textBold}>Choose your  style!</Text>
             {beerStyles.map((elem, idx) => {
             return  <Button key={idx} title={elem} onPress={() => this.props.navigation.navigate('BeerList', { name : elem}) }/>
             })
             }
+            </ScrollView>
         </View>
     }
 }
@@ -55,7 +53,14 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-    }
+        marginTop: 20,
+        marginBottom: 20
+    },
+    textBold:{
+        fontWeight: "bold",
+        fontStyle: 'italic',
+        textAlign: 'center'
+      }
 })
 
 

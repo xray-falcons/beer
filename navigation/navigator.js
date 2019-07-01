@@ -9,7 +9,7 @@ import SingleBeer from "../components/single-beer";
 import Category from "../components/choose-category";
 import Home from "../components/home"
 import Icon from '@expo/vector-icons/Ionicons';
-import BeerList from "../components/beerlist";
+import BeerList from "../components/beer-list";
 
 const AuthStack =  createStackNavigator({
         SignUpScreen: SignUpView,
