@@ -93,7 +93,7 @@ const AppSwitchNavigator = createSwitchNavigator({
     }
 },
 {
-        initialRouteName: 'Dashboard'
+        initialRouteName: 'LoadingScreen'
     }
 );
 //
