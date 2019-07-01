@@ -16,4 +16,4 @@ configs/*
 # package-lock.json
 
 # api secrets
-data-sandbox.json
+.data-sandbox.json
