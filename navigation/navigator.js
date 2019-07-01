@@ -84,12 +84,16 @@ const AppDrawerNavigator = createDrawerNavigator({
 });
 
 const AppSwitchNavigator = createSwitchNavigator({
-    // LoadingScreen: Loading,
+    LoadingScreen: Loading,
     Welcome: AuthStack,
     Dashboard: {
         screen: AppDrawerNavigator
     }
-});
+},
+{
+        initialRouteName: 'Dashboard'
+    }
+);
 //
 // const AppContainer = createAppContainer(AppSwitchNavigator);
 //
