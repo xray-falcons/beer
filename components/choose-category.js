@@ -29,9 +29,7 @@ export default class Category extends Component {
             });
             console.log(beerArray.length)
             console.log('ARRRAAAAAY', beerArray[0])
-            this.props.navigation.navigate('BeerList', {
-                beerArray
-            })
+            this.props.navigation.navigate('BeerList')
 
         } catch (err)  {
             console.log(err)
@@ -45,7 +43,7 @@ export default class Category extends Component {
         return <View style={styles.container}>
             <Text>Choose your  style!</Text>
             {beerStyles.map((elem, idx) => {
-            return  <Button key={idx} title={elem} onPress={() => this.query(elem) }/>
+            return  <Button key={idx} title={elem} onPress={() => this.props.navigation.navigate('BeerList', { name : elem}) }/>
             })
             }
         </View>

@@ -17,6 +17,12 @@ const AuthStack =  createStackNavigator({
     }
 )
 
+const BeerStack =  createStackNavigator({
+        Search: Category,
+    BeerList: BeerList,
+    SingleBeer: SingleBeer
+    }
+)
 
 
 
@@ -71,15 +77,11 @@ const AppDrawerNavigator = createDrawerNavigator({
     Profile: {
         screen: Home,
     },
-    Search: {
-        screen: Category
-    },
+    BeerStack,
     Beer: {
         screen: SingleBeer
     },
-    BeerList: {
-        screen: BeerList
-    }
+
 
 });
 

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from 'axios';
 import {
     StyleSheet,
     Text,
@@ -14,7 +15,6 @@ import firebase from 'firebase';
 import 'firebase/firestore';
 import { db } from '../server/db';
 // import { QueryDocumentSnapshot, DocumentSnapshot } from "@google-cloud/firestore";
-// import console = require("console");
 
 export default class BeerList extends Component{
     constructor(props){
@@ -26,28 +26,47 @@ export default class BeerList extends Component{
     }
     componentDidMount(){
         this.getData()
-
     }
     getData = async () => {
-        const url = `https://jsonplaceholder.typicode.com/photos?_page=${this.state.page}&_limit=10`
-        fetch(url).then(res => res.json()).then(res => this.setState({data: this.state.data.concat(res)}))
-    //     let query = await db.collection('beers').where('style.category.name', '==', "North American Lager").orderBy('name').limit(6)
-    //     let arr = [];
-    //     query.get().then(snapshot => {
-    //         snapshot.forEach(doc =>{
-    //             let beer = doc.data();
-    //             arr.push(beer)
-    //     })
-    //     this.setState({data: arr})
-    // })
+        const name = this.props.navigation.getParam('name')
+        try {
+            const beers = await db.collection('beers');
+            let beerArray =[]
+            const query = await beers.where('style.category.name', '==', name).limit(10);
+            const querySnapshot = await query.get()
+            querySnapshot.forEach(function (doc){
+                let beer = doc.data();
+                beerArray.push(beer)
+            });
+            console.log('BEEROJASF', beerArray.length)
+            console.log('ARRRAAAAAY', beerArray[0])
+            console.log('TYPE', typeof beerArray[0].name)
+
+            this.setState({data: beerArray})
+
+        } catch (err)  {
+            console.log(err)
+
+        }
 }
 
     renderRow = ({item}) => {
-        return(<View style={styles.item}>
-            <Image source={{url: item.url}} style={styles.itemImage}/>
-            <Text>{item.title}</Text>
-            <Text style={style.itemText}>{item.id}</Text>
-        </View>)
+            return(
+                <View style={styles.item}>
+                    <Button title={item.name} onPress={() => this.props.navigation.navigate('SingleBeer', {
+                        beerName: item.name,
+                        beerImage: item.labels.large,
+                        abv: item.abv,
+                        description: item.description,
+                        ibu: item.ibu,
+                        // brewery: "mybrewery",
+                        style: item.style.category.name
+                    }) }/>
+
+                </View>
+          )
+
+
     }
 
     handleLoadMore = () => {
@@ -57,7 +76,7 @@ export default class BeerList extends Component{
     render() {
         console.log(this.props)
         return(
-            <FlatList style={styles.container} data={this.state.data}
+            <FlatList  data={this.state.data}
         renderItem={this.renderRow}
         keyExtractor={(item, index) => index.toString()}
         onEndReached={this.handleLoadMore}
