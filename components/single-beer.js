@@ -14,15 +14,15 @@ import { NEG_ONE } from "long";
 // will refactor so that beer info is passed in props
 // will refactor again so that beer info is passed from redux store
 
-const props = {
-      beerName: "myname",
-      beerImage: "https://brewerydb-images.s3.amazonaws.com/beer/QJZFnY/upload_h8SNgF-contentAwareMedium.png",
-      abv: 10,
-      description: "hello",
-      ibu: 20,
-      brewery: "mybrewery",
-      style: "mystyle"
-    };
+// const props = {
+//       beerName: "myname",
+//       beerImage: "https://brewerydb-images.s3.amazonaws.com/beer/QJZFnY/upload_h8SNgF-contentAwareMedium.png",
+//       abv: 10,
+//       description: "hello",
+//       ibu: 20,
+//       // brewery: "mybrewery",
+//       style: "mystyle"
+//     };
 
     const styles = StyleSheet.create({
       container: {
@@ -55,13 +55,34 @@ const props = {
 
 
 export default class SingleBeer extends React.Component {
+
     render() {
-      return (
+        const beerName = this.props.navigation.getParam('beerName')
+        const beerImage = this.props.navigation.getParam('beerImage')
+        const abv = this.props.navigation.getParam('abv')
+        const description = this.props.navigation.getParam('description')
+        const ibu = this.props.navigation.getParam('ibu')
+        const style = this.props.navigation.getParam('style')
+        if (beerImage === undefined) {
+            return (
+                <View style={styles.container}>
+                    <Text style={styles.headText}>{beerName}</Text>
+                    <Image source={{ uri: beerImage}} style={styles.image} />
+                    <Text style={styles.text}>abv:{abv}</Text>
+                    <Text style={styles.text}>{description}</Text>
+                    <Icon.Button name="thumbs-up" color="#640" style={styles.button}/>
+                    <Icon.Button name="thumbs-down"
+                                 color="#640" style={styles.button} />
+                </View>
+            );
+        }
+
+        return (
         <View style={styles.container}>
-        <Text style={styles.headText}>{props.beerName}</Text>
-        <Image source={{ uri: props.beerImage }} style={styles.image} />
-        <Text style={styles.text}>abv:{props.abv}</Text>
-        <Text style={styles.text}>{props.description}</Text>
+        <Text style={styles.headText}>{beerName}</Text>
+        <Image source={{ uri: beerImage }} style={styles.image} />
+        <Text style={styles.text}>abv:{abv}</Text>
+        <Text style={styles.text}>{description}</Text>
         <Icon.Button name="thumbs-up" color="#640" style={styles.button}/>
         <Icon.Button name="thumbs-down"
         color="#640" style={styles.button} />

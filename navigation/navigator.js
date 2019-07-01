@@ -9,6 +9,7 @@ import SingleBeer from "../components/single-beer";
 import Category from "../components/choose-category";
 import Home from "../components/home"
 import Icon from '@expo/vector-icons/Ionicons';
+import BeerList from "../components/beerlist";
 
 const AuthStack =  createStackNavigator({
         SignUpScreen: SignUpView,
@@ -16,11 +17,26 @@ const AuthStack =  createStackNavigator({
     }
 )
 
+const BeerStack =  createStackNavigator({
+        Search: Category,
+    BeerList: BeerList,
+    SingleBeer: SingleBeer
+    }
+)
+
+
+
 const DashboardTabNavigator = createBottomTabNavigator(
     {
-        Category,
-        Home,
-        SingleBeer
+        Category: {
+            screen: Category
+        },
+        Home: {
+            screen: Home
+        },
+        SingleBeer: {
+            screen: SingleBeer
+        }
     },
     {
         navigationOptions: ({ navigation }) => {
@@ -34,6 +50,9 @@ const DashboardTabNavigator = createBottomTabNavigator(
 const DashboardStackNavigator = createStackNavigator(
     {
         DashboardTabNavigator: DashboardTabNavigator,
+        Home: {
+            screen: Home
+        }
     },
     {
         defaultNavigationOptions: ({ navigation }) => {
@@ -55,20 +74,28 @@ const AppDrawerNavigator = createDrawerNavigator({
     Home: {
         screen: DashboardStackNavigator,
     },
-    Search: {
-        screen: Category
+    Profile: {
+        screen: Home,
     },
+    BeerStack,
     Beer: {
         screen: SingleBeer
-    }
+    },
+
 
 });
 
 const AppSwitchNavigator = createSwitchNavigator({
     LoadingScreen: Loading,
     Welcome: AuthStack,
-    Dashboard: { screen: AppDrawerNavigator }
-});
+    Dashboard: {
+        screen: AppDrawerNavigator
+    }
+},
+{
+        initialRouteName: 'Dashboard'
+    }
+);
 //
 // const AppContainer = createAppContainer(AppSwitchNavigator);
 //

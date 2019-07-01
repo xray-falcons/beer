@@ -10,7 +10,6 @@ import {
     Image,
     Alert
 } from 'react-native';
-import {signUpThunk} from "../redux";
 import * as Facebook from 'expo-facebook';
 import {db} from '../server/db'
 
@@ -41,8 +40,7 @@ export default class SignUpView extends Component {
         try {
             let { user } = await firebase.auth().createUserWithEmailAndPassword(email, password)
             await db.collection('users').doc(user.uid).set({email: this.state.email, fullName: this.state.fullName});
-            db.collection('users').doc(user.uid).set(email, fullName);
-            this.props.navigation.navigate('HomeScreen')
+            this.props.navigation.navigate('Dashboard')
         } catch (err) {
             console.log(err)
 
@@ -62,7 +60,7 @@ export default class SignUpView extends Component {
                 // Get the user's name using Facebook's Graph API
                 //const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
                 Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
-                this.props.navigation.navigate('TestScreen')
+                this.props.navigation.navigate('Dashboard')
 
             } else {
                 // type === 'cancel'
@@ -182,7 +180,7 @@ const styles = StyleSheet.create({
 //
 // const mapDispatchToProps = dispatch => {
 //     return {
-//         signUp: (newUser, password) => dispatch(signUpThunk(newUser, password))
+//         signUp: (newUser, password) => dispatch(signUpThunk(newUser))
 //     }
 // };
 // export default connect(mapStateToProps, mapDispatchToProps)(SignUpView);
