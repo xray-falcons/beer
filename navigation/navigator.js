@@ -1,14 +1,14 @@
 import React from "react";
 import { View, Text } from "react-native";
 import SignUpView from "../components/sign-up";
-import { createSwitchNavigator, createAppContainer, createBottomTabNavigator, createStackNavigator, createNavigationContainer } from "react-navigation";
+import { createSwitchNavigator, createAppContainer, createBottomTabNavigator, createStackNavigator, createDrawerNavigator } from "react-navigation";
 import Loading from "../components/loading";
 import Test from "../components/test";
 import SignInView from "../components/sign-in";
 import SingleBeer from "../components/single-beer";
 import Category from "../components/choose-category";
 import Home from "../components/home"
-
+import Icon from '@expo/vector-icons/Ionicons';
 
 const AuthStack =  createStackNavigator({
         SignUpScreen: SignUpView,
@@ -16,24 +16,96 @@ const AuthStack =  createStackNavigator({
     }
 )
 
-const HomeStack =  createStackNavigator({
-    HomeScreen:  {screen: Home},
-    CategoryScreen: {screen: Category},
-    SingleBeerScreen: {screen: SingleBeer},
+const DashboardTabNavigator = createBottomTabNavigator(
+    {
+        Category,
+        Home,
+        SingleBeer
+    },
+    {
+        navigationOptions: ({ navigation }) => {
+            const { routeName } = navigation.state.routes[navigation.state.index];
+            return {
+                headerTitle: routeName
+            };
+        }
+    }
+);
+const DashboardStackNavigator = createStackNavigator(
+    {
+        DashboardTabNavigator: DashboardTabNavigator,
+    },
+    {
+        defaultNavigationOptions: ({ navigation }) => {
+            return {
+                headerLeft: (
+                    <Icon
+                        style={{ paddingLeft: 10 }}
+                        onPress={() => navigation.openDrawer()}
+                        name="md-menu"
+                        size={30}
+                    />
+                )
+            };
+        }
+    }
+);
 
-})
+const AppDrawerNavigator = createDrawerNavigator({
+    Home: {
+        screen: DashboardStackNavigator,
+    },
+    Search: {
+        screen: Category
+    },
+    Beer: {
+        screen: SingleBeer
+    }
 
-
+});
 
 const AppSwitchNavigator = createSwitchNavigator({
     LoadingScreen: Loading,
-    Auth: AuthStack,
-    // App: HomeStack,
+    Welcome: AuthStack,
+    Dashboard: { screen: AppDrawerNavigator }
+});
+//
+// const AppContainer = createAppContainer(AppSwitchNavigator);
+//
+// const styles = StyleSheet.create({
+//     container: {
+//         flex: 1,
+//         alignItems: 'center',
+//         justifyContent: 'center'
+//     }
+// });
+//
+//
+//
 
-},
-    {
-        initialRouteName: 'LoadingScreen',
-    });
+// const bottomNavigator = createBottomTabNavigator({
+//     Category,
+//     Home,
+//     SingleBeer
+// })
+//
+// const HomeStack =  createStackNavigator({
+//     Test: {
+//         screen: bottomNavigator
+//     }
+//
+// })
+//
+//
+// const AppSwitchNavigator = createSwitchNavigator({
+//     LoadingScreen: Loading,
+//     Auth: AuthStack,
+//     Home: HomeStack,
+//
+// },
+//     {
+//         initialRouteName: 'Home',
+//     });
 
 
 export const AppNavigator = createAppContainer(AppSwitchNavigator);
