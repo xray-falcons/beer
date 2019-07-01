@@ -17,7 +17,8 @@ export const initialState = {
         fullName: '',
         email: '',
         password: '',
-    }
+    },
+    beers: []
 };
 
 //Actions
@@ -25,22 +26,22 @@ const SIGNED_UP = 'SIGNED_UP';
 
 //Action creator
 
-export const signUp = (email, password, fullName) => {
+export const signUp = (email, password) => {
     return {
         type: SIGNED_UP,
-        email, password, fullName
+        email, password
     }
 };
 
 //thunks
 
-export const signUpThunk = (userData, password) => {
+export const signUpThunk = (email, password, fullName) => {
     return async (dispatch) => {
         try {
 
-            let { user } = await firebase.auth().createUserWithEmailAndPassword(userData.email, password);
-            await db.collection('users').doc(user.uid).set(userData);
-            dispatch(signUp(userData));
+            let { user } = await firebase.auth().createUserWithEmailAndPassword(email, password);
+            await db.collection('users').doc(user.uid).set({email: this.state.email, fullName: this.state.fullName});
+            dispatch(signUp(user));
         } catch (error) {
             console.error(error);
         }
@@ -55,6 +56,7 @@ const reducer = (state = initialState, action) => {
         case SIGNED_UP:
             newState.email = action.email;
             newState.password = action.password;
+            newState.fullName = action.fullName;
             return newState;
         default:
             return state;

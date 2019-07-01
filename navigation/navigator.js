@@ -17,11 +17,20 @@ const AuthStack =  createStackNavigator({
     }
 )
 
+
+
+
 const DashboardTabNavigator = createBottomTabNavigator(
     {
-        Category,
-        Home,
-        SingleBeer
+        Category: {
+            screen: Category
+        },
+        Home: {
+            screen: Home
+        },
+        SingleBeer: {
+            screen: SingleBeer
+        }
     },
     {
         navigationOptions: ({ navigation }) => {
@@ -35,6 +44,9 @@ const DashboardTabNavigator = createBottomTabNavigator(
 const DashboardStackNavigator = createStackNavigator(
     {
         DashboardTabNavigator: DashboardTabNavigator,
+        Home: {
+            screen: Home
+        }
     },
     {
         defaultNavigationOptions: ({ navigation }) => {
@@ -55,6 +67,9 @@ const DashboardStackNavigator = createStackNavigator(
 const AppDrawerNavigator = createDrawerNavigator({
     Home: {
         screen: DashboardStackNavigator,
+    },
+    Profile: {
+        screen: Home,
     },
     Search: {
         screen: Category

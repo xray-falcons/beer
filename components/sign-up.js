@@ -40,7 +40,6 @@ export default class SignUpView extends Component {
         try {
             let { user } = await firebase.auth().createUserWithEmailAndPassword(email, password)
             await db.collection('users').doc(user.uid).set({email: this.state.email, fullName: this.state.fullName});
-            db.collection('users').doc(user.uid).set(email, fullName);
             this.props.navigation.navigate('Dashboard')
         } catch (err) {
             console.log(err)
@@ -181,7 +180,7 @@ const styles = StyleSheet.create({
 //
 // const mapDispatchToProps = dispatch => {
 //     return {
-//         signUp: (newUser, password) => dispatch(signUpThunk(newUser, password))
+//         signUp: (newUser, password) => dispatch(signUpThunk(newUser))
 //     }
 // };
 // export default connect(mapStateToProps, mapDispatchToProps)(SignUpView);
