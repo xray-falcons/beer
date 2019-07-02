@@ -10,6 +10,7 @@ import {
     Image,
     Alert
 } from 'react-native';
+import {LinearGradient} from "expo-linear-gradient";
 
 export default class Home extends Component {
 	    constructor(props) {
@@ -18,7 +19,9 @@ export default class Home extends Component {
 
     render() {
         return (
+
             <View style={styles.container}>
+
             	<View style={styles.container}>
                 	<Text style={styles.signUpText}>Your recent beers: </Text>
                 </View>
@@ -42,6 +45,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     signUpText: {
-        color: 'white',
+        color: 'black',
     }
 });
