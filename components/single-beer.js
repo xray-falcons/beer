@@ -6,24 +6,7 @@ import { db } from "../server/db";
 
 export default class SingleBeer extends Component {
 
-    // constructor(props){
-    //     super(props);
-    //     this.state = {
-    //         SingleBeer: {}
-    //     }
-    // }
-
-    // _onTestButton(){
-    //   //console.log("PARAMS FROM INSIDE _onTestButton", this.props.navigation)
-    //   // const thisUserId = firebase.auth().currentUser.uid
-    //   // const userRef = db.collection("users").doc(thisUserId)
-    //   //let beerRef = db.collection("beers").where("id", "==", beerId)
-    //   //userRef.set()
-    //   //console.log("SingleBeer component: ", thisUserId)
-    // }
-
     render() {
-        //console.log("PROPS INSIDE _RENDER:", this.props)
         const beerName = this.props.navigation.getParam('beerName')
         const beerImage = this.props.navigation.getParam('beerImage')
         const abv = this.props.navigation.getParam('abv')
@@ -47,6 +30,8 @@ export default class SingleBeer extends Component {
                 //console.log("USER", user)
                 const beerId = this.props.navigation.getParam('beerId')
                 console.log("beerId", beerId)
+
+                let beersRef = db.collection("users").doc(`${userId}`).collection("beers")
 
                 //const setMyCollectionItem = db.collection("users").doc(userId).collection("test-collection").set({"apple": "testing2"}, {merge:true})
                 // const myBeerRef = db.collection("users").doc(userId).collection("beers").doc()
