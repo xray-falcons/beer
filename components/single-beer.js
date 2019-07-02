@@ -24,26 +24,21 @@ export default class SingleBeer extends Component {
             <Image source={{ uri: beerImage }} style={styles.image} />
             <Text style={styles.text}>{description}</Text>
             <View style={styles.container}>
-            <Button title="test-like"
-              onPress={()=>{
+            <Icon.Button name="thumbs-up" onPress={()=>{
                 db.collection("users").doc(`${userId}`).collection("beers").doc(`${beerId}`).set({
                 "name":beerName,"rating":1}, {"merge":true})
-              }} />
-            <Button title="test-dislike"
-              onPress={()=>{
-                db.collection("users").doc(`${userId}`).collection("beers").doc(`${beerId}`).set({
-                "name":beerName,"rating":-1}, {"merge":true})
-              }} />
-              <Button title="test-cheers"
-              onPress={()=>{
+              }} color="#640" style={styles.button}/>
+            <Icon.Button name="thumbs-down"
+            color="#640" onPress={()=>{
+              db.collection("users").doc(`${userId}`).collection("beers").doc(`${beerId}`).set({
+              "name":beerName,"rating":-1}, {"merge":true})
+            }} style={styles.button} />
+            <Icon.Button name="beer" onPress={()=>{
                 let beerRef = db.doc(`users/${userId}/beers/${beerId}`)
                 if(!beerRef.times) beerRef.times = 0;
                 beerRef.update({"times":firebase.firestore.FieldValue.increment(1)})
                 beerRef.set({"lastHad":new Date() }, {"merge":true})
-              }} />
-            <Icon.Button name="thumbs-up" color="#640" style={styles.button}/>
-            <Icon.Button name="thumbs-down"
-            color="#640" style={styles.button} />
+              }} color="#640" style={styles.button} />
             </View>
           </ScrollView>
       </View>
