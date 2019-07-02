@@ -32,7 +32,7 @@ export default class BeerList extends Component{
         try {
             const beers = await db.collection('beers');
             let beerArray =[]
-            const query = await beers.where('style.category.name', '==', name).limit(10);
+            const query = await beers.where('style.category.name', '==', name).limit(12);
             const querySnapshot = await query.get()
             querySnapshot.forEach(function (doc){
                 let beer = doc.data();
@@ -47,24 +47,14 @@ export default class BeerList extends Component{
 }
 
     renderRow = ({item}) => {
-
-        let beerImage;
-        let description;
-        if (!item.labels) {
-            beerImage = 'https://www.faustbrewing.com/images/beers/types/beerglassthree.png'
-        } else {
-            beerImage = item.labels.large;
-        }
-
             return(
                 <View style={styles.item}>
                     <Button title={item.name} onPress={() => this.props.navigation.navigate('SingleBeer', {
                         beerName: item.name,
-                        beerImage: beerImage,
+                        beerImage: item.labels.large,
                         abv: item.abv,
                         description: item.description,
                         ibu: item.ibu,
-                        // brewery: "mybrewery",
                         style: item.style.category.name
                     }) }/>
 

@@ -49031,13 +49031,14 @@ let beers= [{
         }
     }
 
-    ]
+]
 
-    const data = {}
+const data = {}
 
-    beers = beers.filter(beer => beer.description)
-    .filter(beer => beer.labels).map((beer, i) => data[i+1] = beer);
-    console.log('len: ', beers.length)
+beers = beers.filter(beer => beer.description)
+.filter(beer => beer.labels)
+.filter(beer => beer.isRetired === "N")
+.map((beer, i) => data[i+1] = beer)
 
+module.exports = data
 
-    module.exports = data
