@@ -42,6 +42,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     signUpText: {
-        color: 'white',
+        color: 'black',
     }
 });

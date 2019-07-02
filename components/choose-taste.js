@@ -16,17 +16,18 @@ import BeerList from './beer-list';
 
 
 
-export default class Category extends Component {
+export default class Taste extends Component {
+
 
     render(){
-        const beerStyles = ["British Origin Ales", "Irish Origin Ales", "North American Origin Ales","German Origin Ales", "Belgian And French Origin Ales","International Ale Styles","European-germanic Lager","North American Lager", "International Styles","Hybrid/mixed Beer","Mead, Cider, & Perry","Malternative Beverages"]
+        const beerTastes = ["British Origin Ales", "Irish Origin Ales", "North American Origin Ales","German Origin Ales", "Belgian And French Origin Ales","International Ale Styles","European-germanic Lager","North American Lager", "International Styles","Hybrid/mixed Beer","Mead, Cider, & Perry","Malternative Beverages"]
         return <View style={styles.container}>
             <ScrollView>
-            <Text style={styles.textBold}>Choose your  style!</Text>
-            {beerStyles.map((elem, idx) => {
-            return  <Button key={idx} title={elem} onPress={() => this.props.navigation.navigate('BeerList', { name : elem}) }/>
-            })
-            }
+                <Text style={styles.textBold}>Choose your taste!</Text>
+                {beerTastes.map((elem, idx) => {
+                    return  <Button key={idx} title={elem} onPress={() => this.props.navigation.navigate('BeerList', { name : elem}) }/>
+                })
+                }
             </ScrollView>
         </View>
     }
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontStyle: 'italic',
         textAlign: 'center'
-      }
+    }
 })
 
 
