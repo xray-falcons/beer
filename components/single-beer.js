@@ -1,7 +1,8 @@
 import React from "react";
 import { View, Button, Text, StyleSheet, Image, ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { NEG_ONE } from "long";
+import firebase from "firebase";
+import { db } from "../server/db";
 
     const styles = StyleSheet.create({
       container: {
@@ -43,9 +44,29 @@ import { NEG_ONE } from "long";
         textAlign: 'center'
       }
     });
-
-
 export default class SingleBeer extends React.Component {
+    async like(){
+        firebase.auth().onAuthStateChanged(async (user) => {
+            await db.collection('users').doc(user.uid).set({rating: +1},{merge:true});
+        })
+
+            const users = await db.collection("users")
+
+    //     let userbeer = await users
+    //         .where('beerId', "==", "this.props.beerId")
+    //         .where("userId", "==", "props.userId")
+    //         .set({rating:1},{merge:true})
+    //     console.log("User-beer rating is now: ", userbeer)
+    }
+
+    async dislike(){
+        let userbeer = await db.collection("preferences")
+            .where('beerId', "==", "this.props.beerId")
+            .where("userId", "==", "props.userId")
+            .set({rating:-1},{merge:true})
+        console.log("User-beer rating is now: ", userbeer)
+    }
+
 
     render() {
         const beerName = this.props.navigation.getParam('beerName')
@@ -72,3 +93,4 @@ export default class SingleBeer extends React.Component {
     );
   }
 }
+

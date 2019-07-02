@@ -28,6 +28,8 @@ export default class Home extends Component {
 	            <View>
 	                <Text style={styles.signUpText}>Top picks for you: </Text>
 	            </View>
+                <Button title='LogOUT' onPress={() => firebase.auth().signOut()}/>
+
             </View>
         );
     }

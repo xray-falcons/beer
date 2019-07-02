@@ -17,6 +17,7 @@ import BeerList from './beer-list';
 
 
 export default class Category extends Component {
+
     query = async (beerStyle) => {
         try {
             const beers = await db.collection('beers');

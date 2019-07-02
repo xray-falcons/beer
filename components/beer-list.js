@@ -69,7 +69,6 @@ export default class BeerList extends Component{
         this.getData)
     }
     render() {
-        console.log(this.props)
         return(
             <FlatList  data={this.state.data}
         renderItem={this.renderRow}
