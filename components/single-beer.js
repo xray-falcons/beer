@@ -3,6 +3,7 @@ import { View, Button, Text, StyleSheet, Image, ScrollView} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import firebase from "firebase";
 import { db } from "../server/db";
+// import { Timestamp } from "@google-cloud/firestore";
 
 export default class SingleBeer extends Component {
 
@@ -13,6 +14,8 @@ export default class SingleBeer extends Component {
         const description = this.props.navigation.getParam('description')
         const ibu = this.props.navigation.getParam('ibu')
         const style = this.props.navigation.getParam('style')
+        const userId = firebase.auth().currentUser.uid
+        const beerId = this.props.navigation.getParam('beerId')
         return (
         <View style={styles.container}>
           <ScrollView>
@@ -24,23 +27,20 @@ export default class SingleBeer extends Component {
             <View style={styles.container}>
             <Button title="test-like"
               onPress={()=>{
-                const userId = firebase.auth().currentUser.uid
-                console.log("userId", userId)
-                //const userRef = db.collection("users").doc(userId)
-                //console.log("USER", user)
-                const beerId = this.props.navigation.getParam('beerId')
-                console.log("beerId", beerId)
-
-                let beersRef = db.collection("users").doc(`${userId}`).collection("beers")
-
-                //const setMyCollectionItem = db.collection("users").doc(userId).collection("test-collection").set({"apple": "testing2"}, {merge:true})
-                // const myBeerRef = db.collection("users").doc(userId).collection("beers").doc()
-                // const setMyBeer = myBeerRef.set({rating:1})
-                // console.log("MY BEER", myBeerRef)
-                //const userBeerRef = userRef.beers.set({beerId:{rating:1}},{merge:true})
-                //console.log("USERBEERREF!!!!!", userBeerRef)
-                //userBeerRef.set({rating:1},{merge:true})
-
+                db.collection("users").doc(`${userId}`).collection("beers").doc(`${beerId}`).set({
+                "name":beerName,"rating":1}, {"merge":true})
+              }} />
+            <Button title="test-dislike"
+              onPress={()=>{
+                db.collection("users").doc(`${userId}`).collection("beers").doc(`${beerId}`).set({
+                "name":beerName,"rating":-1}, {"merge":true})
+              }} />
+              <Button title="test-cheers"
+              onPress={()=>{
+                let beerRef = db.doc(`users/${userId}/beers/${beerId}`)
+                if(!beerRef.times) beerRef.times = 0;
+                beerRef.update({"times":firebase.firestore.FieldValue.increment(1)})
+                beerRef.set({"lastHad":new Date() }, {"merge":true})
               }} />
             <Icon.Button name="thumbs-up" color="#640" style={styles.button}/>
             <Icon.Button name="thumbs-down"
@@ -51,6 +51,10 @@ export default class SingleBeer extends Component {
     );
   }
 }
+
+// console.log("times: ", times)
+// db.collection("users").doc(`${userId}`).collection("beers").doc(`${beerId}`).set({
+// "times":times+1}, {"merge":true})
 
 const styles = StyleSheet.create({
   container: {
