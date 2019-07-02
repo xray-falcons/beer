@@ -25,7 +25,7 @@ export default class Taste extends Component {
             <ScrollView>
                 <Text style={styles.textBold}>Choose your taste!</Text>
                 {beerTastes.map((elem, idx) => {
-                    return  <Button key={idx} title={elem} onPress={() => this.props.navigation.navigate('BeerList', { name : elem}) }/>
+                    return  <Button key={idx} title={elem} onPress={() => this.props.navigation.navigate('List', { name : elem}) }/>
                 })
                 }
             </ScrollView>

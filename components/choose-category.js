@@ -24,7 +24,7 @@ export default class Category extends Component {
             <ScrollView>
             <Text style={styles.textBold}>Choose your  style!</Text>
             {beerStyles.map((elem, idx) => {
-            return  <Button key={idx} title={elem} onPress={() => this.props.navigation.navigate('BeerList', { name : elem}) }/>
+            return  <Button key={idx} title={elem} onPress={() => this.props.navigation.navigate('List', { name : elem}) }/>
             })
             }
             </ScrollView>

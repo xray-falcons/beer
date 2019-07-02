@@ -37,8 +37,9 @@ const BottomTabNavigator = createBottomTabNavigator(
             activeTintColor: "black",
             inactiveTintColor: "gray",
             style: {
+                height: 100,
+                marginBottom: 55,
                 backgroundColor: 'blue',
-                height: 150
             },
         }
     }

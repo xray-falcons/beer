@@ -49,7 +49,7 @@ export default class BeerList extends Component{
     renderRow = ({item}) => {
             return(
                 <View style={styles.item}>
-                    <Button title={item.name} onPress={() => this.props.navigation.navigate('SingleBeer', {
+                    <Button title={item.name} onPress={() => this.props.navigation.navigate('Beer', {
                         beerName: item.name,
                         beerImage: item.labels.large,
                         abv: item.abv,
