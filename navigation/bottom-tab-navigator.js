@@ -39,7 +39,7 @@ const BottomTabNavigator = createBottomTabNavigator(
             style: {
                 height: 100,
                 marginBottom: 55,
-                backgroundColor: 'blue',
+                backgroundColor: 'green',
             },
         }
     }
