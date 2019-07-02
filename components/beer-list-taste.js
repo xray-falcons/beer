@@ -25,7 +25,6 @@ export default class BeerListTaste extends Component{
             const beers = await db.collection('beers');
             let beerArray =[]
             const query = await beers.where('taste', 'array-contains', name.toLowerCase());
-            console.log(query)
             const querySnapshot = await query.get()
             querySnapshot.forEach(function (doc){
                 let beer = doc.data();

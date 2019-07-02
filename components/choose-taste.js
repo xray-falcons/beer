@@ -17,6 +17,35 @@ import BeerList from './beer-list';
 
 
 export default class Taste extends Component {
+    try = async () => {
+        console.log('NOAHHHH')
+        try {
+            const beers = await db.collection('beers');
+            const tastes =['hoppy', 'stout', 'earthy', 'fruit']
+            let beerArray =[]
+            const query = await beers.where('taste', 'array-contains', tastes[0]);
+            const querySnapshot = await query.get()
+            querySnapshot.forEach(function (doc){
+                let beer = doc.data();
+                beerArray.push(beer)
+            });
+            let filtered =[]
+            filtered = beerArray.filter(beer =>{
+                for (let i = 0; i < tastes.length; i++ ) {
+                    if (beer.taste.includes(tastes[i])) {
+                        return beer
+                    }
+                }
+            })
+
+            console.log('FILTER', filtered.length)
+
+        } catch (err)  {
+            console.log(err)
+
+        }
+
+    }
 
 
     render(){
@@ -30,6 +59,7 @@ export default class Taste extends Component {
                 })
                 }
             </ScrollView>
+            <Button title='CLIIIIICK MEEEEEE' onPress={() => this.try()}/>
         </View>
     }
 }

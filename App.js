@@ -17,16 +17,14 @@ export default class App extends React.Component {
   }
   render() {
     return (
-      <Provider store={store}>
-        <View>
+
           <LinearGradient
             colors={["#c36f09", "#eeba0b"]}
             style={styles.linearGradient}
           >
             <AppNavigator />
           </LinearGradient>
-        </View>
-      </Provider>
+
     );
   }
 }
