@@ -20,12 +20,13 @@ export default class Taste extends Component {
 
 
     render(){
-        const beerTastes = ["British Origin Ales", "Irish Origin Ales", "North American Origin Ales","German Origin Ales", "Belgian And French Origin Ales","International Ale Styles","European-germanic Lager","North American Lager", "International Styles","Hybrid/mixed Beer","Mead, Cider, & Perry","Malternative Beverages"]
+        const beerTastes = ["sweet", "chocolate", "hoppy", "citrus","full-bodied","sour","spicy", "fruit","light","coffee","earthy"]
+
         return <View style={styles.container}>
             <ScrollView>
                 <Text style={styles.textBold}>Choose your taste!</Text>
                 {beerTastes.map((elem, idx) => {
-                    return  <Button key={idx} title={elem} onPress={() => this.props.navigation.navigate('List', { name : elem}) }/>
+                    return  <Button key={idx} title={elem = elem[0].toUpperCase() + elem.slice(1)} onPress={() => this.props.navigation.navigate('List', { name : elem}) }/>
                 })
                 }
             </ScrollView>

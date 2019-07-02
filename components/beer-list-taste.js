@@ -1,20 +1,12 @@
 import React, { Component } from "react";
-import axios from 'axios';
 import {
     StyleSheet,
-    Text,
     View,
-    TextInput,
     Button,
-    TouchableHighlight,
-    Image,
-    Alert,
     FlatList
 } from 'react-native';
-import firebase from 'firebase';
 import 'firebase/firestore';
 import { db } from '../server/db';
-// import { QueryDocumentSnapshot, DocumentSnapshot } from "@google-cloud/firestore";
 
 export default class BeerListTaste extends Component{
     constructor(props){
@@ -32,7 +24,8 @@ export default class BeerListTaste extends Component{
         try {
             const beers = await db.collection('beers');
             let beerArray =[]
-            const query = await beers.where('style.category.name', '==', name).limit(12);
+            const query = await beers.where('taste', 'array-contains', name.toLowerCase());
+            console.log(query)
             const querySnapshot = await query.get()
             querySnapshot.forEach(function (doc){
                 let beer = doc.data();
