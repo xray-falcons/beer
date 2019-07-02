@@ -1,22 +1,14 @@
 import React, { Component } from "react";
-import axios from 'axios';
 import {
     StyleSheet,
-    Text,
     View,
-    TextInput,
     Button,
-    TouchableHighlight,
-    Image,
-    Alert,
     FlatList
 } from 'react-native';
-import firebase from 'firebase';
 import 'firebase/firestore';
 import { db } from '../server/db';
-// import { QueryDocumentSnapshot, DocumentSnapshot } from "@google-cloud/firestore";
 
-export default class BeerList extends Component{
+export default class BeerListTaste extends Component{
     constructor(props){
         super(props)
         this.state = {
@@ -32,7 +24,7 @@ export default class BeerList extends Component{
         try {
             const beers = await db.collection('beers');
             let beerArray =[]
-            const query = await beers.where('style.category.name', '==', name).limit(12);
+            const query = await beers.where('taste', 'array-contains', name.toLowerCase());
             const querySnapshot = await query.get()
             querySnapshot.forEach(function (doc){
                 let beer = doc.data();
@@ -44,38 +36,38 @@ export default class BeerList extends Component{
             console.log(err)
 
         }
-}
+    }
 
     renderRow = ({item}) => {
-            return(
-                <View style={styles.item}>
-                    <Button title={item.name} onPress={() => this.props.navigation.navigate('Beer', {
-                        beerName: item.name,
-                        beerImage: item.labels.large,
-                        abv: item.abv,
-                        description: item.description,
-                        ibu: item.ibu,
-                        style: item.style.name
-                    }) }/>
+        return(
+            <View style={styles.item}>
+                <Button title={item.name} onPress={() => this.props.navigation.navigate('Beer', {
+                    beerName: item.name,
+                    beerImage: item.labels.large,
+                    abv: item.abv,
+                    description: item.description,
+                    ibu: item.ibu,
+                    style: item.style.category.name
+                }) }/>
 
-                </View>
-          )
+            </View>
+        )
 
 
     }
 
     handleLoadMore = () => {
-       this.setState({page: this.state.page +1},
-        this.getData)
+        this.setState({page: this.state.page +1},
+            this.getData)
     }
     render() {
         return(
             <FlatList  data={this.state.data}
-        renderItem={this.renderRow}
-        keyExtractor={(item, index) => index.toString()}
-        onEndReached={this.handleLoadMore}
-        onEndReachedThreshold={0}
-        />
+                       renderItem={this.renderRow}
+                       keyExtractor={(item, index) => index.toString()}
+                       onEndReached={this.handleLoadMore}
+                       onEndReachedThreshold={0}
+            />
 
 
 
