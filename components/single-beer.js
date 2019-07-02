@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Button, Text, StyleSheet, Image, ScrollView } from "react-native";
+import { View, Button, Text, StyleSheet, Image, ScrollView} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import firebase from "firebase";
 import { db } from "../server/db";
@@ -67,6 +67,12 @@ export default class SingleBeer extends React.Component {
         console.log("User-beer rating is now: ", userbeer)
     }
 
+    _onTestButton(){
+      let thisUserId = firebase.auth().currentUser.uid
+      let userRef = db.collection("users").doc(thisUserId)
+      userRef.set()
+      console.log("SingleBeer component: ", thisUserId)
+    }
 
     render() {
         const beerName = this.props.navigation.getParam('beerName')
@@ -84,6 +90,7 @@ export default class SingleBeer extends React.Component {
             <Image source={{ uri: beerImage }} style={styles.image} />
             <Text style={styles.text}>{description}</Text>
             <View style={styles.container}>
+              <Button onPress={this._onTestButton} title="test-like"/>
             <Icon.Button name="thumbs-up" color="#640" style={styles.button}/>
             <Icon.Button name="thumbs-down"
             color="#640" style={styles.button} />
