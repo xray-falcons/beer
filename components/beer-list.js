@@ -55,7 +55,7 @@ export default class BeerList extends Component{
                         abv: item.abv,
                         description: item.description,
                         ibu: item.ibu,
-                        style: item.style.category.name
+                        style: item.style.name
                     }) }/>
 
                 </View>
