@@ -18,10 +18,11 @@ import { db } from '../server/db';
 
 export default class BeerList extends Component{
     constructor(props){
-        super(props)
+        super(props);
         this.state = {
             data: [],
-            page: 1
+            page: 1,
+            SingleBeer: {}
         }
     }
     componentDidMount(){
@@ -42,26 +43,26 @@ export default class BeerList extends Component{
 
         } catch (err)  {
             console.log(err)
-
         }
 }
 
     renderRow = ({item}) => {
-            return(
-                <View style={styles.item}>
-                    <Button title={item.name} onPress={() => this.props.navigation.navigate('SingleBeer', {
-                        beerName: item.name,
-                        beerImage: item.labels.large,
-                        abv: item.abv,
-                        description: item.description,
-                        ibu: item.ibu,
-                        style: item.style.category.name
-                    }) }/>
-
-                </View>
-          )
-
-
+        return(
+            <View style={styles.item}>
+                <Button title={item.name} 
+                    onPress={() => 
+                        this.props.navigation.navigate('SingleBeer', {
+                    beerName: item.name,
+                    beerImage: item.labels.large,
+                    abv: item.abv,
+                    description: item.description,
+                    ibu: item.ibu,
+                    style: item.style.category.name,
+                    beerId: item.id
+                }) }
+                />
+            </View>
+      )
     }
 
     handleLoadMore = () => {
