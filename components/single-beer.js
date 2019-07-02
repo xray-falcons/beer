@@ -3,7 +3,6 @@ import { View, Button, Text, StyleSheet, Image, ScrollView} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import firebase from "firebase";
 import { db } from "../server/db";
-// import { Timestamp } from "@google-cloud/firestore";
 
 export default class SingleBeer extends Component {
 
@@ -52,10 +51,6 @@ export default class SingleBeer extends Component {
   }
 }
 
-// console.log("times: ", times)
-// db.collection("users").doc(`${userId}`).collection("beers").doc(`${beerId}`).set({
-// "times":times+1}, {"merge":true})
-
 const styles = StyleSheet.create({
   container: {
     flex: 0.6,
@@ -96,11 +91,3 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   }
 });
-
-
-//USING PREFERENCES TABLE
-// const setPref = db.collection("preferences").set({
-// "beerid":beerId,
-// "userid":userId,
-// "rating":1
-// },{merge:true})
