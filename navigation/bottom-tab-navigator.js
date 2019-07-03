@@ -41,7 +41,7 @@ const BottomTabNavigator = createBottomTabNavigator(
         }),
         tabBarOptions: {
             activeTintColor: "black",
-            inactiveTintColor: "gray",
+            inactiveTintColor: "white",
             style: {
                 // height: 100,
                 // marginBottom: 55,

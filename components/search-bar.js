@@ -44,7 +44,9 @@ export default class Search extends React.Component {
                 style={styles.linearGradient}
             >
                 <SearchBar
-                    placeholder="What is a beer you are looking for...?"
+                    containerStyle={{backgroundColor: '#710000'}}
+                    // inputStyle={{backgroundColor: 'red'}}
+                    placeholder="What are you in the mood for...?"
                     value={search}
                     onChangeText={text => { this.setState({ search: text }); }}
                     onSubmitEditing={() => this.try(search)}
