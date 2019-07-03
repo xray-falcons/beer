@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import firebase from 'firebase';
 import {
     StyleSheet,
+    FlatList,
     Text,
     View,
     TextInput,
@@ -11,12 +11,51 @@ import {
     Alert
 } from 'react-native';
 import {LinearGradient} from "expo-linear-gradient";
-import {styles} from "../style/styles";
+//import {styles} from "../style/styles";
+import firebase from 'firebase';
+import { db } from "../server/db";
 
 export default class Home extends Component {
-	    constructor(props) {
-        super(props);
+
+    constructor(props){
+        super(props)
+        this.state = {
+            recentBeers: [],
+            frequentBeers: [],
+        }
     }
+
+    componentDidMount(){
+        this.getFrequentBeers()
+    }
+
+    getFrequentBeers = async () => {
+        const userId = firebase.auth().currentUser.uid
+        console.log("USER IN HOME COMPONENT:", userId)
+        const userBeersRef = db.collection(`users/${userId}/beers`)
+        try {
+            let frequentBeers = []
+            const query = await userBeersRef.orderBy("times", "desc").limit(10)
+            const querySnapshot = await query.get()
+            querySnapshot.forEach(doc=>{
+                let beer = doc.data()
+                frequentBeers.push(beer)                
+            })
+            this.setState({frequentBeers})
+            console.log("FREQUENT BEERS:", this.state.frequentBeers)
+        } catch(err) {
+            console.err(err)
+        }
+    }
+
+    // renderRow = ({item}) => {
+    //     return(
+    //         <View style={styles.item}>
+    //             <Button title={item.name} />
+    //         </View>
+    //     )
+    // }
+
 
     render() {
         return (
@@ -24,16 +63,15 @@ export default class Home extends Component {
                 colors={["#c36f09", "#eeba0b"]}
                 style={styles.linearGradient}
             >
-            <View style={styles1.container}>
-
-            	<View style={styles1.container}>
-                	<Text style={styles1.signUpText}>Your recent beers: </Text>
+            <View style={styles.container}>
+            	<View style={styles.container}>
+                	<Text style={styles.signUpText}>Your recent beers: </Text>
                 </View>
                 <View>
-	                <Text style={styles1.signUpText}>Your favorite beers: </Text>
+	                <Text style={styles.signUpText}>Your favorite beers: </Text>
 	            </View>
 	            <View>
-	                <Text style={styles1.signUpText}>Top picks for you: </Text>
+	                <Text style={styles.signUpText}>Top picks for you: </Text>
 	            </View>
                 <Button title='LogOUT' onPress={() => firebase.auth().signOut()}/>
 
@@ -43,13 +81,28 @@ export default class Home extends Component {
     }
 }
 
-const styles1 = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        marginTop: 20,
     },
-    signUpText: {
-        color: 'black',
+    item: {
+        borderBottomWidth: 1,
+        marginBottom: 10,
+    },
+    itemText:{
+        fontSize: 26,
+        padding:25
+    },
+    itemImage:{
+        width:"100%",
+        height: 200,
+        resizeMode: 'cover'
     }
-});
+})
+
+/*             <FlatList  data={this.state.frequentBeers}
+                       renderItem={this.renderRow}
+                       keyExtractor={(item, index) => index.toString()}
+                    />
+                    */
