@@ -42,13 +42,7 @@ export default class BeerListTaste extends Component{
         return(
             <View style={styles.item}>
                 <Button title={item.name} onPress={() => this.props.navigation.navigate('Beer', {
-                    beerName: item.name,
-                    beerImage: item.labels.large,
-                    abv: item.abv,
-                    description: item.description,
-                    ibu: item.ibu,
-                    style: item.style.category.name,
-                    beerId:item.id
+                    beer:item
                 }) }/>
 
             </View>
