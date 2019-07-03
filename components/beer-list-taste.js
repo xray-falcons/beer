@@ -47,7 +47,8 @@ export default class BeerListTaste extends Component{
                     abv: item.abv,
                     description: item.description,
                     ibu: item.ibu,
-                    style: item.style.category.name
+                    style: item.style.category.name,
+                    beerId:item.id
                 }) }/>
 
             </View>

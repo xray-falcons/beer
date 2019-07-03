@@ -3,8 +3,16 @@ import { View, Button, Text, StyleSheet, Image, ScrollView} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import firebase from "firebase";
 import { db } from "../server/db";
+import { TextInput } from "react-native-gesture-handler";
 
 export default class SingleBeer extends Component {
+
+  constructor(){
+    super()
+    this.state={
+      text:""
+    }
+  }
 
     render() {
         const beerName = this.props.navigation.getParam('beerName')
@@ -40,8 +48,14 @@ export default class SingleBeer extends Component {
                 beerRef.set({"lastHad":new Date() }, {"merge":true})
               }} color="#640" style={styles.button} />
             </View>
+            <Text style={styles.textBold}>Contribute your notes here!</Text>
+            <TextInput style={{height:100}} placeholder="Your notes..." onChangeText={(text)=>this.setState({text})} value={this.state.text}/>
+            <Button title="Submit" onPress={()=>{
+              let beerRef = db.doc(`users/${userId}/beers/${beerId}`)
+              beerRef.set({"userNotes":this.state.text }, {"merge":true})
+              this.setState({text:""})
+            }} />
           </ScrollView>
-          {/* <Text>Notes!</Text> */}
       </View>
     );
   }
@@ -49,7 +63,7 @@ export default class SingleBeer extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.6,
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     margin: 20
