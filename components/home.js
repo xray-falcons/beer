@@ -11,6 +11,7 @@ import {
     Alert
 } from 'react-native';
 import {LinearGradient} from "expo-linear-gradient";
+import {styles} from "../style/styles";
 
 export default class Home extends Component {
 	    constructor(props) {
@@ -19,28 +20,32 @@ export default class Home extends Component {
 
     render() {
         return (
+            <LinearGradient
+                colors={["#c36f09", "#eeba0b"]}
+                style={styles.linearGradient}
+            >
+            <View style={styles1.container}>
 
-            <View style={styles.container}>
-
-            	<View style={styles.container}>
-                	<Text style={styles.signUpText}>Your recent beers: </Text>
+            	<View style={styles1.container}>
+                	<Text style={styles1.signUpText}>Your recent beers: </Text>
                 </View>
                 <View>
-	                <Text style={styles.signUpText}>Your favorite beers: </Text>
+	                <Text style={styles1.signUpText}>Your favorite beers: </Text>
 	            </View>
 	            <View>
-	                <Text style={styles.signUpText}>Top picks for you: </Text>
+	                <Text style={styles1.signUpText}>Top picks for you: </Text>
 	            </View>
                 <Button title='LogOUT' onPress={() => firebase.auth().signOut()}/>
 
             </View>
+            </LinearGradient>
         );
     }
 }
 
-const styles = StyleSheet.create({
+const styles1 = StyleSheet.create({
     container: {
-        flex: 0.6,
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
     },

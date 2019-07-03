@@ -17,6 +17,7 @@ export default class App extends React.Component {
   }
   render() {
     return (
+        <View style={styles.containerApp}>
 
           <LinearGradient
             colors={["#c36f09", "#eeba0b"]}
@@ -24,6 +25,7 @@ export default class App extends React.Component {
           >
             <AppNavigator />
           </LinearGradient>
+        </View>
 
     );
   }
