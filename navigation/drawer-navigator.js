@@ -1,7 +1,7 @@
 import React from "react";
 import { createDrawerNavigator, createAppContainer } from "react-navigation";
 import BottomTabNavigator from "./bottom-tab-navigator";
-import {HomeNavigator, SearchNavigator, StyleNavigator, TapViewNavigator, TasteNavigator} from "./stack-navigator";
+import {HomeNavigator, SearchNavigator, StyleNavigator, TasteNavigator} from "./stack-navigator";
 
 const DrawerNavigator = createDrawerNavigator({
     /*To have a header on the drawer screens,
@@ -11,7 +11,6 @@ const DrawerNavigator = createDrawerNavigator({
     // Taste: TasteNavigator,
     // Style: StyleNavigator,
     // Search: SearchNavigator,
-    Tap: TapViewNavigator
 });
 
 const Drawer = createAppContainer(DrawerNavigator);

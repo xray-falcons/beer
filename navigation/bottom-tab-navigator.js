@@ -3,7 +3,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { createBottomTabNavigator } from "react-navigation";
 import {
     HomeNavigator, SearchNavigator,
-    StyleNavigator, TapViewNavigator,
+    StyleNavigator,
     TasteNavigator
 } from "./stack-navigator";
 
@@ -22,9 +22,6 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
     else if (routeName === "Search") {
         iconName = "ios-search";
     }
-    else if (routeName === 'Tab') {
-        iconName = "ios-beer"
-    }
 
     return <IconComponent name={iconName} size={25} color={tintColor} />;
 };
@@ -35,7 +32,6 @@ const BottomTabNavigator = createBottomTabNavigator(
         Style: StyleNavigator,
         Taste: TasteNavigator,
         Search: SearchNavigator,
-        Tab: TapViewNavigator
 
     },
     {
