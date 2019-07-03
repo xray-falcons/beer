@@ -72,8 +72,6 @@ export default class Home extends Component {
             <LinearGradient
                 colors={["#c36f09", "#eeba0b"]}
                 style={styles.linearGradient}>
-                <View style={styles.container}>
-                    <View style={styles.container}>
                         <ScrollView>
                             <View>
                                 <Text style={{fontSize:24}}>Your recent beers: </Text>
@@ -82,21 +80,19 @@ export default class Home extends Component {
                                 </ScrollView>
                             </View>
                             <View>
-                                <Text style={styles.signUpText}>Your favorite beers: </Text>
+                                <Text style={{fontSize:24}}>Your favorite beers: </Text>
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                 {this.state.frequentBeers.map((eachBeer)=>
                                 <Beer key={eachBeer.beer.id} beer={eachBeer.beer}/>)}
                             </ScrollView>
                             </View>
                             <View>
-                                <Text style={styles.signUpText}>Top picks for you: </Text>
+                                <Text style={{fontSize:24}}>Top picks for you: </Text>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                             </ScrollView>
                             </View>
                             <Button title='LogOUT' onPress={() => firebase.auth().signOut()}/>
                         </ScrollView>
-                    </View>
-                </View>
             </LinearGradient>
         );
     }

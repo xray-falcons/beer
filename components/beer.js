@@ -17,7 +17,7 @@ export default class Beer extends Component {
     const beer = this.props.beer
     console.log("beer props", beer)
     return (
-      <View style={styles.container}>
+      <View>
         <Image source={{uri:beer.labels.icon}} style={{height:100, width: 100}}/>
         <Text style={{
          fontSize: 20,
