@@ -42,6 +42,7 @@ export default class BeerList extends Component{
             });
             this.setState({data: beerArray})
 
+
         } catch (err)  {
             console.log(err)
         }

@@ -10,6 +10,7 @@ import SignUpView from "../components/sign-up";
 import SignInView from "../components/sign-in";
 import Search from "../components/search-bar";
 import TabViewSearch from "../components/tab-view-search";
+import BeerListSearch from "../components/beer-list-search";
 
 //Add navigators with screens in this file
 export const HomeNavigator = createStackNavigator({
@@ -29,6 +30,7 @@ export const TasteNavigator = createStackNavigator({
 
 export const SearchNavigator = createStackNavigator({
     Search: { screen: Search },
+    SearchList: {screen: BeerListSearch},
     Beer: { screen: SingleBeer }
 
 

@@ -2,13 +2,14 @@ import { SearchBar } from 'react-native-elements';
 import { LinearGradient } from "expo-linear-gradient";
 import * as React from 'react';
 import { Image, Text, View, StyleSheet, FlatList, ActivityIndicator, Platform } from 'react-native';
+import {db} from "../server/db";
 
 export default class Search extends React.Component {
     constructor(props) {
         super(props);
         //setting default state
         this.state = {  search: '' };
-        this.arrayholder = [];
+        this.beers = [];
     }
 
 
@@ -36,6 +37,29 @@ export default class Search extends React.Component {
             search:text,
         });
     }
+    try = async (search) => {
+        try {
+            const beers = await db.collection('beers');
+            let beerArray = []
+            const query = await beers.where('nameArr', 'array-contains', search.toLowerCase());
+            const querySnapshot = await query.get()
+            querySnapshot.forEach(function (doc){
+                let beer = doc.data();
+                console.log(beer.name)
+                beerArray.push(beer)
+            });
+            this.setState({
+                beers: beerArray,
+                search: ''
+            });
+            console.log('STATE', this.state.beers.length, this.state.search)
+            this.props.navigation.navigate('SearchList', {
+                beers: this.state.beers
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
     render() {
         const { search } = this.state;
@@ -48,8 +72,10 @@ export default class Search extends React.Component {
             >
                 <SearchBar
                     placeholder="What is a beer you are looking for...?"
-                    onChangeText={text => this.SearchFilterFunction(text)}                    value={search}
-                    onClear={text => this.SearchFilterFunction('')}
+                    value={search}
+                    onChangeText={text => { this.setState({ search: text }); }}
+                    // onClear={text => this.SearchFilterFunction('')}
+                    onSubmitEditing={() => this.try(search)}
                 />
                 <View style={styles.container}>
                     <Image source={require('../style/StumblrLogo.png')} style={styles.containerImage}
