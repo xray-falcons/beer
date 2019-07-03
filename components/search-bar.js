@@ -2,7 +2,7 @@ import { SearchBar } from 'react-native-elements';
 import { LinearGradient } from "expo-linear-gradient";
 import * as React from 'react';
 import { Image, Text, View, StyleSheet, FlatList, ActivityIndicator, Platform } from 'react-native';
-import {db} from "../server/db";
+import { db } from "../server/db";
 
 export default class Search extends React.Component {
     constructor(props) {
@@ -12,47 +12,20 @@ export default class Search extends React.Component {
         this.beers = [];
     }
 
-
-    updateSearch = search => {
-        this.setState({ search });
-        console.log(this.state.search)
-    };
-
-    clear = () => {
-        this.search.clear();
-    };
-
-    SearchFilterFunction(text) {
-        //passing the inserted text in textinput
-        const newData = this.arrayholder.filter(function(item) {
-            //applying filter for the inserted text in search bar
-            const itemData = item.title ? item.title.toUpperCase() : ''.toUpperCase();
-            const textData = text.toUpperCase();
-            return itemData.indexOf(textData) > -1;
-        });
-        this.setState({
-            //setting the filtered newData on datasource
-            //After setting the data it will automatically re-render the view
-            dataSource: newData,
-            search:text,
-        });
-    }
     try = async (search) => {
         try {
             const beers = await db.collection('beers');
-            let beerArray = []
+            let beerArray = [];
             const query = await beers.where('nameArr', 'array-contains', search.toLowerCase());
             const querySnapshot = await query.get()
             querySnapshot.forEach(function (doc){
                 let beer = doc.data();
-                console.log(beer.name)
                 beerArray.push(beer)
             });
             this.setState({
                 beers: beerArray,
                 search: ''
             });
-            console.log('STATE', this.state.beers.length, this.state.search)
             this.props.navigation.navigate('SearchList', {
                 beers: this.state.beers
             })
@@ -74,7 +47,6 @@ export default class Search extends React.Component {
                     placeholder="What is a beer you are looking for...?"
                     value={search}
                     onChangeText={text => { this.setState({ search: text }); }}
-                    // onClear={text => this.SearchFilterFunction('')}
                     onSubmitEditing={() => this.try(search)}
                 />
                 <View style={styles.container}>
