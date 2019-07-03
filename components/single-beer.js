@@ -42,7 +42,7 @@ export default class SingleBeer extends Component {
               "name":beerName,"rating":-1}, {"merge":true})
             }} style={styles.button} />
             <Icon.Button name="beer" onPress={()=>{
-                let beerRef = db.doc(`users/${userId}/beers/${beerId}`)
+                const beerRef = db.doc(`users/${userId}/beers/${beerId}`)
                 if(!beerRef.times) beerRef.times = 0;
                 beerRef.update({"times":firebase.firestore.FieldValue.increment(1)})
                 beerRef.set({"lastHad":new Date() }, {"merge":true})
