@@ -11,10 +11,19 @@ import {
     Alert, ScrollView
 } from 'react-native';
 import { db } from '../server/db';
+import Search from "./search-bar";
+import {LinearGradient} from "expo-linear-gradient";
 
 
 
 export default class Taste extends Component {
+    constructor(props) {
+        super(props);
+       this.state = {
+
+       }
+
+    }
     try = async () => {
         try {
             const beers = await db.collection('beers');
@@ -55,18 +64,30 @@ export default class Taste extends Component {
 
 
     render(){
-        const beerTastes = ["sweet", "chocolate", "hoppy", "citrus","full-bodied","sour","spicy", "fruit","light","coffee","earthy"]
+        const beerTastes = ["sweet", "chocolate", "hoppy", "citrus","full-bodied","sour","spicy", "fruit","light","coffee","earthy", "tropical", "roast", "caramel", "coconut", "porter", "dark", "barley", "malt", "ipa", "grapefruit", "stout", "smokey", "banana", "vanilla", "bitter", "zest", "crispy", "lemon", "raspberries", "oak", "smooth", "bavaria"]
 
-        return <View style={styles.container}>
+        return(
+            <LinearGradient
+                colors={["#c36f09", "#eeba0b"]}
+                style={styles.linearGradient}
+            >
+            <View>
+
+        <View>
             <ScrollView>
+                <Button type='solid' color="#841584"  title='CLIIIIICK MEEEEEE' onPress={() => this.try()}/>
+
                 <Text style={styles.textBold}>Choose your taste!</Text>
                 {beerTastes.map((elem, idx) => {
-                    return  <Button key={idx} title={elem = elem[0].toUpperCase() + elem.slice(1)} onPress={() => this.props.navigation.navigate('List', { name : elem}) }/>
+                    return  <Button type='outline' key={idx} title={elem = elem[0].toUpperCase() + elem.slice(1)}
+                                    onPress={() => this.props.navigation.navigate('List', { name : elem}) }
+                    />
                 })
                 }
             </ScrollView>
-            <Button title='CLIIIIICK MEEEEEE' onPress={() => this.try()}/>
         </View>
+            </View>
+            </LinearGradient>)
     }
 }
 
@@ -82,7 +103,17 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         fontStyle: 'italic',
         textAlign: 'center'
-    }
+    },
+    linearGradient: {
+        width: '100%',
+        height: '100%',
+        flex: 1,
+        left: 0,
+        right: 0,
+        top: 0,
+        //CHECK DOCS!!!!! cause this could not work on different devices
+        // height: 1000
+    },
 })
 
 

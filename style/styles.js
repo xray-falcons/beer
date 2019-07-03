@@ -8,6 +8,12 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'column'
     },
+    containerImage: {
+        width: "30%",
+        height: "40%",
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     linearGradient: {
         width: '100%',
         height: '100%',

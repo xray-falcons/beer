@@ -16,8 +16,6 @@ import BeerList from './beer-list';
 import {LinearGradient} from "expo-linear-gradient";
 import {styles} from "../style/styles";
 
-
-
 export default class Category extends Component {
 
     render(){
@@ -36,6 +34,7 @@ export default class Category extends Component {
             }
             </ScrollView>
         </View>
+
             </LinearGradient>)
     }
 }
