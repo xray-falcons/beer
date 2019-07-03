@@ -30,6 +30,7 @@ export default class Home extends Component {
 
     componentDidMount(){
         this.getFrequentBeers()
+        this.getRecentBeers()
     }
 
     getFrequentBeers = async () => {
@@ -49,6 +50,23 @@ export default class Home extends Component {
         }
     }
 
+    getRecentBeers = async () => {
+        const userId = firebase.auth().currentUser.uid
+        const userBeersRef = db.collection(`users/${userId}/beers`)
+        try {
+            let recentBeers = []
+            const query = await userBeersRef.orderBy("lastHad", "desc").limit(3)
+            const querySnapshot = await query.get()
+            querySnapshot.forEach(doc=>{
+                let beer = doc.data()
+                recentBeers.push(beer)
+            })
+            this.setState({recentBeers})
+        } catch(err) {
+            console.err(err)
+        }
+    }
+
     render() {
         return (
             <LinearGradient
@@ -57,15 +75,18 @@ export default class Home extends Component {
                 <View style={styles.container}>
                     <View style={styles.container}>
                         <ScrollView>
-                            <Text style={{fontSize:24}}>Your recent beers: </Text>
-                            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
-                                {this.state.frequentBeers.map((eachBeer)=>
-                                <Beer beer={eachBeer.beer}/>)}
-                            </ScrollView>
+                            <View>
+                                <Text style={{fontSize:24}}>Your recent beers: </Text>
+                                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
+                                    {this.state.recentBeers.map((eachBeer)=> <Beer key={eachBeer.beer.id} beer={eachBeer.beer}/>)}
+                                </ScrollView>
+                            </View>
                             <View>
                                 <Text style={styles.signUpText}>Your favorite beers: </Text>
-                                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
-                                </ScrollView>
+                            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
+                                {this.state.frequentBeers.map((eachBeer)=>
+                                <Beer key={eachBeer.beer.id} beer={eachBeer.beer}/>)}
+                            </ScrollView>
                             </View>
                             <View>
                                 <Text style={styles.signUpText}>Top picks for you: </Text>
