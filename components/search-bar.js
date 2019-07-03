@@ -11,6 +11,9 @@ export default class Search extends React.Component {
         this.state = {  search: '' };
         this.beers = [];
     }
+    // static navigationOptions = {
+    //     header: null
+    // }
 
     try = async (search) => {
         try {

@@ -5,12 +5,13 @@ import {
     Text,
     View,
     TextInput,
-    Button,
     TouchableHighlight,
     Image,
     Alert,
     FlatList
 } from 'react-native';
+import { Card, ListItem, Button, Icon } from 'react-native-elements'
+
 import firebase from 'firebase';
 import 'firebase/firestore';
 import { db } from '../server/db';
@@ -78,16 +79,45 @@ export default class BeerList extends Component{
     }
     render() {
         return(
-            <FlatList  data={this.state.data}
-        renderItem={this.renderRow}
-        keyExtractor={(item, index) => index.toString()}
-        // onEndReached={this.handleLoadMore}
-        // onEndReachedThreshold={0}
-        />
-
-
+            <LinearGradient
+                colors={["#c36f09", "#eeba0b"]}
+                style={styles.linearGradient}
+            ><Card containerStyle={{padding: 0}}>
+                {
+                    this.state.data.map((u, i) => {
+                        return (
+                            <ListItem
+                                key={i}
+                                roundAvatar
+                                title={u.name}
+                                avatar={{uri: u.labels.contentAwareIcon}}
+                    />
+                            // <View key={i} style={styles.item}>
+                            //     <Image
+                            //         style={styles.image}
+                            //         resizeMode="cover"
+                            //         source={{ uri: u.labels.contentAwareIcon }}
+                            //     />
+                            //     <Text style={styles.item}>{u.name}</Text>
+                            // </View>
+                        );
+                    })
+                }
+            </Card>
+            </LinearGradient>
 
         )
+        // (
+        //     {/*<FlatList  data={this.state.data}*/}
+        // {/*renderItem={this.renderRow}*/}
+        // {/*keyExtractor={(item, index) => index.toString()}*/}
+        // {/*// onEndReached={this.handleLoadMore}*/}
+        // {/*// onEndReachedThreshold={0}*/}
+        // {/*/>*/}
+        //
+        //
+        //
+        // )
     }
 }
 
