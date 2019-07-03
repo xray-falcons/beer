@@ -6,7 +6,7 @@ import {
     StyleNavigator,
     TasteNavigator
 } from "./stack-navigator";
-
+import TopTabNavigator from "./top-tab-navigator";
 
 const getTabBarIcon = (navigation, focused, tintColor) => {
     const { routeName } = navigation.state;
@@ -14,7 +14,7 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
     let iconName;
     if (routeName === "Home") {
         iconName = "ios-home";
-    } else if (routeName === "Style") {
+    } else if (routeName === "Choose your beer!") {
         iconName = "ios-beer";
     } else if (routeName === "Taste") {
         iconName = "ios-heart";
@@ -29,8 +29,8 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
 const BottomTabNavigator = createBottomTabNavigator(
     {
         Home: HomeNavigator,
-        Style: StyleNavigator,
-        Taste: TasteNavigator,
+        "Choose your beer!": TopTabNavigator,
+        // Taste: TasteNavigator,
         Search: SearchNavigator,
 
     },

@@ -1,6 +1,7 @@
 import React from "react";
 import { createDrawerNavigator, createAppContainer } from "react-navigation";
 import BottomTabNavigator from "./bottom-tab-navigator";
+import TopTabNavigator from "./top-tab-navigator";
 import {HomeNavigator, SearchNavigator, StyleNavigator, TasteNavigator} from "./stack-navigator";
 
 const DrawerNavigator = createDrawerNavigator({

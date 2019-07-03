@@ -1,18 +1,12 @@
 import React, { Component } from 'react';
-
 import {
     StyleSheet,
-    Text,
     View,
-    TextInput,
     Button,
-    TouchableHighlight,
-    Image,
-    Alert, ScrollView
+    ScrollView
 } from 'react-native';
 import { db } from '../server/db';
-import Search from "./search-bar";
-import {LinearGradient} from "expo-linear-gradient";
+import { LinearGradient } from "expo-linear-gradient";
 
 
 
@@ -22,8 +16,12 @@ export default class Taste extends Component {
        this.state = {
 
        }
-
     }
+
+    static navigationOptions = {
+        header: null
+    }
+
     try = async () => {
         try {
             const beers = await db.collection('beers');
@@ -77,7 +75,6 @@ export default class Taste extends Component {
             <ScrollView>
                 <Button type='solid' color="#841584"  title='CLIIIIICK MEEEEEE' onPress={() => this.try()}/>
 
-                <Text style={styles.textBold}>Choose your taste!</Text>
                 {beerTastes.map((elem, idx) => {
                     return  <Button type='outline' key={idx} title={elem = elem[0].toUpperCase() + elem.slice(1)}
                                     onPress={() => this.props.navigation.navigate('List', { name : elem}) }
