@@ -50232,15 +50232,16 @@ beers = beers.filter(beer => beer.description)
 .filter(beer => beer.labels)
 .filter(beer => beer.isRetired === "N")
 .map((beer, i) => data[i+1] = beer)
+// .map(beer => {
+//     let exclude = ['and', 'of', 'a', 'the', 'with', 'very', 'but', 'that', 'to', 'this',
+// 'that' , 'out', 'in', `it's`, 'our', 'into', 'which', 'what', 'is', 'are', 'again', 'next', 'all', 'how', 'we', 'have'],
+//         tasteArr = beer.description.toLowerCase().split(' ').filter(x => !(exclude.includes(x)))
+//     beer.taste = tasteArr;
+//     return beer;
+// })
 .map(beer => {
-    let exclude = ['and', 'of', 'a', 'the', 'with', 'very', 'but', 'that', 'to', 'this',
-'that' , 'out', 'in', `it's`, 'our', 'into', 'which', 'what', 'is', 'are', 'again', 'next', 'all', 'how', 'we', 'have']
-    let tasteArr = beer.description
-    .toLowerCase()
-    .split(' ')
-    .filter(x => !(exclude.includes(x)))
-    beer.taste = tasteArr;
-    return beer;
+    let nameArr = beer.name.toLowerCase().split(' ')
+    beer.nameArr = nameArr;
 })
 
 module.exports = data
