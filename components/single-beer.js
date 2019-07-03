@@ -23,7 +23,7 @@ export default class SingleBeer extends Component {
             <Text style={styles.textBold}>abv: {abv} ibu: {ibu}</Text>
             <Image source={{ uri: beerImage }} style={styles.image} />
             <Text style={styles.text}>{description}</Text>
-            <View style={styles.container}>
+            <View style={styles.buttonRow}>
             <Icon.Button name="thumbs-up" onPress={()=>{
                 db.collection("users").doc(`${userId}`).collection("beers").doc(`${beerId}`).set({
                 "name":beerName,"rating":1}, {"merge":true})
@@ -41,6 +41,7 @@ export default class SingleBeer extends Component {
               }} color="#640" style={styles.button} />
             </View>
           </ScrollView>
+          {/* <Text>Notes!</Text> */}
       </View>
     );
   }
@@ -84,5 +85,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontStyle: 'italic',
     textAlign: 'center'
+  },
+  buttonRow:{
+    flexDirection:"row",
+    justifyContent: "center"
   }
 });
