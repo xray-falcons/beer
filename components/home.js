@@ -11,7 +11,6 @@ import {
     Alert, Category
 } from 'react-native';
 import {LinearGradient} from "expo-linear-gradient";
-//import {styles} from "../style/styles";
 import firebase from 'firebase';
 import { db } from "../server/db";
 import { ScrollView } from 'react-native-gesture-handler';
@@ -76,22 +75,23 @@ export default class Home extends Component {
                             <View>
                                 <Text style={{fontSize:24}}>Your recent beers: </Text>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
-                                    {this.state.recentBeers.map((eachBeer)=> <Beer key={eachBeer.beer.id} beer={eachBeer.beer}/>)}
+                                    {this.state.recentBeers.map(eachBeer => 
+                                        <Beer key={eachBeer.beer.id} beer={eachBeer.beer}/>)}
                                 </ScrollView>
                             </View>
                             <View>
                                 <Text style={{fontSize:24}}>Your favorite beers: </Text>
-                            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
-                                {this.state.frequentBeers.map((eachBeer)=>
-                                <Beer key={eachBeer.beer.id} beer={eachBeer.beer}/>)}
-                            </ScrollView>
+                                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
+                                    {this.state.frequentBeers.map(eachBeer =>
+                                        <Beer key={eachBeer.beer.id} beer={eachBeer.beer}/>)}
+                                </ScrollView>
                             </View>
                             <View>
                                 <Text style={{fontSize:24}}>Top picks for you: </Text>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
-                            </ScrollView>
+                                </ScrollView>
                             </View>
-                            <Button title='LogOUT' onPress={() => firebase.auth().signOut()}/>
+                            <Button title='Logout' onPress={() => firebase.auth().signOut()}/>
                         </ScrollView>
             </LinearGradient>
         );
@@ -118,22 +118,5 @@ export default class Home extends Component {
 //     }
 // })
 
-/*             <FlatList  data={this.state.frequentBeers}
-    renderItem={this.renderRow}
-    keyExtractor={(item, index) => index.toString()}
-/>
-*/
-
-// export default class home extends Component {
-//     render() {
-//         return (
-//             <View style={styles.container}>
-//                 <Text style={styles.itemText}>
-//                     this works?
-//                 </Text>
-//             </View>
-//         )
-//     }
-// }
 
 

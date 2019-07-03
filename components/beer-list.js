@@ -15,7 +15,6 @@ import firebase from 'firebase';
 import 'firebase/firestore';
 import { db } from '../server/db';
 import {LinearGradient} from "expo-linear-gradient";
-// import { QueryDocumentSnapshot, DocumentSnapshot } from "@google-cloud/firestore";
 
 export default class BeerList extends Component{
     constructor(props){
@@ -49,38 +48,33 @@ export default class BeerList extends Component{
 }
 
     renderRow = ({item}) => {
-            return(
-                <LinearGradient
-                    colors={["#c36f09", "#eeba0b"]}
-                    style={styles.linearGradient}
-                >
+        return(
+            <LinearGradient
+                colors={["#c36f09", "#eeba0b"]}
+                style={styles.linearGradient}
+            >
                 <View style={styles.item}>
-                    <Button title={item.name} onPress={() => this.props.navigation.navigate('Beer', {beer:item}) }/>
-
+                    <Button title={item.name} onPress={() => 
+                        this.props.navigation.navigate('Beer', {beer:item})}
+                    />
                 </View>
-                </LinearGradient>
-          )
-
-
-    }
+            </LinearGradient>
+      )}
 
     handleLoadMore = () => {
        this.setState({page: this.state.page +1},
         this.getData)
     }
+
     render() {
         return(
             <FlatList  data={this.state.data}
-        renderItem={this.renderRow}
-        keyExtractor={(item, index) => index.toString()}
-        // onEndReached={this.handleLoadMore}
-        // onEndReachedThreshold={0}
-        />
-
-
-
-        )
-    }
+            renderItem={this.renderRow}
+            keyExtractor={(item, index) => index.toString()}
+            // onEndReached={this.handleLoadMore}
+            // onEndReachedThreshold={0}
+            />
+    )}
 }
 
 const styles = StyleSheet.create({

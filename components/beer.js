@@ -15,7 +15,6 @@ import { styles } from '../style/styles';
 export default class Beer extends Component {
   render() {
     const beer = this.props.beer
-    console.log("beer props", beer)
     return (
       <View>
         <Image source={{uri:beer.labels.icon}} style={{height:100, width: 100}}/>
