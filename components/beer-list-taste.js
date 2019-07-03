@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import 'firebase/firestore';
 import { db } from '../server/db';
+import {LinearGradient} from "expo-linear-gradient";
 
 export default class BeerListTaste extends Component{
     constructor(props){
@@ -57,12 +58,17 @@ export default class BeerListTaste extends Component{
     }
     render() {
         return(
+            <LinearGradient
+                colors={["#c36f09", "#eeba0b"]}
+                style={styles.linearGradient}
+            >
             <FlatList  data={this.state.data}
                        renderItem={this.renderRow}
                        keyExtractor={(item, index) => index.toString()}
                        onEndReached={this.handleLoadMore}
                        onEndReachedThreshold={0}
             />
+            </LinearGradient>
 
 
 
@@ -89,5 +95,15 @@ const styles = StyleSheet.create({
         width:"100%",
         height: 200,
         resizeMode: 'cover'
-    }
+    },
+    linearGradient: {
+        width: '100%',
+        height: '100%',
+        flex: 1,
+        left: 0,
+        right: 0,
+        top: 0,
+        //CHECK DOCS!!!!! cause this could not work on different devices
+        // height: 1000
+    },
 })

@@ -14,6 +14,7 @@ import {
 import firebase from 'firebase';
 import 'firebase/firestore';
 import { db } from '../server/db';
+import {LinearGradient} from "expo-linear-gradient";
 // import { QueryDocumentSnapshot, DocumentSnapshot } from "@google-cloud/firestore";
 
 export default class BeerList extends Component{
@@ -33,13 +34,14 @@ export default class BeerList extends Component{
         try {
             const beers = await db.collection('beers');
             let beerArray =[]
-            const query = await beers.where('style.category.name', '==', name).limit(12);
+            const query = await beers.where('style.category.name', '==', name);
             const querySnapshot = await query.get()
             querySnapshot.forEach(function (doc){
                 let beer = doc.data();
                 beerArray.push(beer)
             });
             this.setState({data: beerArray})
+
 
         } catch (err)  {
             console.log(err)
@@ -48,10 +50,15 @@ export default class BeerList extends Component{
 
     renderRow = ({item}) => {
             return(
+                <LinearGradient
+                    colors={["#c36f09", "#eeba0b"]}
+                    style={styles.linearGradient}
+                >
                 <View style={styles.item}>
                     <Button title={item.name} onPress={() => this.props.navigation.navigate('Beer', {beer:item}) }/>
 
                 </View>
+                </LinearGradient>
           )
 
 
@@ -66,8 +73,8 @@ export default class BeerList extends Component{
             <FlatList  data={this.state.data}
         renderItem={this.renderRow}
         keyExtractor={(item, index) => index.toString()}
-        onEndReached={this.handleLoadMore}
-        onEndReachedThreshold={0}
+        // onEndReached={this.handleLoadMore}
+        // onEndReachedThreshold={0}
         />
 
 
@@ -95,5 +102,15 @@ const styles = StyleSheet.create({
         width:"100%",
         height: 200,
         resizeMode: 'cover'
-    }
+    },
+    linearGradient: {
+        width: '100%',
+        height: '100%',
+        flex: 1,
+        left: 0,
+        right: 0,
+        top: 0,
+        //CHECK DOCS!!!!! cause this could not work on different devices
+        // height: 1000
+    },
 })

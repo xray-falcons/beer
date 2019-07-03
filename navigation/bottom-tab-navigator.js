@@ -2,10 +2,11 @@ import React from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { createBottomTabNavigator } from "react-navigation";
 import {
-    HomeNavigator,
+    HomeNavigator, SearchNavigator,
     StyleNavigator,
     TasteNavigator
 } from "./stack-navigator";
+import TopTabNavigator from "./top-tab-navigator";
 
 const getTabBarIcon = (navigation, focused, tintColor) => {
     const { routeName } = navigation.state;
@@ -13,9 +14,12 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
     let iconName;
     if (routeName === "Home") {
         iconName = "ios-home";
-    } else if (routeName === "Style") {
+    } else if (routeName === "Choose your beer!") {
         iconName = "ios-beer";
     } else if (routeName === "Taste") {
+        iconName = "ios-heart";
+    }
+    else if (routeName === "Search") {
         iconName = "ios-search";
     }
 
@@ -25,8 +29,10 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
 const BottomTabNavigator = createBottomTabNavigator(
     {
         Home: HomeNavigator,
-        Style: StyleNavigator,
-        Taste: TasteNavigator
+        "Choose your beer!": TopTabNavigator,
+        // Taste: TasteNavigator,
+        Search: SearchNavigator,
+
     },
     {
         defaultNavigationOptions: ({ navigation }) => ({
@@ -35,12 +41,16 @@ const BottomTabNavigator = createBottomTabNavigator(
         }),
         tabBarOptions: {
             activeTintColor: "black",
-            inactiveTintColor: "gray",
+            inactiveTintColor: "white",
             style: {
                 // height: 100,
                 // marginBottom: 55,
                 paddingTop: 10,
-                backgroundColor: 'green',
+
+                backgroundColor: "#c36f09",
+                // justifyContent: 'center',
+                alignItems: 'center',
+
             },
         }
     }
