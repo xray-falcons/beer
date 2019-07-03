@@ -13,26 +13,34 @@ import {
 import firebase from 'firebase';
 import { db } from '../server/db';
 import BeerList from './beer-list';
+import {LinearGradient} from "expo-linear-gradient";
+import {styles} from "../style/styles";
 
 
 
 export default class Category extends Component {
 
     render(){
-        const beerStyles = ["British Origin Ales", "Irish Origin Ales", "North American Origin Ales","German Origin Ales", "Belgian And French Origin Ales","International Ale Styles","European-germanic Lager","North American Lager", "International Styles","Hybrid/mixed Beer"]
-        return <View style={styles.container}>
+        const beerStyles = ["British Origin Ales", "Irish Origin Ales", "North American Origin Ales","German Origin Ales", "Belgian And French Origin Ales","International Ale Styles","European-germanic Lager","North American Lager", "International Styles","Hybrid/mixed Beer","Mead, Cider, & Perry","Malternative Beverages"]
+        return (
+            <LinearGradient
+                colors={["#c36f09", "#eeba0b"]}
+                style={styles.linearGradient}
+            >
+            <View style={styles1.container}>
             <ScrollView>
-            <Text style={styles.textBold}>Choose your  style!</Text>
+            <Text style={styles1.textBold}>Choose your style!</Text>
             {beerStyles.map((elem, idx) => {
             return  <Button key={idx} title={elem} onPress={() => this.props.navigation.navigate('List', { name : elem}) }/>
             })
             }
             </ScrollView>
         </View>
+            </LinearGradient>)
     }
 }
 
-const styles = StyleSheet.create({
+const styles1 = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',

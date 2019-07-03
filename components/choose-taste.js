@@ -10,18 +10,15 @@ import {
     Image,
     Alert, ScrollView
 } from 'react-native';
-import firebase from 'firebase';
 import { db } from '../server/db';
-import BeerList from './beer-list';
 
 
 
 export default class Taste extends Component {
     try = async () => {
-        console.log('NOAHHHH')
         try {
             const beers = await db.collection('beers');
-            const tastes =['hoppy', 'stout', 'earthy', 'fruit']
+            const tastes =['hoppy', 'earthy', 'citrus', 'chocolate', 'full-bodied']
             let beerArray =[]
             const query = await beers.where('taste', 'array-contains', tastes[0]);
             const querySnapshot = await query.get()
@@ -29,16 +26,25 @@ export default class Taste extends Component {
                 let beer = doc.data();
                 beerArray.push(beer)
             });
-            let filtered =[]
-            filtered = beerArray.filter(beer =>{
-                for (let i = 0; i < tastes.length; i++ ) {
-                    if (beer.taste.includes(tastes[i])) {
-                        return beer
+
+            let filtered = beerArray.filter(beer => {
+                for (let i = 0; i < beer.taste.length; i ++) {
+                    for (let j = 1; j < tastes.length; j ++) {
+                        if (beer.taste[i] === tastes[j]){
+                            console.log(beer.name)
+                            return beer
+                        }
                     }
                 }
             })
 
-            console.log('FILTER', filtered.length)
+
+
+            console.log('FFFILW', filtered.length)
+            console.log(beerArray.length)
+
+
+
 
         } catch (err)  {
             console.log(err)

@@ -12,6 +12,7 @@ import {
     Alert
 } from 'react-native';
 import * as Facebook from 'expo-facebook';
+import {LinearGradient} from "expo-linear-gradient";
 
 
 export default class SignInView extends Component {
@@ -65,9 +66,14 @@ export default class SignInView extends Component {
 
     render() {
         return (
+            <LinearGradient
+                colors={["#c36f09", "#eeba0b"]}
+                style={styles.linearGradient}
+            >
             <View style={styles.container}>
 
-
+                <Image source={require('../style/StumblrLogo.png')} style={styles.image}
+                />
                 <View style={styles.inputContainer}>
                     <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
                     <TextInput style={styles.inputs}
@@ -90,21 +96,18 @@ export default class SignInView extends Component {
                     <Text style={styles.signUpText}>Sign in</Text>
                 </TouchableHighlight>
 
-                <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.onClickListener('sign_up')}>
-                    <Text style={styles.signUpText}>Sign in with Google</Text>
-                </TouchableHighlight>
-
                 <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.logInWithFacebook()}>
                     <Text style={styles.signUpText}>Sign in with Facebook</Text>
                 </TouchableHighlight>
             </View>
+            </LinearGradient>
         );
     }
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 0.6,
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -151,7 +154,15 @@ const styles = StyleSheet.create({
         height:200,
         marginBottom: 20,
         borderRadius: 100
-
-
+    },
+    linearGradient: {
+        width: '100%',
+        height: '100%',
+        flex: 1,
+        left: 0,
+        right: 0,
+        top: 0,
+        //CHECK DOCS!!!!! cause this could not work on different devices
+        // height: 1000
     },
 });

@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import * as Facebook from 'expo-facebook';
 import {db} from '../server/db'
+import {LinearGradient} from "expo-linear-gradient";
 
 export default class SignUpView extends Component {
 
@@ -72,6 +73,10 @@ export default class SignUpView extends Component {
 
     render() {
         return (
+            <LinearGradient
+                colors={["#c36f09", "#eeba0b"]}
+                style={styles.linearGradient}
+            >
             <View style={styles.container}>
                 <Image source={require('../style/StumblrLogo.png')} style={styles.image}
             />
@@ -116,13 +121,14 @@ export default class SignUpView extends Component {
                     <Text style={styles.signUpText}>Have an account? Sign in</Text>
                 </TouchableHighlight>
             </View>
+            </LinearGradient>
         );
     }
 }
 
 const styles = StyleSheet.create({
     container: {
-      flex: 0.6,
+      flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -169,7 +175,15 @@ const styles = StyleSheet.create({
         height:200,
         marginBottom: 20,
         borderRadius: 100
-
-
+    },
+    linearGradient: {
+        width: '100%',
+        height: '100%',
+        flex: 1,
+        left: 0,
+        right: 0,
+        top: 0,
+        //CHECK DOCS!!!!! cause this could not work on different devices
+        // height: 1000
     },
 });
