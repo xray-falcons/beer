@@ -15,17 +15,18 @@ const TopTabNavigator = createMaterialTopTabNavigator(
         animationEnabled: true,
         tabBarOptions: {
 
-            activeTintColor: 'red',
-            inactiveTintColor: 'black',
+            activeTintColor: 'black',
+            inactiveTintColor: 'white',
             style: {
-                backgroundColor: 'yellow',
-                marginTop: 50
+                backgroundColor: '#c36f09',
+                marginTop: 70,
+                fontWeight: "bold"
             },
             labelStyle: {
                 textAlign: 'center',
             },
             indicatorStyle: {
-                borderBottomColor: '#87B56A',
+                borderBottomColor: '#788475',
                 borderBottomWidth: 2,
             },
         },

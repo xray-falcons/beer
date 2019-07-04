@@ -11,9 +11,9 @@ export default class Search extends React.Component {
         this.state = {  search: '' };
         this.beers = [];
     }
-    // static navigationOptions = {
-    //     header: null
-    // }
+    static navigationOptions = {
+        header: null
+    }
 
     try = async (search) => {
         try {
@@ -47,8 +47,8 @@ export default class Search extends React.Component {
                 style={styles.linearGradient}
             >
                 <SearchBar
-                    containerStyle={{backgroundColor: '#710000'}}
-                    // inputStyle={{backgroundColor: 'red'}}
+                    containerStyle={{backgroundColor: '#c36f09', marginTop: 70}}
+                    // inputStyle={{backgroundColor: '#788475'}}
                     placeholder="What are you in the mood for...?"
                     value={search}
                     onChangeText={text => { this.setState({ search: text }); }}
