@@ -46,39 +46,24 @@ export default class BeerList extends Component{
 }
 
     renderRow = ({item}) => {
-            return(
-                <LinearGradient
-                    colors={["#c36f09", "#eeba0b"]}
-                    style={styles.linearGradient}
-                >
+        return(
+            <LinearGradient
+                colors={["#c36f09", "#eeba0b"]}
+                style={styles.linearGradient}
+            >
                 <View style={styles.item}>
                     <Card
                         style={{height: 20}}
                     >
 
-                        <Button  title={item.nameDisplay} onPress={() => this.props.navigation.navigate('Beer', {
-                        beerName: item.name,
-                        beerImage: item.labels.large,
-                        abv: item.abv,
-                        description: item.description,
-                        ibu: item.ibu,
-                        style: item.style.name,
-                        beerId: item.id
-                        }) }/>
+                     <Button title={item.name} onPress={() => 
+                        this.props.navigation.navigate('Beer', {beer:item})}
+                    />
                     </Card>
-
-
                 </View>
-                </LinearGradient>
-          )
+            </LinearGradient>
+      )}
 
-
-    }
-
-    handleLoadMore = () => {
-       this.setState({page: this.state.page +1},
-        this.getData)
-    }
     render() {
         return(
             <LinearGradient
@@ -99,14 +84,15 @@ export default class BeerList extends Component{
         )
 
     }
+          
+    )}
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginTop: 20,
-        // justifyContent: 'center',
-        //alignItems: 'center',
+   
     },
     item: {
         borderBottomWidth: 1,
@@ -129,7 +115,6 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         top: 0,
-        //CHECK DOCS!!!!! cause this could not work on different devices
-        // height: 1000
+      
     },
 })

@@ -2,9 +2,8 @@ const admin = require('firebase-admin');
 const serviceAccount = require('../.serviceAcctKey');
 //const serviceAccount = require('../.data-sandbox');
 const data = require('./data2.js');
-//const styles = require('./styles.js');
 const collectionKey = 'beers';
-//const collectionKey = 'styles';
+
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -23,7 +22,8 @@ if (data && typeof data === 'object') {
     firestore
       .collection(collectionKey)
       .doc(dockey)
-      .set(data[dockey])
+       .update(data[dockey])
+      // .set(data[dockey])
       .then(res => {
         console.log('Document ' + dockey + ' successfully written!');
       })
@@ -33,18 +33,3 @@ if (data && typeof data === 'object') {
   });
 }
 
-// if (styles && typeof styles === 'object') {
-//   Object.keys(styles).forEach(dockey => {
-//     firestore
-//       .collection(collectionKey)
-//       .doc(dockey)
-//       .set(styles[dockey])
-//       .then(res => {
-//         console.log('Document ' + dockey + ' successfully written!');
-//       })
-//       .catch(error => {
-//         console.error('Error writing document: ', error);
-//       });
-//   });
-
-// }
