@@ -31,18 +31,15 @@ export default class SignInView extends Component {
 
     signIn(email, password) {
         try {
-            firebase.auth().signInWithEmailAndPassword(email, password).then(function (user) {
-                console.log(user)
-            })
+            firebase.auth().signInWithEmailAndPassword(email, password)
             this.props.navigation.navigate('Dashboard')
-
         } catch (err) {
             console.log(err)
         }
     }
+    
     async logInWithFacebook() {
         try {
-            console.log(4)
             const {
                 type,
                 token,
