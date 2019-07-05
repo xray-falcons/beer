@@ -31,7 +31,8 @@
     "react-redux-firebase": "^2.2.6",
     "redux": "^4.0.1",
     "redux-firestore": "^0.8.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "react-native-gesture-handler": "latest"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.1.1"

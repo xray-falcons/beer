@@ -2,11 +2,12 @@ import React from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { createBottomTabNavigator } from "react-navigation";
 import {
-    HomeNavigator, SearchNavigator,
+    HomeNavigator, RandomNavigator, SearchNavigator,
     StyleNavigator,
     TasteNavigator
 } from "./stack-navigator";
 import TopTabNavigator from "./top-tab-navigator";
+import Random from "../components/random";
 
 const getTabBarIcon = (navigation, focused, tintColor) => {
     const { routeName } = navigation.state;
@@ -16,7 +17,7 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
         iconName = "ios-home";
     } else if (routeName === "Choose your beer!") {
         iconName = "ios-beer";
-    } else if (routeName === "Taste") {
+    } else if (routeName === "Random") {
         iconName = "ios-heart";
     }
     else if (routeName === "Search") {
@@ -28,9 +29,9 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
 
 const BottomTabNavigator = createBottomTabNavigator(
     {
+        Random: RandomNavigator,
         Home: HomeNavigator,
         "Choose your beer!": TopTabNavigator,
-        // Taste: TasteNavigator,
         Search: SearchNavigator,
 
     },
