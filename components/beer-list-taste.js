@@ -15,28 +15,6 @@ export default class BeerListTaste extends Component{
         super(props)
         this.state = {
             data: [],
-            page: 1
-        }
-    }
-    componentDidMount(){
-        this.getData()
-    }
-    getData = async () => {
-        const name = this.props.navigation.getParam('name')
-        try {
-            const beers = await db.collection('beers');
-            let beerArray =[]
-            const query = await beers.where('taste', 'array-contains', name.toLowerCase());
-            const querySnapshot = await query.get()
-            querySnapshot.forEach(function (doc){
-                let beer = doc.data();
-                beerArray.push(beer)
-            });
-            this.setState({data: beerArray})
-
-        } catch (err)  {
-            console.log(err)
-
         }
     }
 
@@ -52,11 +30,8 @@ export default class BeerListTaste extends Component{
       </LinearGradient>
       )}
 
-    handleLoadMore = () => {
-        this.setState({page: this.state.page +1},
-            this.getData)
-    }
     render() {
+        this.setState({data: this.props.navigation.getParam('beers')})
         return(
             <LinearGradient
                 colors={["#c36f09", "#eeba0b"]}

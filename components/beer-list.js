@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {StyleSheet,FlatList,} from 'react-native';
-import {  Button, Card } from 'react-native-elements'
+import { Card } from 'react-native-elements'
 import firebase from 'firebase';
 import 'firebase/firestore';
 import { db } from '../server/db';
@@ -14,7 +14,6 @@ export default class BeerList extends Component{
         super(props);
         this.state = {
             data: [],
-            SingleBeer: {}
         }
     }
     static navigationOptions = {
@@ -50,8 +49,7 @@ export default class BeerList extends Component{
                 <Card>
                     <Beer beer={item} navigation={this.props.navigation} />
                 </Card>
-
-      </LinearGradient>
+            </LinearGradient>
       )}
 
     render() {
@@ -66,7 +64,6 @@ export default class BeerList extends Component{
                     data={this.state.data}
                     renderItem={this.renderItem}
                     keyExtractor={(item, index) => index.toString()}
-
                 />
             </LinearGradient>
 

@@ -94,11 +94,11 @@ export default class Taste extends Component {
                     return  (<View key={idx}>
                     <CheckBox
                         title={elem}
-
                         checkedIcon='dot-circle-o'
                         uncheckedIcon='circle-o'
                         checked={this.isItemChecked(elem)}
                         onPress={evt => this.manageToggle(evt, elem)}
+
                     />
                     </View>)
                 })

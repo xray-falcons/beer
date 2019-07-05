@@ -73,50 +73,53 @@ export default class Home extends Component {
                 style={styles.linearGradient}>
                         <ScrollView>
                             <View>
-                                <Text style={{fontSize:24}}>Top picks for you: </Text>
+                                <Text style={style.headText}>Top picks for you: </Text>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                 </ScrollView>
                             </View>
                             <View>
-                                <Text style={{fontSize:24}}>Your recent beers: </Text>
+                                <Text style={style.textBold}>Your recent beers: </Text>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                     {this.state.recentBeers.length ? this.state.recentBeers.map(eachBeer =>
-                                        <Beer key={eachBeer.beer.id} beer={eachBeer.beer} navigation={this.props.navigation}/>) : <Text style={{fontSize:16}}>Like some beers to show here!</Text>}
+                                        <Beer key={eachBeer.beer.id} beer={eachBeer.beer} navigation={this.props.navigation}/>) : <Text style={style.itemText}>Like some beers to show here!</Text>}
                                 </ScrollView>
                             </View>
                             <View>
-                                <Text style={{fontSize:24}}>Your favorite beers: </Text>
+                                <Text style={style.textBold}>Your favorite beers: </Text>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                     {this.state.frequentBeers.length ? this.state.frequentBeers.map(eachBeer =>
-                                        <Beer key={eachBeer.beer.id} beer={eachBeer.beer} navigation={this.props.navigation}/>) : <Text style={{fontSize:16}}>Like some beers to show here!</Text>}
+                                        <Beer key={eachBeer.beer.id} beer={eachBeer.beer} navigation={this.props.navigation}/>) : <Text style={style.itemText}>Like some beers to show here!</Text>}
                                 </ScrollView>
                             </View>
-                            <Button title='Logout' onPress={() => firebase.auth().signOut()}/>
+                            <Button color='black' title='Logout' onPress={() => firebase.auth().signOut()}/>
                         </ScrollView>
             </LinearGradient>
         );
     }
 }
 
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         marginTop: 20,
-//     },
-//     item: {
-//         borderBottomWidth: 1,
-//         marginBottom: 10,
-//     },
-//     itemText:{
-//         fontSize: 26,
-//         padding:25
-//     },
-//     itemImage:{
-//         width:"100%",
-//         height: 200,
-//         resizeMode: 'cover'
-//     }
-// })
+const style = StyleSheet.create({
+textBold:{
+    fontWeight: "bold",
+    fontStyle: 'italic',
+    textAlign: 'center',
+    fontSize: 24
+  },
+    itemText:{
+        fontSize: 16,
+        padding:25,
+        marginTop: 25,
+        marginBottom: 25,
+        textAlign: 'center',
+    },
+    headText: {
+        fontSize: 40,
+        fontWeight: "bold",
+        textAlign: 'center',
+        fontStyle: 'italic',
+        marginBottom: 15
+      },
+})
 
 
 
