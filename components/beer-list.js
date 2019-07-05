@@ -1,22 +1,18 @@
 import React, { Component } from "react";
-import axios from 'axios';
 import {
     StyleSheet,
-    Text,
     View,
-    TextInput,
-    TouchableHighlight,
-    Image,
-    Alert,
-    FlatList
-} from 'react-native';
-import { Card, ListItem, Button, Icon } from 'react-native-elements'
+    FlatList,
+    Image
 
+} from 'react-native';
+import {  Button, Card } from 'react-native-elements'
 import firebase from 'firebase';
 import 'firebase/firestore';
 import { db } from '../server/db';
-import {LinearGradient} from "expo-linear-gradient";
-// import { QueryDocumentSnapshot, DocumentSnapshot } from "@google-cloud/firestore";
+import { LinearGradient } from "expo-linear-gradient";
+
+
 
 export default class BeerList extends Component{
     constructor(props){
@@ -56,7 +52,11 @@ export default class BeerList extends Component{
                     style={styles.linearGradient}
                 >
                 <View style={styles.item}>
-                    <Button title={item.name} onPress={() => this.props.navigation.navigate('Beer', {
+                    <Card
+                        style={{height: 20}}
+                    >
+
+                        <Button  title={item.nameDisplay} onPress={() => this.props.navigation.navigate('Beer', {
                         beerName: item.name,
                         beerImage: item.labels.large,
                         abv: item.abv,
@@ -64,7 +64,9 @@ export default class BeerList extends Component{
                         ibu: item.ibu,
                         style: item.style.name,
                         beerId: item.id
-                    }) }/>
+                        }) }/>
+                    </Card>
+
 
                 </View>
                 </LinearGradient>
@@ -82,42 +84,20 @@ export default class BeerList extends Component{
             <LinearGradient
                 colors={["#c36f09", "#eeba0b"]}
                 style={styles.linearGradient}
-            ><Card containerStyle={{padding: 0}}>
-                {
-                    this.state.data.map((u, i) => {
-                        return (
-                            <ListItem
-                                key={i}
-                                roundAvatar
-                                title={u.name}
-                                avatar={{uri: u.labels.contentAwareIcon}}
-                    />
-                            // <View key={i} style={styles.item}>
-                            //     <Image
-                            //         style={styles.image}
-                            //         resizeMode="cover"
-                            //         source={{ uri: u.labels.contentAwareIcon }}
-                            //     />
-                            //     <Text style={styles.item}>{u.name}</Text>
-                            // </View>
-                        );
-                    })
-                }
-            </Card>
+            >
+                <FlatList
+                    style={{marginTop: 16}}
+                    numColumns={2}
+                    data={this.state.data}
+                    renderItem={this.renderRow}
+                    keyExtractor={(item, index) => index.toString()}
+
+                />
+
             </LinearGradient>
 
         )
-        // (
-        //     {/*<FlatList  data={this.state.data}*/}
-        // {/*renderItem={this.renderRow}*/}
-        // {/*keyExtractor={(item, index) => index.toString()}*/}
-        // {/*// onEndReached={this.handleLoadMore}*/}
-        // {/*// onEndReachedThreshold={0}*/}
-        // {/*/>*/}
-        //
-        //
-        //
-        // )
+
     }
 }
 
@@ -131,6 +111,7 @@ const styles = StyleSheet.create({
     item: {
         borderBottomWidth: 1,
         marginBottom: 10,
+        justifyContent: "space-around"
     },
     itemText:{
         fontSize: 26,

@@ -31,10 +31,7 @@ export const SearchNavigator = createStackNavigator({
     Search: { screen: Search },
     SearchList: {screen: BeerListSearch},
     Beer: { screen: SingleBeer }
-
-
 });
-
 
 export const AuthNavigator =  createStackNavigator({
         SignUpScreen: { screen: SignUpView },
