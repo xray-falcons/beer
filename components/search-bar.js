@@ -19,9 +19,9 @@ export default class Search extends React.Component {
         try {
             const beers = await db.collection('beers');
             let beerArray = [];
-            const query = await beers.where('nameArr', 'array-contains', search.trim().toLowerCase());
+            const query = beers.where('nameArr', 'array-contains', search.trim().toLowerCase());
             const querySnapshot = await query.get()
-            querySnapshot.forEach(function (doc){
+            querySnapshot.forEach(doc => {
                 let beer = doc.data();
                 beerArray.push(beer)
             });
