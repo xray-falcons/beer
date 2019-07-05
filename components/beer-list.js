@@ -85,7 +85,7 @@ export default class BeerList extends Component{
 
     }
           
-    )}
+
 }
 
 const styles = StyleSheet.create({
