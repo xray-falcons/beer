@@ -5,27 +5,45 @@ import {
     Button,
     ScrollView
 } from 'react-native';
+import { CheckBox } from 'react-native-elements'
 import { db } from '../server/db';
 import { LinearGradient } from "expo-linear-gradient";
-
+import IconButton from "react-native-vector-icons/Ionicons";
 
 
 export default class Taste extends Component {
     constructor(props) {
         super(props);
        this.state = {
-
+           checked: []
        }
     }
 
     static navigationOptions = {
         header: null
     }
+    isItemChecked(taste) {
+        return this.state.checked.indexOf(taste) > -1
+    }
+    manageToggle = (evt, taste) => {
+        if (this.isItemChecked(taste)) {
+            this.setState({
+                checked: this.state.checked.filter(i => i !== taste)
+            })
+            console.log('IF', this.state.checked)
+        } else {
+            this.setState({
+                checked: [...this.state.checked, taste]
+            })
+            console.log('ELSE', this.state.checked)
 
-    try = async () => {
+        }
+    }
+
+
+    try = async (tastes) => {
         try {
             const beers = await db.collection('beers');
-            const tastes =['hoppy', 'earthy', 'citrus', 'chocolate', 'full-bodied']
             let beerArray =[]
             const query = await beers.where('taste', 'array-contains', tastes[0]);
             const querySnapshot = await query.get()
@@ -44,11 +62,10 @@ export default class Taste extends Component {
                     }
                 }
             })
+            console.log(tastes, beerArray.length, filtered.length)
 
+            //this.props.navigation.navigate('List') }
 
-
-            console.log('FFFILW', filtered.length)
-            console.log(beerArray.length)
 
 
 
@@ -72,14 +89,22 @@ export default class Taste extends Component {
 
         <View>
             <ScrollView>
-                <Button type='solid' color="#841584"  title='CLIIIIICK MEEEEEE' onPress={() => this.try()}/>
 
                 {beerTastes.map((elem, idx) => {
-                    return  <Button type='outline' key={idx} title={elem = elem[0].toUpperCase() + elem.slice(1)}
-                                    onPress={() => this.props.navigation.navigate('List', { name : elem}) }
+                    return  (<View key={idx}>
+                    <CheckBox
+                        title={elem}
+                        checkedIcon='dot-circle-o'
+                        uncheckedIcon='circle-o'
+                        checked={this.isItemChecked(elem)}
+                        onPress={evt => this.manageToggle(evt, elem)}
+
                     />
+                    </View>)
                 })
                 }
+                <Button type='solid' color="#841584"  title='Find Your beers!' onPress={() => this.try(this.state.checked)}/>
+
             </ScrollView>
         </View>
     </LinearGradient>)

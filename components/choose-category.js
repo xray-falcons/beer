@@ -31,7 +31,7 @@ export default class Category extends Component {
             <View style={styles1.container}>
             <ScrollView>
             {beerStyles.map((elem, idx) => {
-            return  <Button key={idx} title={elem} onPress={() => this.props.navigation.navigate('List', { name : elem}) }/>
+            return  <Button key={idx} title={elem} color='black' onPress={() => this.props.navigation.navigate('List', { name : elem}) }/>
             })
             }
             </ScrollView>

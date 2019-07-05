@@ -1,7 +1,7 @@
 import { SearchBar } from 'react-native-elements';
 import { LinearGradient } from "expo-linear-gradient";
 import * as React from 'react';
-import { Image, Text, View, StyleSheet, FlatList, ActivityIndicator, Platform } from 'react-native';
+import { Image, View, StyleSheet } from 'react-native';
 import { db } from "../server/db";
 
 export default class Search extends React.Component {
@@ -19,7 +19,7 @@ export default class Search extends React.Component {
         try {
             const beers = await db.collection('beers');
             let beerArray = [];
-            const query = await beers.where('nameArr', 'array-contains', search.toLowerCase());
+            const query = await beers.where('nameArr', 'array-contains', search.trim().toLowerCase());
             const querySnapshot = await query.get()
             querySnapshot.forEach(function (doc){
                 let beer = doc.data();
@@ -34,7 +34,9 @@ export default class Search extends React.Component {
                     beers: this.state.beers
                 })
             } else {
-                this.props.navigation.navigate('Random')
+                this.props.navigation.navigate('Random',{
+                    name: "Search"
+                })
             }
 
         } catch (err) {
@@ -83,14 +85,10 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         top: 0,
-
-        //CHECK DOCS!!!!! cause this could not work on different devices
-        // height: 1000
     },
     container: {
         justifyContent: 'center',
         alignItems: 'center',
         flex: 1
     }
-
 })

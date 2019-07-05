@@ -32,7 +32,7 @@ export default class SignUpView extends Component {
 
     signUp = async (email, password, fullName) => {
         if (this.state.password.length < 5) {
-            Alert.alert('Password is invalid', 'Password must be longer than 5 characters')
+            Alert.alert('Password is invalid', 'Password must be longer than 6 characters')
             return;
         }
         if (this.state.fullName === '') {
@@ -40,6 +40,7 @@ export default class SignUpView extends Component {
             return;
         }
         try {
+            email = email.trim().toLowerCase()
             let { user } = await firebase.auth().createUserWithEmailAndPassword(email, password)
             await db.collection('users').doc(user.uid).set({email: this.state.email, fullName: this.state.fullName});
             this.props.navigation.navigate('Dashboard')

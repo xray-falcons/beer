@@ -1,42 +1,29 @@
 import React, { Component } from 'react';
-
 import {
     StyleSheet,
-    Text,
     View,
-    TextInput,
     Button,
-    TouchableHighlight,
-    Image,
-    Alert
 } from 'react-native';
-import firebase from 'firebase';
 import {db} from "../server/db";
 import Beer from "./beer";
 import { LinearGradient } from "expo-linear-gradient";
-
-
+import {Text} from "react-native-elements";
 
 export default class Random extends Component {
     constructor(props){
         super(props)
-
         this.state = {
             randomNumber: 0,
             beer: {}
         }
     }
-
-
-
+    static navigationOptions = {
+        header: null
+    }
     generateRandomNumber = async () => {
-
-        let RandomNumber = Math.floor(Math.random() * (200-100+1)) + 100 ;
-
+        let RandomNumber = Math.floor(Math.random() * (300-100+1)) + 100 ;
         this.setState({
-
             randomNumber : RandomNumber
-
         })
         try {
             let docRef = await db.collection("beers").doc(RandomNumber.toString());
@@ -46,18 +33,29 @@ export default class Random extends Component {
                 this.state.randomNumber = 0
                 this.props.navigation.navigate('Beer',
                     {beer: this.state.beer})
-
             } else {
-                console.log("No such document!");
+                this.generateRandomNumber();
             }
         } catch (err)  {
             console.log(err)
         }
     }
-
     render(){
-            return (
-            <LinearGradient
+        if (this.props.navigation.getParam('name') === 'Search') {
+            return (<LinearGradient
+                    colors={["#c36f09", "#eeba0b"]}
+                    style={styles.linearGradient}
+                ><View style={styles.container}>
+                    <Text>Sorry, we did not find your beer... But maybe you feel lucky?</Text>
+                    <Button title={'Try random!'} onPress={() => {
+                        this.generateRandomNumber();
+                    }}
+                    />
+                </View>
+                </LinearGradient>
+            )
+        }
+            return (<LinearGradient
                     colors={["#c36f09", "#eeba0b"]}
                     style={styles.linearGradient}
                 ><View style={styles.container}>
@@ -69,7 +67,6 @@ export default class Random extends Component {
             </LinearGradient>)
     }
 }
-
 
 
 const styles = StyleSheet.create({
