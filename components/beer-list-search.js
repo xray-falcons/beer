@@ -63,7 +63,5 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         top: 0,
-        //CHECK DOCS!!!!! cause this could not work on different devices
-        // height: 1000
     },
 })

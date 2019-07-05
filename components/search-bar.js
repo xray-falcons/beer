@@ -29,9 +29,14 @@ export default class Search extends React.Component {
                 beers: beerArray,
                 search: ''
             });
-            this.props.navigation.navigate('SearchList', {
-                beers: this.state.beers
-            })
+            if (beerArray.length) {
+                this.props.navigation.navigate('SearchList', {
+                    beers: this.state.beers
+                })
+            } else {
+                this.props.navigation.navigate('Random')
+            }
+
         } catch (err) {
             console.log(err)
         }
