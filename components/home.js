@@ -87,7 +87,7 @@ export default class Home extends Component {
                             <View>
                                 <Text style={{fontSize:24}}>Your favorite beers: </Text>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
-                                    {this.state.recentBeers.length ? this.state.frequentBeers.map(eachBeer =>
+                                    {this.state.frequentBeers.length ? this.state.frequentBeers.map(eachBeer =>
                                         <Beer key={eachBeer.beer.id} beer={eachBeer.beer}/>) : <Text style={{fontSize:16}}>Like some beers to show here!</Text>}
                                 </ScrollView>
                             </View>
