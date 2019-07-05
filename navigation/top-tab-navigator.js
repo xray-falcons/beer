@@ -19,7 +19,7 @@ const TopTabNavigator = createMaterialTopTabNavigator(
             inactiveTintColor: 'white',
             style: {
                 backgroundColor: '#c36f09',
-                marginTop: 70,
+                marginTop: 30,
                 fontWeight: "bold"
             },
             labelStyle: {

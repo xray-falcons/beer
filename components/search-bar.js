@@ -47,7 +47,7 @@ export default class Search extends React.Component {
                 style={styles.linearGradient}
             >
                 <SearchBar
-                    containerStyle={{backgroundColor: '#c36f09', marginTop: 70}}
+                    containerStyle={{backgroundColor: '#c36f09', marginTop: 40}}
                     // inputStyle={{backgroundColor: '#788475'}}
                     placeholder="What are you in the mood for...?"
                     value={search}
