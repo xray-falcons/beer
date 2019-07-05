@@ -15,17 +15,8 @@ export default class SingleBeer extends Component {
   }
 
     render() {
-        // const beerName = this.props.navigation.getParam('item').name
-        // const beerImage = this.props.navigation.getParam('item')
-        // const abv = this.props.navigation.getParam('abv')
-        // const description = this.props.navigation.getParam('description')
-        // const ibu = this.props.navigation.getParam('ibu')
-        // const style = this.props.navigation.getParam('style')
         const userId = firebase.auth().currentUser.uid
-        // const beerId = this.props.navigation.getParam('beerId')
-
         const beer = this.props.navigation.getParam('beer')
-        console.log("beer's name", beer.name)
         return (
         <View style={styles.container}>
           <ScrollView>

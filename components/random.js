@@ -29,7 +29,6 @@ export default class Random extends Component {
             let docRef = await db.collection("beers").doc(RandomNumber.toString());
             let beer = await docRef.get()
             if (beer.exists) {
-                console.log(beer.data())
                 this.state.beer = beer.data()
                 this.state.randomNumber = 0
                 this.props.navigation.navigate('Beer',
