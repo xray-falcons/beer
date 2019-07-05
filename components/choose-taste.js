@@ -75,7 +75,7 @@ export default class Taste extends Component {
                 <Button type='solid' color="#841584"  title='CLIIIIICK MEEEEEE' onPress={() => this.try()}/>
 
                 {beerTastes.map((elem, idx) => {
-                    return  <Button type='outline' key={idx} title={elem = elem[0].toUpperCase() + elem.slice(1)}
+                    return  <Button color='black' type='clear' key={idx} title={elem = elem[0].toUpperCase() + elem.slice(1)}
                                     onPress={() => this.props.navigation.navigate('List', { name : elem}) }
                     />
                 })

@@ -3,8 +3,6 @@ import {
     StyleSheet,
     View,
     ScrollView
-    // Button,
-    // FlatList, Text
 } from 'react-native'
 
 import { Card } from 'react-native-elements'
@@ -21,8 +19,6 @@ export default class BeerListSearch extends Component {
 
     render() {
         const beers = this.props.navigation.getParam('beers')
-
-        console.log(beers.length)
         return(
             <LinearGradient
                 colors={["#c36f09", "#eeba0b"]}
@@ -31,8 +27,8 @@ export default class BeerListSearch extends Component {
                 <View style={styles.item}>
                 <ScrollView >
                     {beers.map((beer, idx) => {
-                       return <Card>
-                                <Beer key={idx} beer={beer} navigation={this.props.navigation} />
+                       return <Card key={idx} >
+                                <Beer beer={beer} navigation={this.props.navigation} />
                             </Card>
                     })}
                 </ScrollView>

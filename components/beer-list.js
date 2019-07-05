@@ -14,7 +14,6 @@ export default class BeerList extends Component{
         super(props);
         this.state = {
             data: [],
-            SingleBeer: {}
         }
     }
     componentDidMount(){
