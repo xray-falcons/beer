@@ -2,12 +2,17 @@ import React, { Component } from "react";
 import {
     StyleSheet,
     View,
-    Button,
-    FlatList, Text
-} from 'react-native';
+    ScrollView
+    // Button,
+    // FlatList, Text
+} from 'react-native'
+
+import { Card } from 'react-native-elements'
 import 'firebase/firestore';
 import { db } from '../server/db';
 import { LinearGradient } from "expo-linear-gradient";
+import Beer from './beer'
+
 
 export default class BeerListSearch extends Component {
     // static navigationOptions = {
@@ -24,14 +29,16 @@ export default class BeerListSearch extends Component {
                 style={styles.linearGradient}
             >
                 <View style={styles.item}>
+                <ScrollView >
                     {beers.map((beer, idx) => {
-                        return <Button key={idx} title={beer.name} onPress={() => this.props.navigation.navigate('Beer', {beer}) }/>
+                       return <Card>
+                                <Beer key={idx} beer={beer} navigation={this.props.navigation} />
+                            </Card>
                     })}
+                </ScrollView>
                 </View>
             </LinearGradient>
         )
-
-
     }
 }
 
@@ -39,8 +46,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginTop: 20,
-        // justifyContent: 'center',
-        //alignItems: 'center',
     },
     item: {
         borderBottomWidth: 1,
