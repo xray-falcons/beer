@@ -47,7 +47,7 @@ const BottomTabNavigator = createBottomTabNavigator(
                 // marginBottom: 55,
                 paddingTop: 10,
 
-                backgroundColor: "#c36f09",
+                backgroundColor: "#eeba0b",
                 // justifyContent: 'center',
                 alignItems: 'center',
 

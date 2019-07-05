@@ -21,8 +21,8 @@ export default class Loading extends React.Component {
 
   render() {
     return (
-      <View>
-        <Text>Loading your beer!</Text>
+      <View style={styles.container}>
+        <Text>Pouring your beer!</Text>
         <ActivityIndicator size="large" />
       </View>
     );

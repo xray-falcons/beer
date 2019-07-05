@@ -1,20 +1,18 @@
 import React, { Component } from "react";
-import axios from 'axios';
 import {
     StyleSheet,
-    Text,
     View,
-    TextInput,
-    Button,
-    TouchableHighlight,
-    Image,
-    Alert,
-    FlatList
+    FlatList,
+    Image
+
 } from 'react-native';
+import {  Button, Card } from 'react-native-elements'
 import firebase from 'firebase';
 import 'firebase/firestore';
 import { db } from '../server/db';
-import {LinearGradient} from "expo-linear-gradient";
+import { LinearGradient } from "expo-linear-gradient";
+
+
 
 export default class BeerList extends Component{
     constructor(props){
@@ -54,26 +52,39 @@ export default class BeerList extends Component{
                 style={styles.linearGradient}
             >
                 <View style={styles.item}>
-                    <Button title={item.name} onPress={() => 
+                    <Card
+                        style={{height: 20}}
+                    >
+
+                     <Button title={item.name} onPress={() => 
                         this.props.navigation.navigate('Beer', {beer:item})}
                     />
+                    </Card>
                 </View>
             </LinearGradient>
       )}
 
-    handleLoadMore = () => {
-       this.setState({page: this.state.page +1},
-        this.getData)
-    }
-
     render() {
         return(
-            <FlatList  data={this.state.data}
-            renderItem={this.renderRow}
-            keyExtractor={(item, index) => index.toString()}
-            // onEndReached={this.handleLoadMore}
-            // onEndReachedThreshold={0}
-            />
+            <LinearGradient
+                colors={["#c36f09", "#eeba0b"]}
+                style={styles.linearGradient}
+            >
+                <FlatList
+                    style={{marginTop: 16}}
+                    numColumns={2}
+                    data={this.state.data}
+                    renderItem={this.renderRow}
+                    keyExtractor={(item, index) => index.toString()}
+
+                />
+
+            </LinearGradient>
+
+        )
+
+    }
+          
     )}
 }
 
@@ -81,12 +92,12 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginTop: 20,
-        // justifyContent: 'center',
-        //alignItems: 'center',
+   
     },
     item: {
         borderBottomWidth: 1,
         marginBottom: 10,
+        justifyContent: "space-around"
     },
     itemText:{
         fontSize: 26,
@@ -104,7 +115,6 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         top: 0,
-        //CHECK DOCS!!!!! cause this could not work on different devices
-        // height: 1000
+      
     },
 })

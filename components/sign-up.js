@@ -25,9 +25,10 @@ export default class SignUpView extends Component {
             age: false
         }
     }
-    onClickListener = (viewId) => {
-        Alert.alert("Alert", "Button pressed "+viewId);
+    static navigationOptions = {
+        header: null
     }
+
 
     signUp = async (email, password, fullName) => {
         if (this.state.password.length < 5) {

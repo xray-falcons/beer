@@ -15,6 +15,7 @@
     "expo-linear-gradient": "^5.0.1",
     "firebase": "^6.2.3",
     "firebase-admin": "^8.2.0",
+    "glamorous-native": "^1.4.2",
     "jsonfile": "^5.0.0",
     "react": "16.8.3",
     "react-dom": "^16.8.6",
