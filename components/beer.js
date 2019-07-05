@@ -10,19 +10,31 @@ import {
   Image,
   Alert, Category
 } from 'react-native';
-import { styles } from '../style/styles';
+// import { styles } from '../style/styles';
+import { LinearGradient } from "expo-linear-gradient";
 
 export default class Beer extends Component {
   render() {
     const beer = this.props.beer
     return (
       <View>
-        <Image source={{uri:beer.labels.icon}} style={{height:100, width: 100}}/>
-        <Text style={{
-         fontSize: 20,
-         padding:25
-     }}>{beer.name}</Text>
+        <Image source={{uri:beer.labels.medium}} style={styles.itemImage}/>
+        <Button title={beer.name} color='black' onPress={() => this.props.navigation.navigate('Beer', {beer: beer}) }/>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+      flex: 1,
+      marginTop: 20,
+
+
+  },
+  itemImage:{
+      width:"100%",
+      height: 100,
+      resizeMode: 'cover'
+  },
+})

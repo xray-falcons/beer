@@ -1,16 +1,11 @@
 import React, { Component } from "react";
-import {
-    StyleSheet,
-    View,
-    FlatList,
-    Image
-
-} from 'react-native';
+import {StyleSheet,FlatList,} from 'react-native';
 import {  Button, Card } from 'react-native-elements'
 import firebase from 'firebase';
 import 'firebase/firestore';
 import { db } from '../server/db';
 import { LinearGradient } from "expo-linear-gradient";
+import Beer from './beer'
 
 
 
@@ -19,7 +14,6 @@ export default class BeerList extends Component{
         super(props);
         this.state = {
             data: [],
-            page: 1,
             SingleBeer: {}
         }
     }
@@ -45,23 +39,16 @@ export default class BeerList extends Component{
         }
 }
 
-    renderRow = ({item}) => {
+    renderItem = ({item}) => {
         return(
             <LinearGradient
                 colors={["#c36f09", "#eeba0b"]}
-                style={styles.linearGradient}
-            >
-                <View style={styles.item}>
-                    <Card
-                        style={{height: 20}}
-                    >
+                style={styles.linearGradient}>
+                <Card>
+                    <Beer beer={item} navigation={this.props.navigation} />
+                </Card>
 
-                     <Button title={item.name} onPress={() => 
-                        this.props.navigation.navigate('Beer', {beer:item})}
-                    />
-                    </Card>
-                </View>
-            </LinearGradient>
+      </LinearGradient>
       )}
 
     render() {
@@ -74,29 +61,25 @@ export default class BeerList extends Component{
                     style={{marginTop: 16}}
                     numColumns={2}
                     data={this.state.data}
-                    renderItem={this.renderRow}
+                    renderItem={this.renderItem}
                     keyExtractor={(item, index) => index.toString()}
 
                 />
-
             </LinearGradient>
 
         )
 
     }
-          
-
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginTop: 20,
-   
+
     },
     item: {
         borderBottomWidth: 1,
-        marginBottom: 10,
         justifyContent: "space-around"
     },
     itemText:{
@@ -115,6 +98,6 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         top: 0,
-      
+
     },
 })
