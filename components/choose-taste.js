@@ -67,7 +67,8 @@ export default class Taste extends Component {
         return(
             <LinearGradient
                 colors={["#c36f09", "#eeba0b"]}
-                style={styles.linearGradient}>
+                style={styles.linearGradient}
+>
 
         <View>
             <ScrollView>

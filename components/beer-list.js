@@ -1,11 +1,5 @@
 import React, { Component } from "react";
-import {
-    StyleSheet,
-    View,
-    FlatList,
-    Image
-
-} from 'react-native';
+import {StyleSheet,FlatList,} from 'react-native';
 import {  Button, Card } from 'react-native-elements'
 import firebase from 'firebase';
 import 'firebase/firestore';
@@ -45,16 +39,16 @@ export default class BeerList extends Component{
         }
 }
 
-    renderRow = ({item}) => {
+    renderItem = ({item}) => {
         return(
             <LinearGradient
                 colors={["#c36f09", "#eeba0b"]}
                 style={styles.linearGradient}>
                 <Card>
-                <Beer beer={item}/>
+                    <Beer beer={item} navigation={this.props.navigation} />
                 </Card>
 
-            </LinearGradient>
+      </LinearGradient>
       )}
 
     render() {
@@ -67,11 +61,10 @@ export default class BeerList extends Component{
                     style={{marginTop: 16}}
                     numColumns={2}
                     data={this.state.data}
-                    renderItem={this.renderRow}
+                    renderItem={this.renderItem}
                     keyExtractor={(item, index) => index.toString()}
 
                 />
-
             </LinearGradient>
 
         )
@@ -87,7 +80,6 @@ const styles = StyleSheet.create({
     },
     item: {
         borderBottomWidth: 1,
-        marginBottom: 10,
         justifyContent: "space-around"
     },
     itemText:{

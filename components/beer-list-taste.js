@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import {
     StyleSheet,
-    View,
-    Button,
     FlatList
 } from 'react-native';
+import {  Button, Card } from 'react-native-elements'
 import 'firebase/firestore';
 import { db } from '../server/db';
 import {LinearGradient} from "expo-linear-gradient";
+import Beer from './beer'
+
 
 export default class BeerListTaste extends Component{
     constructor(props){
@@ -39,18 +40,17 @@ export default class BeerListTaste extends Component{
         }
     }
 
-    renderRow = ({item}) => {
+    renderItem = ({item}) => {
         return(
-            <View style={styles.item}>
-                <Button title={item.name} onPress={() => this.props.navigation.navigate('Beer', {
-                    beer:item
-                }) }/>
+            <LinearGradient
+                colors={["#c36f09", "#eeba0b"]}
+                style={styles.linearGradient}>
+                <Card>
+                    <Beer beer={item} navigation={this.props.navigation} />
+                </Card>
 
-            </View>
-        )
-
-
-    }
+      </LinearGradient>
+      )}
 
     handleLoadMore = () => {
         this.setState({page: this.state.page +1},
@@ -63,15 +63,13 @@ export default class BeerListTaste extends Component{
                 style={styles.linearGradient}
             >
             <FlatList  data={this.state.data}
-                       renderItem={this.renderRow}
+                       renderItem={this.renderItem}
+                       numColumns={2}
                        keyExtractor={(item, index) => index.toString()}
                        onEndReached={this.handleLoadMore}
                        onEndReachedThreshold={0}
             />
             </LinearGradient>
-
-
-
         )
     }
 }

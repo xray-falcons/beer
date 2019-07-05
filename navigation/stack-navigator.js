@@ -16,14 +16,11 @@ import Beer from "../components/beer";
 export const HomeNavigator = createStackNavigator({
     Home: { screen: Home }
 });
-export const SingleBeerNavigator = createStackNavigator({
-    Beer: {screen: Beer},
-    Single: { screen: SingleBeer}
-})
+
 export const StyleNavigator = createStackNavigator({
     Style: { screen: Category },
     List: { screen: BeerList },
-    SingleBeerNavigator
+    Beer: { screen: SingleBeer },
 });
 
 export const TasteNavigator = createStackNavigator({
