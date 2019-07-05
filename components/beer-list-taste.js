@@ -31,13 +31,13 @@ export default class BeerListTaste extends Component{
       )}
 
     render() {
-        this.setState({data: this.props.navigation.getParam('beers')})
+        const beers =  this.props.navigation.getParam('beers')
         return(
             <LinearGradient
                 colors={["#c36f09", "#eeba0b"]}
                 style={styles.linearGradient}
             >
-            <FlatList  data={this.state.data}
+            <FlatList  data={beers}
                        renderItem={this.renderItem}
                        numColumns={2}
                        keyExtractor={(item, index) => index.toString()}

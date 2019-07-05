@@ -64,7 +64,9 @@ export default class Taste extends Component {
             })
             console.log(tastes, beerArray.length, filtered.length)
 
-            //this.props.navigation.navigate('List') }
+            this.props.navigation.navigate('List', {
+                beers: filtered
+            })
 
 
 
