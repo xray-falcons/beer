@@ -25,7 +25,9 @@ export default class BeerListSearch extends Component {
             >
                 <View style={styles.item}>
                     {beers.map((beer, idx) => {
-                        return <Button key={idx} title={beer.name} onPress={() => this.props.navigation.navigate('Beer', {beer}) }/>
+                        return <Button key={idx} title={beer.name} onPress={() => this.props.navigation.navigate('Beer', {
+                            beer: beer
+                        }) }/>
                     })}
                 </View>
             </LinearGradient>
@@ -62,7 +64,5 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         top: 0,
-        //CHECK DOCS!!!!! cause this could not work on different devices
-        // height: 1000
     },
 })
