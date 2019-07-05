@@ -5,26 +5,34 @@ import {
     Button,
     FlatList,
     ScrollView,
-    Text
+    Text,
+    Alert
 } from 'react-native';
 import firebase from "firebase";
-//import 'firebase/firestore';
 import { db } from '../server/db';
 import {LinearGradient} from "expo-linear-gradient";
 
 
 export default class UserProfile extends Component{
-	constructor() {
-       super();
-       this.state = {
-       		userProfile: []
-       }
+    constructor() {
+        super();
+        this.state = {
+            userProfile: []
+        }
     }
 
-    render(){
-    	const userId = firebase.auth().currentUser.uid
-    	console.log("USERID:", userId)
+    submitHandler = async()=>{
+        const userId = firebase.auth().currentUser.uid
         const userRef = db.doc(`users/${userId}`)
+        if (this.state.userProfile.length >=3) {
+            await userRef.set({preferences:this.state.userProfile},{merge:true});
+            this.setState({userProfile:[]});
+            this.props.navigation.navigate("Home")
+        } else {
+            Alert.alert("We'll need a few more than that to give you a good recommendation ;)")}
+        }
+
+        render(){
 		const beerTastes = ["sweet", "chocolate", "hoppy", "citrus","full-bodied","sour","spicy", "fruit","light","coffee","earthy", "tropical", "roast", "caramel", "coconut", "porter", "dark", "barley", "malt", "ipa", "grapefruit", "stout", "smokey", "banana", "vanilla", "bitter", "zest", "crispy", "lemon", "raspberries", "oak", "smooth", "bavaria"]
         return(
             <LinearGradient
@@ -32,15 +40,13 @@ export default class UserProfile extends Component{
                 style={styles.linearGradient}
             >
             <ScrollView>
-                {beerTastes.map((elem, idx) => 
+                {beerTastes.map((elem, idx) =>
                     <Button key={idx} title={elem = elem[0].toUpperCase() + elem.slice(1)} onPress={() => {
                     	this.setState({userProfile: [...this.state.userProfile, elem]})
                     }}
                     />
                 )}
-            	<Button title={"submit"} onPress={async()=>{
-            		await userRef.set({preferences:this.state.userProfile},{merge:true})
-            	}}/>
+            	<Button color="#fff" title="submit" onPress={this.submitHandler}/>
             </ScrollView>
             </LinearGradient>
     )}
