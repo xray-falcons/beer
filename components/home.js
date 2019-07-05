@@ -74,7 +74,6 @@ export default class Home extends Component {
         const recommendedBeers = []
         try {
             const beers = await db.collection('beers')
-            //this line works
             const userQuery = await db.doc(`users/${userId}`).get()
             const preferences = userQuery.data().preferences
             console.log("PREFERENCE", preferences[1]) 
@@ -89,9 +88,7 @@ export default class Home extends Component {
                 recommendedBeers.push(beer)
                 console.log(beer.id)
             })
-            // console.log(recommendedBeers.length)
             this.setState({recommendedBeers})
-            console.log("STATE>RECOMMENDED BEERS", this.state.recommendedBeers)
         } catch(err) {
             console.err(err)
         }
