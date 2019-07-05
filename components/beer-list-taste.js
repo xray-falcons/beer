@@ -15,7 +15,6 @@ export default class BeerListTaste extends Component{
         super(props)
         this.state = {
             data: [],
-            page: 1
         }
     }
 
@@ -31,10 +30,6 @@ export default class BeerListTaste extends Component{
       </LinearGradient>
       )}
 
-    handleLoadMore = () => {
-        this.setState({page: this.state.page +1},
-            this.getData)
-    }
     render() {
         this.setState({data: this.props.navigation.getParam('beers')})
         return(
