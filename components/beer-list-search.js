@@ -13,9 +13,9 @@ import Beer from './beer'
 
 
 export default class BeerListSearch extends Component {
-    // static navigationOptions = {
-    //     header: null
-    // }
+    static navigationOptions = {
+        header: null
+    }
 
     render() {
         const beers = this.props.navigation.getParam('beers')
@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
     item: {
         borderBottomWidth: 1,
         marginBottom: 10,
+        marginTop: 70
     },
     itemText:{
         fontSize: 26,
@@ -63,7 +64,5 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         top: 0,
-        //CHECK DOCS!!!!! cause this could not work on different devices
-        // height: 1000
     },
 })

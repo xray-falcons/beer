@@ -11,10 +11,15 @@ import SignInView from "../components/sign-in";
 import Search from "../components/search-bar";
 import BeerListSearch from "../components/beer-list-search";
 import Beer from "../components/beer";
+import Random from "../components/random";
 
 //Add navigators with screens in this file
 export const HomeNavigator = createStackNavigator({
     Home: { screen: Home }
+});
+export const RandomNavigator = createStackNavigator({
+    Random: { screen: Random },
+    Beer: { screen: SingleBeer },
 });
 
 export const StyleNavigator = createStackNavigator({
@@ -31,7 +36,8 @@ export const TasteNavigator = createStackNavigator({
 export const SearchNavigator = createStackNavigator({
     Search: { screen: Search },
     SearchList: {screen: BeerListSearch},
-    Beer: { screen: SingleBeer }
+    Beer: { screen: SingleBeer },
+    Random: RandomNavigator
 });
 
 export const AuthNavigator =  createStackNavigator({

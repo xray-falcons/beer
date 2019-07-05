@@ -16,6 +16,9 @@ export default class BeerList extends Component{
             data: [],
         }
     }
+    static navigationOptions = {
+        header: null
+    }
     componentDidMount(){
         this.getData()
     }
