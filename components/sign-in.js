@@ -25,6 +25,10 @@ export default class SignInView extends Component {
         }
 
     }
+    static navigationOptions = {
+        header: null
+    }
+
     signIn(email, password) {
         try {
             firebase.auth().signInWithEmailAndPassword(email, password).then(function (user) {
