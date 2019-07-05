@@ -35,7 +35,8 @@ export const TasteNavigator = createStackNavigator({
 export const SearchNavigator = createStackNavigator({
     Search: { screen: Search },
     SearchList: {screen: BeerListSearch},
-    Beer: { screen: SingleBeer }
+    Beer: { screen: SingleBeer },
+    Random: RandomNavigator
 });
 
 export const AuthNavigator =  createStackNavigator({
