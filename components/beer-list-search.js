@@ -10,9 +10,9 @@ import { db } from '../server/db';
 import { LinearGradient } from "expo-linear-gradient";
 
 export default class BeerListSearch extends Component {
-    // static navigationOptions = {
-    //     header: null
-    // }
+    static navigationOptions = {
+        header: null
+    }
 
     render() {
         const beers = this.props.navigation.getParam('beers')
@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     item: {
         borderBottomWidth: 1,
         marginBottom: 10,
+        marginTop: 70
     },
     itemText:{
         fontSize: 26,
