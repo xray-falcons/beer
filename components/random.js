@@ -42,11 +42,8 @@ export default class Random extends Component {
             let docRef = await db.collection("beers").doc(RandomNumber.toString());
             let beer = await docRef.get()
             if (beer.exists) {
-                console.log(beer.data())
                 this.state.beer = beer.data()
                 this.state.randomNumber = 0
-
-                console.log('BBEEER', this.state.beer)
                 this.props.navigation.navigate('Beer',
                     {beer: this.state.beer})
 
@@ -59,18 +56,17 @@ export default class Random extends Component {
     }
 
     render(){
-            return (<LinearGradient
+            return (
+            <LinearGradient
                     colors={["#c36f09", "#eeba0b"]}
                     style={styles.linearGradient}
                 ><View style={styles.container}>
                 <Button title={'Try random!'} onPress={() => {
                     this.generateRandomNumber();
-                    console.log("BUTTTON", this.state.beer)
                 }}
                 />
             </View>
             </LinearGradient>)
-
     }
 }
 

@@ -51,7 +51,6 @@ export default class SignUpView extends Component {
 
     async logInWithFacebook() {
         try {
-            console.log(4)
             const {
                 type,
                 token,
