@@ -11,6 +11,7 @@ import firebase from 'firebase';
 import 'firebase/firestore';
 import { db } from '../server/db';
 import { LinearGradient } from "expo-linear-gradient";
+import Beer from './beer'
 
 
 
@@ -19,7 +20,6 @@ export default class BeerList extends Component{
         super(props);
         this.state = {
             data: [],
-            page: 1,
             SingleBeer: {}
         }
     }
@@ -49,18 +49,11 @@ export default class BeerList extends Component{
         return(
             <LinearGradient
                 colors={["#c36f09", "#eeba0b"]}
-                style={styles.linearGradient}
-            >
-                <View style={styles.item}>
-                    <Card
-                        style={{height: 20}}
-                    >
+                style={styles.linearGradient}>
+                <Card>
+                <Beer beer={item}/>
+                </Card>
 
-                     <Button title={item.name} onPress={() => 
-                        this.props.navigation.navigate('Beer', {beer:item})}
-                    />
-                    </Card>
-                </View>
             </LinearGradient>
       )}
 
@@ -84,15 +77,13 @@ export default class BeerList extends Component{
         )
 
     }
-          
-    )}
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginTop: 20,
-   
+
     },
     item: {
         borderBottomWidth: 1,
@@ -115,6 +106,6 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         top: 0,
-      
+
     },
 })

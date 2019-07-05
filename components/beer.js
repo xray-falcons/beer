@@ -17,11 +17,12 @@ export default class Beer extends Component {
     const beer = this.props.beer
     return (
       <View>
-        <Image source={{uri:beer.labels.icon}} style={{height:100, width: 100}}/>
-        <Text style={{
-         fontSize: 20,
+        <Image source={{uri:beer.labels.medium}} style={{height:100, width: 100}}/>
+        <Button title={beer.name} onPress={() => this.props.navigation.navigate('Beer', {beer: beer}) }/>
+        {/* <Button style={{
+         fontSize: 10,
          padding:25
-     }}>{beer.name}</Text>
+     }}>{beer.name}</Text> */}
       </View>
     )
   }

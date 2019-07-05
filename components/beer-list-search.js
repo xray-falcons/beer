@@ -25,15 +25,7 @@ export default class BeerListSearch extends Component {
             >
                 <View style={styles.item}>
                     {beers.map((beer, idx) => {
-                        return <Button key={idx} title={beer.name} onPress={() => this.props.navigation.navigate('Beer', {
-                            beerName: beer.name,
-                            beerImage: beer.labels.large,
-                            abv: beer.abv,
-                            description: beer.description,
-                            ibu: beer.ibu,
-                            style: beer.style.name,
-                            beerId: beer.id
-                        }) }/>
+                        return <Button key={idx} title={beer.name} onPress={() => this.props.navigation.navigate('Beer', {beer}) }/>
                     })}
                 </View>
             </LinearGradient>
