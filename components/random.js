@@ -9,8 +9,6 @@ import Beer from "./beer";
 import { LinearGradient } from "expo-linear-gradient";
 import {Text} from "react-native-elements";
 
-
-
 export default class Random extends Component {
     constructor(props){
         super(props)
@@ -56,10 +54,8 @@ export default class Random extends Component {
                     />
                 </View>
                 </LinearGradient>
-
             )
         }
-
             return (<LinearGradient
                     colors={["#c36f09", "#eeba0b"]}
                     style={styles.linearGradient}
@@ -70,10 +66,8 @@ export default class Random extends Component {
                 />
             </View>
             </LinearGradient>)
-
     }
 }
-
 
 
 const styles = StyleSheet.create({
