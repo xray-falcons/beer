@@ -62,11 +62,10 @@ export default class Taste extends Component {
                     }
                 }
             })
+            console.log(tastes, beerArray.length, filtered.length)
 
+            //this.props.navigation.navigate('List') }
 
-
-            console.log('FFFILW', filtered.length)
-            console.log(beerArray.length)
 
 
 
@@ -91,7 +90,6 @@ export default class Taste extends Component {
 
         <View>
             <ScrollView>
-                <Button type='solid' color="#841584"  title='Find Your beers!' onPress={() => this.try(this.state.checked)}/>
 
                 {beerTastes.map((elem, idx) => {
                     return  (<View key={idx}>
@@ -106,6 +104,8 @@ export default class Taste extends Component {
                     </View>)
                 })
                 }
+                <Button type='solid' color="#841584"  title='Find Your beers!' onPress={() => this.try(this.state.checked)}/>
+
             </ScrollView>
         </View>
             </View>
