@@ -1,16 +1,24 @@
 import {StyleSheet} from "react-native";
 
 export default StyleSheet.create({
+    attentionButton:{
+        backgroundColor:"#841574",
+        borderRadius:5
+    },
+    buttonRow:{
+        flexDirection:"row",
+        justifyContent: "center"
+    },
     buttonText:{
         color:"black",
         fontSize:14
     },
     container: {
         flex: 1,
-        backgroundColor: '#c36f09',
         alignItems: 'center',
         justifyContent: 'center',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        margin: 20
     },
     containerApp: {
         flex: 1,
@@ -22,12 +30,25 @@ export default StyleSheet.create({
         alignItems: 'center',
     },
     headText: {
-        fontSize: 40,
+        fontSize: 38,
         fontWeight: "bold",
         textAlign: 'center',
-        fontStyle: 'italic',
         marginBottom: 15
       },
+    iconButton: {
+        fontSize:36,
+        color:"#530",
+        padding:15,
+    },
+    image: {
+        width: 200,
+        height: 200,
+        marginTop: 20,
+        marginBottom: 20,
+        borderRadius: 100,
+        marginLeft: 'auto',
+        marginRight: 'auto'
+    },
     item: {
         borderBottomWidth: 1,
         marginBottom: 10,
@@ -67,17 +88,36 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    notebox:{
+        height:100,
+        backgroundColor:"#f0f0f0",
+        borderRadius:5
+    },
+    searchBar:{
+        marginTop: 35,
+        backgroundColor:"transparent"
+    },
+    searchLogo:{
+        width:200,
+        height:200,
+        marginBottom: 20,
+        borderRadius: 100
+    },
     tabBarOptions:{
         paddingTop: 10,
         backgroundColor: "#eeba0b",
         alignItems: 'center',
+    },
+    text: {
+        fontSize: 20,
+        textAlign: 'justify'
     },
     textBold:{
         fontWeight: "bold",
         fontStyle: 'italic',
         textAlign: 'center',
         fontSize:22
-      },
+    },
 });
 
 // beerlistsearch container

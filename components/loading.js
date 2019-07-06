@@ -1,7 +1,8 @@
 // Loading.js
 import React from "react";
-import { View, Text, ActivityIndicator, StyleSheet } from "react-native";
+import { View, Text, ActivityIndicator } from "react-native";
 import firebase from "firebase";
+import styles from "../style/styles"
 
 export default class Loading extends React.Component {
   //we check if a user has an account in the firebase
@@ -28,10 +29,3 @@ export default class Loading extends React.Component {
     );
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
-  }
-});

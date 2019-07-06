@@ -1,5 +1,7 @@
 import React from 'react';
-import {Text, View, Button} from 'react-native';
+// import {Text, Button, View} from 'react-native';
+import {Text, View} from 'react-native';
+import {Button} from "react-native-elements"
 import {LinearGradient} from "expo-linear-gradient";
 import firebase from 'firebase';
 import { db } from "../server/db";
@@ -60,13 +62,11 @@ export default class Home extends React.Component {
 
     getRecommendations = async () => {
         const userId = firebase.auth().currentUser.uid
-        console.log("THIS IS THE USER ID", userId)
         const recommendedBeers = []
         try {
             const beers = await db.collection('beers')
             const userQuery = await db.doc(`users/${userId}`).get()
             const preferences = userQuery.data().preferences
-            console.log("PREFERENCE", preferences[1])
             const beerQuery = beers
                 .where('taste', 'array-contains', preferences[1])
                 .limit(3)
@@ -74,7 +74,6 @@ export default class Home extends React.Component {
             querySnapshot.forEach(doc=>{
                 let beer = doc.data()
                 recommendedBeers.push(beer)
-                console.log(beer.id)
             })
             this.setState({recommendedBeers})
         } catch(err) {
@@ -109,7 +108,7 @@ export default class Home extends React.Component {
                                         <Beer key={eachBeer.id} beer={eachBeer} />) : <Text style={{fontSize:16}}>Like some beers to show here!</Text>}
                                 </ScrollView>
                             </View>
-                            <Button color='black' title='Logout' onPress={() => firebase.auth().signOut()}/>
+                            <Button type="solid" buttonStyle={styles.attentionButton} title='Logout' onPress={() => firebase.auth().signOut()}/>
                         </ScrollView>
             </LinearGradient>
         );
