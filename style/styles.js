@@ -162,14 +162,3 @@ export default StyleSheet.create({
         fontSize:22
     },
 });
-
-//home component itemText
-
-// itemText:{
-//     fontSize: 16,
-//     padding:25,
-//     marginTop: 25,
-//     marginBottom: 25,
-//     textAlign: 'center',
-// },
-

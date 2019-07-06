@@ -6,7 +6,8 @@ import {
     TextInput,
     TouchableHighlight,
     Image,
-    Alert
+    Alert,
+    KeyboardAvoidingView
 } from 'react-native';
 import * as Facebook from 'expo-facebook';
 import {db} from '../server/db'
@@ -76,7 +77,8 @@ export default class SignUpView extends Component {
                 colors={["#c36f09", "#eeba0b"]}
                 style={styles.linearGradient}
             >
-            <View style={styles.container}>
+           <KeyboardAvoidingView style={styles.container}
+                behavior="padding">
                 <Image source={require('../style/StumblrLogo.png')} style={styles.image}
             />
                 <View style={styles.authInputContainer}>
@@ -119,7 +121,7 @@ export default class SignUpView extends Component {
                 }>
                     <Text style={styles.authText}>Have an account? Sign in</Text>
                 </TouchableHighlight>
-            </View>
+            </KeyboardAvoidingView>
             </LinearGradient>
         );
     }

@@ -6,7 +6,8 @@ import {
     TextInput,
     TouchableHighlight,
     Image,
-    Alert
+    Alert,
+    KeyboardAvoidingView
 } from 'react-native';
 import * as Facebook from 'expo-facebook';
 import {LinearGradient} from "expo-linear-gradient";
@@ -69,7 +70,8 @@ export default class SignInView extends Component {
                 colors={["#c36f09", "#eeba0b"]}
                 style={styles.linearGradient}
             >
-            <View style={styles.container}>
+            <KeyboardAvoidingView style={styles.container}
+                behavior="padding">
 
                 <Image source={require('../style/StumblrLogo.png')} style={styles.image}
                 />
@@ -98,7 +100,7 @@ export default class SignInView extends Component {
                 <TouchableHighlight style={[styles.authButtonContainer, styles.authButton]} onPress={() => this.logInWithFacebook()}>
                     <Text style={styles.authText}>Sign in with Facebook</Text>
                 </TouchableHighlight>
-            </View>
+            </KeyboardAvoidingView>
             </LinearGradient>
         );
     }
