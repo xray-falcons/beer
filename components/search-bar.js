@@ -38,7 +38,6 @@ export default class Search extends React.Component {
                     name: "Search"
                 })
             }
-
         } catch (err) {
             console.log(err)
         }
@@ -46,9 +45,7 @@ export default class Search extends React.Component {
 
     render() {
         const { search } = this.state;
-
         return (
-
             <LinearGradient
                 colors={["#c36f09", "#eeba0b"]}
                 style={styles.linearGradient}
@@ -66,10 +63,7 @@ export default class Search extends React.Component {
                     />
                 </View>
             </LinearGradient>
-
-
-    );
-    }
+    )}
 }
 const styles = StyleSheet.create({
     containerImage: {
