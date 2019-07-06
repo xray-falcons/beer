@@ -22,7 +22,8 @@ export default class BeerListTaste extends Component{
         return(
             <LinearGradient
                 colors={["#c36f09", "#eeba0b"]}
-                style={styles.linearGradient}>
+                style={styles.linearGradient}
+                >
                 <Card>
                     <Beer beer={item} navigation={this.props.navigation} />
                 </Card>
@@ -53,8 +54,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginTop: 20,
-        // justifyContent: 'center',
-        //alignItems: 'center',
     },
     item: {
         borderBottomWidth: 1,

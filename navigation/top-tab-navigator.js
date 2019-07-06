@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { createMaterialTopTabNavigator } from "react-navigation";
-import {StyleNavigator} from "./stack-navigator";
-import {TasteNavigator} from "./stack-navigator";
+import {StyleNavigator, TasteNavigator} from "./stack-navigator";
 
 
 const TopTabNavigator = createMaterialTopTabNavigator(
     {
-        "Choose your style!":  StyleNavigator ,
+        "Choose your style!":  StyleNavigator,
         "Choose your taste!": TasteNavigator,
     },
     {

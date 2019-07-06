@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import {
     StyleSheet,
     Text,
@@ -21,6 +20,7 @@ export default class Category extends Component {
     static navigationOptions = {
         header: null
     }
+
     render(){
         const beerStyles = ["British Origin Ales", "Irish Origin Ales", "North American Origin Ales","German Origin Ales", "Belgian And French Origin Ales","International Ale Styles","European-germanic Lager","North American Lager", "International Styles","Hybrid/mixed Beer","Mead, Cider, & Perry","Malternative Beverages"]
         return (
@@ -28,16 +28,17 @@ export default class Category extends Component {
                 colors={["#c36f09", "#eeba0b"]}
                 style={styles.linearGradient}
             >
-            <View style={styles1.container}>
-            <ScrollView>
-            {beerStyles.map((elem, idx) => {
-            return  <Button key={idx} title={elem} color='black' onPress={() => this.props.navigation.navigate('List', { name : elem}) }/>
-            })
-            }
-            </ScrollView>
-        </View>
-
-            </LinearGradient>)
+                <View style={styles1.container}>
+                    <ScrollView>
+                    {beerStyles.map((elem, idx) => {
+                        return <Button key={idx} title={elem} color='black' onPress={()=> 
+                            this.props.navigation.navigate('List', { name : elem}) }/>
+                        })
+                    }
+                    </ScrollView>
+                </View>
+            </LinearGradient>
+        )
     }
 }
 
@@ -53,7 +54,7 @@ const styles1 = StyleSheet.create({
         fontWeight: "bold",
         fontStyle: 'italic',
         textAlign: 'center'
-      }
+    }
 })
 
 
