@@ -10,13 +10,13 @@ export default class BeerListTaste extends React.Component{
     constructor(props){
         super(props)
         this.state = {
-            data: [],
+            data:[]
         }
     }
 
     renderItem = ({item}) => {
         return(
-            <Card containerStyle={{backgroundColor:"transparent"}}>
+            <Card containerStyle={styles.cardContainer}>
                 <Beer beer={item} navigation={this.props.navigation} />
             </Card>
       )}

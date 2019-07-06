@@ -42,13 +42,9 @@ export default class BeerList extends Component{
 
     renderItem = ({item}) => {
         return(
-            <LinearGradient
-                colors={["#c36f09", "#eeba0b"]}
-                style={styles.linearGradient}>
-                <Card containerStyle={{backgroundColor:"transparent"}}>
-                    <Beer beer={item} navigation={this.props.navigation} />
-                </Card>
-            </LinearGradient>
+            <Card containerStyle={styles.cardContainer}>
+                <Beer beer={item} navigation={this.props.navigation} />
+            </Card>
       )}
 
     render() {
@@ -58,7 +54,6 @@ export default class BeerList extends Component{
                 style={styles.linearGradient}
             >
                 <FlatList
-                    style={{marginTop: 16}}
                     numColumns={2}
                     data={this.state.data}
                     renderItem={this.renderItem}

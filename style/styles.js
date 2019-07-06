@@ -5,6 +5,44 @@ export default StyleSheet.create({
         backgroundColor:"#841574",
         borderRadius:5
     },
+    authButton: {
+        backgroundColor: "#710000",
+    },
+    authButtonContainer: {
+        height:25,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: 1,
+        width:200,
+        borderRadius:30,
+    },
+    authInputs:{
+        height:40,
+        marginLeft:16,
+        borderBottomColor: '#FFFFFF',
+        flex:1,
+    },
+    authInputContainer: {
+        borderBottomColor: '#F5FCFF',
+        backgroundColor: '#FFFFFF',
+        borderRadius:30,
+        borderBottomWidth: 1,
+        width: 200,
+        height: 35,
+        marginBottom:2,
+        flexDirection: 'row',
+        alignItems:'center'
+    },
+    authInputIcon:{
+        width:15,
+        height:15,
+        marginLeft:15,
+        justifyContent: 'center'
+    },
+    authText: {
+        color: 'white',
+    },
     buttonRow:{
         flexDirection:"row",
         justifyContent: "center"
@@ -12,6 +50,10 @@ export default StyleSheet.create({
     buttonText:{
         color:"black",
         fontSize:14
+    },
+    cardContainer:{
+        backgroundColor:"transparent",
+        width:150
     },
     container: {
         flex: 1,
@@ -75,8 +117,6 @@ export default StyleSheet.create({
         left: 0,
         right: 0,
         top: 0,
-        //CHECK DOCS!!!!! cause this could not work on different devices
-        // height: 1000
     },
     listCard:{
         backgroundColor:"transparent",
@@ -112,6 +152,9 @@ export default StyleSheet.create({
         fontSize: 20,
         textAlign: 'justify'
     },
+    titleText:{
+        fontSize: 26,
+    },
     textBold:{
         fontWeight: "bold",
         fontStyle: 'italic',
@@ -119,21 +162,6 @@ export default StyleSheet.create({
         fontSize:22
     },
 });
-
-// beerlistsearch container
-// container: {
-//     flex: 1,
-//     marginTop: 20,
-// },
-
-//choose category container
-// container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     marginTop: 20,
-//     marginBottom: 20
-// },
 
 //home component itemText
 

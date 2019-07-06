@@ -1,5 +1,4 @@
 import React from 'react';
-// import {Text, Button, View} from 'react-native';
 import {Text, View} from 'react-native';
 import {Button} from "react-native-elements"
 import {LinearGradient} from "expo-linear-gradient";
@@ -88,24 +87,24 @@ export default class Home extends React.Component {
                 style={styles.linearGradient}>
                         <ScrollView>
                             <View>
-                                <Text style={{fontSize:24}}>Your recent beers: </Text>
+                                <Text style={styles.titleText}>Your recent beers: </Text>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                     {this.state.recentBeers.length ? this.state.recentBeers.map(eachBeer =>
-                                        <Beer key={eachBeer.beer.id} beer={eachBeer.beer} navigation={this.props.navigation}/>) : <Text style={styles.itemText}>Like some beers to show here!</Text>}
+                                        <Beer key={eachBeer.beer.id} beer={eachBeer.beer} navigation={this.props.navigation}/>) : <Text style={styles.text}>Like some beers to show here!</Text>}
                                 </ScrollView>
                             </View>
                             <View>
-                                <Text style={{fontSize:24}}>Top beers: </Text>
+                                <Text style={styles.titleText}>Top beers: </Text>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                     {this.state.frequentBeers.length ? this.state.frequentBeers.map(eachBeer =>
-                                        <Beer key={eachBeer.beer.id} beer={eachBeer.beer} navigation={this.props.navigation}/>) : <Text style={styles.itemText}>Like some beers to show here!</Text>}
+                                        <Beer key={eachBeer.beer.id} beer={eachBeer.beer} navigation={this.props.navigation}/>) : <Text style={styles.text}>Like some beers to show here!</Text>}
                                 </ScrollView>
                             </View>
                             <View>
-                                <Text style={{fontSize:24}}>Top picks for you: </Text>
+                                <Text style={styles.titleText}>Top picks for you: </Text>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                     {this.state.recommendedBeers.length ? this.state.recommendedBeers.map(eachBeer =>
-                                        <Beer key={eachBeer.id} beer={eachBeer} />) : <Text style={{fontSize:16}}>Like some beers to show here!</Text>}
+                                        <Beer key={eachBeer.id} beer={eachBeer} />) : <Text style={styles.text}>Like some beers to show here!</Text>}
                                 </ScrollView>
                             </View>
                             <Button type="solid" buttonStyle={styles.attentionButton} title='Logout' onPress={() => firebase.auth().signOut()}/>
