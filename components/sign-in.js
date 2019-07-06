@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
-
 import {
     StyleSheet,
     Text,
     View,
     TextInput,
-    Button,
     TouchableHighlight,
     Image,
-    Alert
+    Alert,
+    KeyboardAvoidingView
 } from 'react-native';
 import * as Facebook from 'expo-facebook';
 import {LinearGradient} from "expo-linear-gradient";
@@ -37,7 +36,7 @@ export default class SignInView extends Component {
             console.log(err)
         }
     }
-    
+
     async logInWithFacebook() {
         try {
             const {
@@ -71,7 +70,8 @@ export default class SignInView extends Component {
                 colors={["#c36f09", "#eeba0b"]}
                 style={styles.linearGradient}
             >
-            <View style={styles.container}>
+            <KeyboardAvoidingView style={styles.container}
+                behavior="padding">
 
                 <Image source={require('../style/StumblrLogo.png')} style={styles.image}
                 />
@@ -100,7 +100,7 @@ export default class SignInView extends Component {
                 <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.logInWithFacebook()}>
                     <Text style={styles.signUpText}>Sign in with Facebook</Text>
                 </TouchableHighlight>
-            </View>
+            </KeyboardAvoidingView>
             </LinearGradient>
         );
     }
