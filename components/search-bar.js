@@ -19,9 +19,9 @@ export default class Search extends React.Component {
         try {
             const beers = await db.collection('beers');
             let beerArray = [];
-            const query = await beers.where('nameArr', 'array-contains', search.trim().toLowerCase());
+            const query = beers.where('nameArr', 'array-contains', search.trim().toLowerCase());
             const querySnapshot = await query.get()
-            querySnapshot.forEach(function (doc){
+            querySnapshot.forEach(doc => {
                 let beer = doc.data();
                 beerArray.push(beer)
             });
@@ -38,7 +38,6 @@ export default class Search extends React.Component {
                     name: "Search"
                 })
             }
-
         } catch (err) {
             console.log(err)
         }
@@ -46,9 +45,7 @@ export default class Search extends React.Component {
 
     render() {
         const { search } = this.state;
-
         return (
-
             <LinearGradient
                 colors={["#c36f09", "#eeba0b"]}
                 style={styles.linearGradient}
@@ -66,10 +63,7 @@ export default class Search extends React.Component {
                     />
                 </View>
             </LinearGradient>
-
-
-    );
-    }
+    )}
 }
 const styles = StyleSheet.create({
     containerImage: {

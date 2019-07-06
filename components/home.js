@@ -1,23 +1,13 @@
-import React, { Component } from 'react';
-import {
-    StyleSheet,
-    FlatList,
-    Text,
-    View,
-    TextInput,
-    Button,
-    TouchableHighlight,
-    Image,
-    Alert, Category
-} from 'react-native';
+import React from 'react';
+import {Text, View, Button} from 'react-native';
 import {LinearGradient} from "expo-linear-gradient";
 import firebase from 'firebase';
 import { db } from "../server/db";
 import { ScrollView } from 'react-native-gesture-handler';
-import { styles } from '../style/styles';
+import styles from '../style/styles';
 import Beer from "./beer"
 
-export default class Home extends Component {
+export default class Home extends React.Component {
 
     constructor(){
         super()
@@ -27,7 +17,7 @@ export default class Home extends Component {
             recommendedBeers: []
         }
     }
-    //TODO: COMPONENTS DONT UPDATE! SHOULD WE USE componentDidUpdate()?
+
     componentDidMount(){
         this.getFrequentBeers()
         this.getRecentBeers()
@@ -74,14 +64,11 @@ export default class Home extends Component {
         const recommendedBeers = []
         try {
             const beers = await db.collection('beers')
-            //this line works
             const userQuery = await db.doc(`users/${userId}`).get()
             const preferences = userQuery.data().preferences
-            console.log("PREFERENCE", preferences[1]) 
+            console.log("PREFERENCE", preferences[1])
             const beerQuery = beers
-                //.where('taste', 'array-contains', preferences[0])
                 .where('taste', 'array-contains', preferences[1])
-                // .where('taste', 'array-contains', preferences[2])
                 .limit(3)
             const querySnapshot = await beerQuery.get()
             querySnapshot.forEach(doc=>{
@@ -89,9 +76,7 @@ export default class Home extends Component {
                 recommendedBeers.push(beer)
                 console.log(beer.id)
             })
-            // console.log(recommendedBeers.length)
             this.setState({recommendedBeers})
-            console.log("STATE>RECOMMENDED BEERS", this.state.recommendedBeers)
         } catch(err) {
             console.err(err)
         }
@@ -107,14 +92,14 @@ export default class Home extends Component {
                                 <Text style={{fontSize:24}}>Your recent beers: </Text>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                     {this.state.recentBeers.length ? this.state.recentBeers.map(eachBeer =>
-                                        <Beer key={eachBeer.beer.id} beer={eachBeer.beer} navigation={this.props.navigation}/>) : <Text style={style.itemText}>Like some beers to show here!</Text>}
+                                        <Beer key={eachBeer.beer.id} beer={eachBeer.beer} navigation={this.props.navigation}/>) : <Text style={styles.itemText}>Like some beers to show here!</Text>}
                                 </ScrollView>
                             </View>
                             <View>
                                 <Text style={{fontSize:24}}>Top beers: </Text>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                     {this.state.frequentBeers.length ? this.state.frequentBeers.map(eachBeer =>
-                                        <Beer key={eachBeer.beer.id} beer={eachBeer.beer} navigation={this.props.navigation}/>) : <Text style={style.itemText}>Like some beers to show here!</Text>}
+                                        <Beer key={eachBeer.beer.id} beer={eachBeer.beer} navigation={this.props.navigation}/>) : <Text style={styles.itemText}>Like some beers to show here!</Text>}
                                 </ScrollView>
                             </View>
                             <View>
@@ -130,30 +115,6 @@ export default class Home extends Component {
         );
     }
 }
-
-const style = StyleSheet.create({
-textBold:{
-    fontWeight: "bold",
-    fontStyle: 'italic',
-    textAlign: 'center',
-    fontSize: 24
-  },
-    itemText:{
-        fontSize: 16,
-        padding:25,
-        marginTop: 25,
-        marginBottom: 25,
-        textAlign: 'center',
-    },
-    headText: {
-        fontSize: 40,
-        fontWeight: "bold",
-        textAlign: 'center',
-        fontStyle: 'italic',
-        marginBottom: 15
-      },
-})
-
 
 
 

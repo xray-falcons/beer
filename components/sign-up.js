@@ -29,7 +29,6 @@ export default class SignUpView extends Component {
         header: null
     }
 
-
     signUp = async (email, password, fullName) => {
         if (this.state.password.length < 5) {
             Alert.alert('Password is invalid', 'Password must be longer than 6 characters')

@@ -8,7 +8,6 @@ import { LinearGradient } from "expo-linear-gradient";
 import Beer from './beer'
 
 
-
 export default class BeerList extends Component{
     constructor(props){
         super(props);
@@ -16,30 +15,31 @@ export default class BeerList extends Component{
             data: [],
         }
     }
+
     static navigationOptions = {
         header: null
     }
+
     componentDidMount(){
         this.getData()
     }
+
     getData = async () => {
         const name = this.props.navigation.getParam('name')
         try {
             const beers = await db.collection('beers');
-            let beerArray =[]
-            const query = await beers.where('style.category.name', '==', name);
+            let beerArray = [];
+            const query = beers.where('style.category.name', '==', name);
             const querySnapshot = await query.get()
             querySnapshot.forEach(function (doc){
                 let beer = doc.data();
-                beerArray.push(beer)
+                beerArray.push(beer);
             });
             this.setState({data: beerArray})
-
-
         } catch (err)  {
             console.log(err)
         }
-}
+    }
 
     renderItem = ({item}) => {
         return(
@@ -66,9 +66,7 @@ export default class BeerList extends Component{
                     keyExtractor={(item, index) => index.toString()}
                 />
             </LinearGradient>
-
         )
-
     }
 }
 

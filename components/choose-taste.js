@@ -14,7 +14,7 @@ import IconButton from "react-native-vector-icons/Ionicons";
 export default class Taste extends Component {
     constructor(props) {
         super(props);
-       this.state = {
+        this.state = {
            checked: []
        }
     }
@@ -22,24 +22,22 @@ export default class Taste extends Component {
     static navigationOptions = {
         header: null
     }
+
     isItemChecked(taste) {
         return this.state.checked.indexOf(taste) > -1
     }
+
     manageToggle = (evt, taste) => {
         if (this.isItemChecked(taste)) {
             this.setState({
                 checked: this.state.checked.filter(i => i !== taste)
             })
-            console.log('IF', this.state.checked)
         } else {
             this.setState({
                 checked: [...this.state.checked, taste]
             })
-            console.log('ELSE', this.state.checked)
-
         }
     }
-
 
     try = async (tastes) => {
         try {
@@ -51,47 +49,31 @@ export default class Taste extends Component {
                 let beer = doc.data();
                 beerArray.push(beer)
             });
-
             let filtered = beerArray.filter(beer => {
                 for (let i = 0; i < beer.taste.length; i ++) {
                     for (let j = 1; j < tastes.length; j ++) {
                         if (beer.taste[i] === tastes[j]){
-                            console.log(beer.name)
                             return beer
                         }
                     }
                 }
             })
-            console.log(tastes, beerArray.length, filtered.length)
-
             this.props.navigation.navigate('List', {
                 beers: filtered
             })
-
-
-
-
-
         } catch (err)  {
-            console.log(err)
-
+            console.err(err)
         }
-
     }
-
 
     render(){
         const beerTastes = ["sweet", "chocolate", "hoppy", "citrus","full-bodied","sour","spicy", "fruit","light","coffee","earthy", "tropical", "roast", "caramel", "coconut", "porter", "dark", "barley", "malt", "ipa", "grapefruit", "stout", "smokey", "banana", "vanilla", "bitter", "zest", "crispy", "lemon", "raspberries", "oak", "smooth", "bavaria"]
-
         return(
             <LinearGradient
                 colors={["#c36f09", "#eeba0b"]}
                 style={styles.linearGradient}
->
-
-        <View>
+            >
             <ScrollView>
-
                 {beerTastes.map((elem, idx) => {
                     return  (<View key={idx}>
                     <CheckBox
@@ -106,9 +88,7 @@ export default class Taste extends Component {
                 })
                 }
                 <Button type='solid' color="#841584"  title='Find Your beers!' onPress={() => this.try(this.state.checked)}/>
-
             </ScrollView>
-        </View>
     </LinearGradient>)
     }
 }
