@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, FlatList, TouchableOpacity, Text } from 'react-native';
 import { CheckBox, Button } from 'react-native-elements'
 import { db } from '../server/db';
 import { LinearGradient } from "expo-linear-gradient";
@@ -9,7 +9,8 @@ export default class Taste extends Component {
     constructor(props) {
         super(props);
         this.state = {
-           checked: []
+           checked: [],
+           data: beerTastes
        }
     }
 
@@ -68,27 +69,31 @@ export default class Taste extends Component {
         }
     }
 
+    renderItem = (elem, idx) => {
+        console.log('elem', elem.item, 'type', typeof elem.item)
+        return  (<View key={idx} style={{width: 187}}>
+            <CheckBox
+                title={elem.item}
+                checkedIcon='dot-circle-o'
+                uncheckedIcon='circle-o'
+                checked={this.isItemChecked(elem.item)}
+                onPress={evt => this.manageToggle(evt, elem.item)}
+            />
+            </View>)
+    }
+
     render(){
         return(
             <LinearGradient
                 colors={["#c36f09", "#eeba0b"]}
                 style={styles.linearGradient}
             >
-            <ScrollView>
-                {beerTastes.map((elem, idx) => {
-                    return  (<View key={idx}>
-                    <CheckBox
-                        title={elem}
-                        checkedIcon='dot-circle-o'
-                        uncheckedIcon='circle-o'
-                        checked={this.isItemChecked(elem)}
-                        onPress={evt => this.manageToggle(evt, elem)}
-                    />
-                    </View>)
-                })
-                }
-                <Button type='solid' buttonStyle={styles.attentionButton} title='Find Your beers!' onPress={() => this.try(this.state.checked)}/>
-            </ScrollView>
+            <Button type='solid' buttonStyle={styles.attentionButton} title='Find Your beers!' onPress={() => this.try(this.state.checked)}/>
+
+            <FlatList data={this.state.data.sort()}
+            renderItem={this.renderItem}
+            numColumns={2}
+            keyExtractor={(elem, index) => index.toString()}  />
     </LinearGradient>)
     }
 }
