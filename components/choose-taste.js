@@ -3,7 +3,7 @@ import { View, ScrollView } from 'react-native';
 import { CheckBox, Button } from 'react-native-elements'
 import { db } from '../server/db';
 import { LinearGradient } from "expo-linear-gradient";
-import styles from "../style/styles"
+import styles, { beerTastes } from "../style/styles"
 
 export default class Taste extends Component {
     constructor(props) {
@@ -56,12 +56,11 @@ export default class Taste extends Component {
                 beers: filtered
             })
         } catch (err)  {
-            console.err(err)
+            console.log(err)
         }
     }
 
     render(){
-        const beerTastes = ["sweet", "chocolate", "hoppy", "citrus","full-bodied","sour","spicy", "fruit","light","coffee","earthy", "tropical", "roast", "caramel", "coconut", "porter", "dark", "barley", "malt", "ipa", "grapefruit", "stout", "smokey", "banana", "vanilla", "bitter", "zest", "crispy", "lemon", "raspberries", "oak", "smooth", "bavaria"]
         return(
             <LinearGradient
                 colors={["#c36f09", "#eeba0b"]}
@@ -76,7 +75,6 @@ export default class Taste extends Component {
                         uncheckedIcon='circle-o'
                         checked={this.isItemChecked(elem)}
                         onPress={evt => this.manageToggle(evt, elem)}
-
                     />
                     </View>)
                 })

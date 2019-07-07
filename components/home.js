@@ -18,6 +18,9 @@ export default class Home extends React.Component {
             recommendedBeers: []
         }
     }
+    static navigationOptions = {
+        header: null
+    }
 
     componentDidMount(){
         this.getFrequentBeers()
@@ -26,6 +29,8 @@ export default class Home extends React.Component {
     }
 
     getFrequentBeers = async () => {
+        const user = this.props.navigation.getParam('user')
+        console.log(user)
         const userId = firebase.auth().currentUser.uid
         const userBeersRef = db.collection(`users/${userId}/beers`)
         try {
