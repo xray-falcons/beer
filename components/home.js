@@ -39,7 +39,7 @@ export default class Home extends React.Component {
         const userBeersRef = db.collection(`users/${this.state.userId}/beers`)
         try {
             let frequentBeers = []
-            const query = userBeersRef.orderBy("times", "desc").limit(3)
+            const query = userBeersRef.orderBy("times", "desc").limit(10)
             const querySnapshot = await query.get()
             querySnapshot.forEach(doc=>{
                 let beer = doc.data()
@@ -55,7 +55,7 @@ export default class Home extends React.Component {
         const userBeersRef = db.collection(`users/${this.state.userId}/beers`)
         try {
             let recentBeers = []
-            const query = userBeersRef.orderBy("lastHad", "desc").limit(3)
+            const query = userBeersRef.orderBy("lastHad", "desc").limit(10)
             const querySnapshot = await query.get()
             querySnapshot.forEach(doc=>{
                 let beer = doc.data()
@@ -95,24 +95,30 @@ export default class Home extends React.Component {
                         <ScrollView>
                             <View style={{marginTop: 80, justifyContent: "space-between"}}>
                                 <Text style={styles.titleText}>Your recent beers: </Text>
+                                <View style={{justifyContent: "space-between", marginTop: 15}}>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                     {this.state.recentBeers.length ? this.state.recentBeers.map(eachBeer =>
                                         <Beer key={eachBeer.beer.id} beer={eachBeer.beer} navigation={this.props.navigation}/>) : <Text style={styles.text}>Like some beers to show here!</Text>}
                                 </ScrollView>
+                                </View>
                             </View>
-                            <View>
+                            <View style={{marginTop: 10, justifyContent: "space-between"}}>
                                 <Text style={styles.titleText}>Top beers: </Text>
+                                <View style={{justifyContent: "space-between", marginTop: 15}}>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                     {this.state.frequentBeers.length ? this.state.frequentBeers.map(eachBeer =>
                                         <Beer key={eachBeer.beer.id} beer={eachBeer.beer} navigation={this.props.navigation}/>) : <Text style={styles.text}>Like some beers to show here!</Text>}
                                 </ScrollView>
+                                </View>
                             </View>
-                            <View>
+                            <View style={{marginTop: 10, justifyContent: "space-between"}}>
                                 <Text style={styles.titleText}>Top picks for you: </Text>
+                                <View style={{justifyContent: "space-between", marginTop: 15}}>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                     {this.state.recommendedBeers.length ? this.state.recommendedBeers.map(eachBeer =>
                                         <Beer key={eachBeer.id} beer={eachBeer} />) : <Text style={styles.text}>Like some beers to show here!</Text>}
                                 </ScrollView>
+                                </View>
                             </View>
                         </ScrollView>
             </LinearGradient>

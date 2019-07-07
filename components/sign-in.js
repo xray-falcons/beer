@@ -69,11 +69,12 @@ export default class SignInView extends Component {
                                onChangeText={(password) => this.setState({password})}/>
                 </View>
 
-                <TouchableHighlight style={[styles.authButtonContainer, styles.authButton]} onPress={() => this.signIn(this.state.email, this.state.password)}>
+                <TouchableHighlight underlayColor='red' style={[styles.authButtonContainer, styles.authButton]} onPress={() => this.signIn(this.state.email, this.state.password)}>
                     <Text style={styles.authText}>Sign in</Text>
                 </TouchableHighlight>
 
-                <TouchableHighlight style={[styles.authButtonContainer, styles.authButton]} onPress={() => logInWithFacebook()}>
+                <TouchableHighlight     underlayColor='red'
+                                        style={[styles.authButtonContainer, styles.authButton]} onPress={() => logInWithFacebook()}>
                     <Text style={styles.authText}>Sign in with Facebook</Text>
                 </TouchableHighlight>
             </KeyboardAvoidingView>

@@ -46,7 +46,6 @@ export default class SignUpView extends Component {
             this.props.navigation.navigate('Dashboard')
         } catch (err) {
             console.log(err)
-
         }
     }
     render() {
@@ -60,7 +59,6 @@ export default class SignUpView extends Component {
                 <Image source={require('../style/StumblrLogo.png')} style={styles.image}
             />
                 <View style={styles.authInputContainer}>
-
                     <Image style={styles.authInputIcon} source={{uri: 'https://png.icons8.com/male-user/ultraviolet/50/3498db'}}/>
                     <TextInput style={styles.authInputs}
                                placeholder="Full name"
@@ -68,7 +66,6 @@ export default class SignUpView extends Component {
                                underlineColorAndroid='transparent'
                                onChangeText={(fullName) =>  this.setState({fullName})}/>
                 </View>
-
                 <View style={styles.authInputContainer}>
                     <Image style={styles.authInputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
                     <TextInput style={styles.authInputs}
@@ -77,7 +74,6 @@ export default class SignUpView extends Component {
                                underlineColorAndroid='transparent'
                                onChangeText={(email) => this.setState({email})}/>
                 </View>
-
                 <View style={styles.authInputContainer}>
                     <Image style={styles.authInputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
                     <TextInput style={styles.authInputs}
@@ -86,16 +82,13 @@ export default class SignUpView extends Component {
                                underlineColorAndroid='transparent'
                                onChangeText={(password) => this.setState({password})}/>
                 </View>
-
-                <TouchableHighlight style={[styles.authButtonContainer, styles.authButton]} onPress={() => this.signUp(this.state.email, this.state.password, this.state.fullName)}>
+                <TouchableHighlight underlayColor='red' style={[styles.authButtonContainer, styles.authButton]} onPress={() => this.signUp(this.state.email, this.state.password, this.state.fullName)}>
                     <Text style={styles.authText}>Sign up</Text>
                 </TouchableHighlight>
-
-                <TouchableHighlight style={[styles.authButtonContainer, styles.authButton]} onPress={() => logInWithFacebook()}>
+                <TouchableHighlight underlayColor='red' style={[styles.authButtonContainer, styles.authButton]} onPress={() => logInWithFacebook()}>
                     <Text style={styles.authText}>Sign up with Facebook</Text>
                 </TouchableHighlight>
-
-                <TouchableHighlight style={[styles.authButtonContainer, styles.authButton]} onPress={() => this.props.navigation.navigate('SignInScreen')
+                <TouchableHighlight underlayColor='red' style={[styles.authButtonContainer, styles.authButton]} onPress={() => this.props.navigation.navigate('SignInScreen')
                 }>
                     <Text style={styles.authText}>Have an account? Sign in</Text>
                 </TouchableHighlight>
