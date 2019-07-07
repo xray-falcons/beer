@@ -82,6 +82,11 @@ export default StyleSheet.create({
         color:"#530",
         padding:15,
     },
+    iconButtonPressed: {
+        fontSize:36,
+        color:"#eee",
+        padding:15,
+    },
     image: {
         width: 200,
         height: 200,

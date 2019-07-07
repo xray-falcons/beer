@@ -11,12 +11,15 @@ import {LinearGradient} from "expo-linear-gradient";
 
 export default class SingleBeer extends Component {
 
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state={
-      text:""
+      text:"",
+      like:false,
+      dislike:false
     }
   }
+
 
     render() {
         const userId = firebase.auth().currentUser.uid
@@ -34,13 +37,16 @@ export default class SingleBeer extends Component {
             <Image source={{ uri: beer.labels.large }} style={styles.image} />
             <Text style={styles.text}>{beer.description}</Text>
             <View style={styles.buttonRow}>
-              <Icon name="thumbs-up" style={styles.iconButton} onPress={()=>{
-                  db.collection("users").doc(`${userId}`).collection("beers").doc(`${beer.id}`).set({
-                  "name":beer.name,"rating":1, "beer":beer}, {"merge":true})
-                }} />
-              <Icon name="thumbs-down" style={styles.iconButton} onPress={()=>{
+              <Icon name="thumbs-up" style={this.state.like ? styles.iconButtonPressed : styles.iconButton} onPress={()=>{
                 db.collection("users").doc(`${userId}`).collection("beers").doc(`${beer.id}`).set({
-                "name":beer.name,"rating":-1, "beer":beer}, {"merge":true})
+                  "name":beer.name,"rating":1, "beer":beer
+                  }, {"merge":true});
+                  this.setState({like:true, dislike:false})
+              }} />
+              <Icon name="thumbs-down" style={this.state.dislike ?styles.iconButtonPressed : styles.iconButton} onPress={()=>{
+                db.collection("users").doc(`${userId}`).collection("beers").doc(`${beer.id}`).set({
+                  "name":beer.name,"rating":-1, "beer":beer}, {"merge":true});
+                  this.setState({like:false, dislike:true})
               }} />
               <Icon name="beer" style={styles.iconButton} onPress={()=>{
                   const beerRef = db.doc(`users/${userId}/beers/${beer.id}`)
