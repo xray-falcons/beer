@@ -8,6 +8,11 @@ import MapView, { Marker,  } from 'react-native-maps';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
+const deltas = {
+    latitudeDelta: 0.0002,
+    longitudeDelta: 0.0091
+};
+
 export default class Map extends Component {
     constructor(props) {
         super()
@@ -17,12 +22,7 @@ export default class Map extends Component {
         };
     }
     componentWillMount() {
-        // if (Platform.OS === 'android') {
-        //     this.setState({
-        //         errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
-        //     });
-        // } else {
-            this._getLocationAsync();
+        this._getLocationAsync();
 
     }
 
@@ -33,16 +33,14 @@ export default class Map extends Component {
                 errorMessage: 'Permission to access location was denied',
             });
         }
-
         let location = await Location.getCurrentPositionAsync({});
         const region = {
             latitude: location.coords.latitude,
             longitude: location.coords.longitude,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421
-
+            ...deltas
         };
-        await this.setState({ region });    };
+        await this.setState({ region });
+    };
 
     static navigationOptions = {
         header: null
@@ -53,10 +51,11 @@ export default class Map extends Component {
 
         return (
             <MapView
-                style={{flex: 1}}
+                style={styles1.container}
                 region={this.state.region}
-                showsUserLocation
-                showsMyLocationButton
+                showsUserLocation={true}
+                showsMyLocationButton={false}
+                zoomEnabled = {true}
 
             />
         );
@@ -64,7 +63,7 @@ export default class Map extends Component {
 }
 const styles1 = {
     container: {
-        width: "100%",
-        height: "80%"
+        marginTop: 50,
+        flex: 1
 }
 }
