@@ -13,7 +13,7 @@ export default class BeerListSearch extends Component {
     }
 
     static navigationOptions = {
-        headerTransparent: true
+        header: null
     }
 
     renderItem = ({item}) => {

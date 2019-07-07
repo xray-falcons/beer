@@ -41,7 +41,7 @@ export default class SingleBeer extends Component {
                   db.collection("users").doc(`${userId}`).collection("beers").doc(`${beer.id}`).set({
                   "name":beer.name,"rating":1, "beer":beer}, {"merge":true})
                 }} />
-              <Icon name="thumbs-down" style={styles.iconButton} onPress={()=>{
+              <Icon name="thumbs-down" color='red' style={styles.iconButton} onPress={()=>{
                 db.collection("users").doc(`${userId}`).collection("beers").doc(`${beer.id}`).set({
                 "name":beer.name,"rating":-1, "beer":beer}, {"merge":true})
               }} />

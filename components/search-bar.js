@@ -13,7 +13,7 @@ export default class Search extends React.Component {
         this.beers = [];
     }
     static navigationOptions = {
-        headerTransparent: true,
+        header: null
     }
 
     try = async (search) => {
