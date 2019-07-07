@@ -19,8 +19,11 @@ export default class Home extends React.Component {
         }
     }
     static navigationOptions = {
-        header: null
-    }
+        headerTitle: "",
+        headerRight: (
+            <Button type="solid" buttonStyle={styles.attentionButton} title='Logout' onPress={() => firebase.auth().signOut()}/>
+        ),
+    };
 
     componentDidMount(){
         this.getFrequentBeers()
@@ -112,7 +115,6 @@ export default class Home extends React.Component {
                                         <Beer key={eachBeer.id} beer={eachBeer} />) : <Text style={styles.text}>Like some beers to show here!</Text>}
                                 </ScrollView>
                             </View>
-                            <Button type="solid" buttonStyle={styles.attentionButton} title='Logout' onPress={() => firebase.auth().signOut()}/>
                         </ScrollView>
             </LinearGradient>
         );

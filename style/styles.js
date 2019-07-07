@@ -154,6 +154,9 @@ export default StyleSheet.create({
     },
     titleText:{
         fontSize: 26,
+        alignItems: 'center',
+        textAlign: 'center',
+
     },
     textBold:{
         fontWeight: "bold",

@@ -53,16 +53,13 @@ export default class SignInView extends Component {
 
             } else {
                 // type === 'cancel'
+                Alert.alert('Oops!', 'Something went wrong...');
+
             }
         } catch ({ message }) {
             alert(`Facebook Login Error: ${message}`);
         }
     }
-
-    onClickListener = (viewId) => {
-        Alert.alert("Alert", "Button pressed "+viewId);
-    }
-
 
     render() {
         return (
