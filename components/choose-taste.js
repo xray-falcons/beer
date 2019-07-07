@@ -74,8 +74,9 @@ export default class Taste extends Component {
                 colors={["#c36f09", "#eeba0b"]}
                 style={styles.linearGradient}
             >
+            <Button type='solid' buttonStyle={styles.attentionButton} title='Find Your beers!' onPress={() => this.try(this.state.checked)}/>
             <ScrollView>
-                {beerTastes.map((elem, idx) => {
+                {beerTastes.sort().map((elem, idx) => {
                     return  (<View key={idx}>
                     <CheckBox
                         title={elem}
@@ -87,7 +88,6 @@ export default class Taste extends Component {
                     </View>)
                 })
                 }
-                <Button type='solid' buttonStyle={styles.attentionButton} title='Find Your beers!' onPress={() => this.try(this.state.checked)}/>
             </ScrollView>
     </LinearGradient>)
     }
