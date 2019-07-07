@@ -68,7 +68,6 @@ export default class Taste extends Component {
     }
 
     renderItem = (elem, idx) => {
-        console.log('elem', elem.item, 'type', typeof elem.item)
         return  (<View key={idx} style={{width: 187}}>
             <CheckBox
                 title={elem.item}
