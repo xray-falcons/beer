@@ -20,10 +20,22 @@ export default class SingleBeer extends Component {
     }
   }
 
+  componentDidMount = async () =>{
+    const userId = firebase.auth().currentUser.uid
+    const beer = this.props.navigation.getParam('beer')
+    const beerQuery = await db.collection("users").doc(`${userId}`).collection("beers").doc(`${beer.id}`).get()
+    if(beerQuery){
+      if(beerQuery.data().rating === 1){
+        this.setState({like:true, dislike:false})
+      } else if(beerQuery.data().rating === -1){
+        this.setState({like:false, dislike:true})
+      }
+    }
+  }
 
-    render() {
+    render(){
         const userId = firebase.auth().currentUser.uid
-        const beer = this.props.navigation.getParam('beer')
+        const beer = this.props.navigation.getParam('beer');
         return (
           <LinearGradient
                 colors={["#c36f09", "#eeba0b"]}
