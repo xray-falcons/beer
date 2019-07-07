@@ -50,9 +50,10 @@ export default class Taste extends Component {
             let filtered = beerArray.filter(beer => {
                 for (let j = 1; j < tastes.length; j ++) {
                     console.log(tastes[j])
-                    for (let i = 0; i < beer.taste.length; i ++) {
-                        if (beer.taste[i] === tastes[j]){
+                    for (let i = 0; i < beer.taste.length; i++) {
+                        if (beer.taste[i] === tastes[j]) {
                             return beer
+                        }
                     }
                 }
             })
