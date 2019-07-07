@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {View, ScrollView} from 'react-native';
 import {Button} from "react-native-elements"
 import {LinearGradient} from "expo-linear-gradient";
-import styles from "../style/styles";
+import styles, { beerStyles } from "../style/styles";
 
 export default class Category extends Component {
 
@@ -11,7 +11,6 @@ export default class Category extends Component {
     }
 
     render(){
-        const beerStyles = ["British Origin Ales", "Irish Origin Ales", "North American Origin Ales","German Origin Ales", "Belgian And French Origin Ales","International Ale Styles","European-germanic Lager","North American Lager", "International Styles","Hybrid/mixed Beer","Mead, Cider, & Perry","Malternative Beverages"]
         return (
             <LinearGradient
                 colors={["#c36f09", "#eeba0b"]}

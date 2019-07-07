@@ -1,4 +1,4 @@
-import {StyleSheet} from "react-native";
+import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
     attentionButton:{
@@ -107,7 +107,7 @@ export default StyleSheet.create({
         resizeMode: 'cover'
     },
     itemImageSmall:{
-        width:"100%",
+        width: 100,
         height: 100,
         resizeMode: 'cover'
     },
@@ -132,6 +132,9 @@ export default StyleSheet.create({
     logo: {
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    marginTop: {
+        marginTop: 70
     },
     notebox:{
         height:100,
@@ -159,6 +162,9 @@ export default StyleSheet.create({
     },
     titleText:{
         fontSize: 26,
+        alignItems: 'center',
+        textAlign: 'center',
+
     },
     textBold:{
         fontWeight: "bold",
@@ -167,3 +173,9 @@ export default StyleSheet.create({
         fontSize:22
     },
 });
+
+
+
+
+export const beerStyles = ["British Origin Ales", "Irish Origin Ales", "North American Origin Ales","German Origin Ales", "Belgian And French Origin Ales","International Ale Styles","European-germanic Lager","North American Lager", "International Styles","Hybrid/mixed Beer","Mead, Cider, & Perry","Malternative Beverages"]
+export const beerTastes = ["sweet", "chocolate", "hoppy", "citrus","full-bodied","sour","spicy", "fruit","light","coffee","earthy", "tropical", "roast", "caramel", "coconut", "porter", "dark", "barley", "malt", "ipa", "grapefruit", "stout", "smokey", "banana", "vanilla", "bitter", "zest", "crispy", "lemon", "raspberries", "oak", "smooth", "bavaria"]

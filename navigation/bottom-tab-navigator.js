@@ -10,7 +10,7 @@ const getTabBarIcon = (navigation, focused, tintColor) => {
     let iconName;
     if (routeName === "Home") {
         iconName = "ios-home";
-    } else if (routeName === "Choose your beer!") {
+    } else if (routeName === "Choose a beer!") {
         iconName = "ios-beer";
     } else if (routeName === "I feel lucky!") {
         iconName = "ios-heart";
@@ -26,7 +26,7 @@ const BottomTabNavigator = createBottomTabNavigator(
     {
         "I feel lucky!": RandomNavigator,
         Home: HomeNavigator,
-        "Choose your beer!": TopTabNavigator,
+        "Choose a beer!": TopTabNavigator,
         Search: SearchNavigator,
     },
     {

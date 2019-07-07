@@ -4,6 +4,7 @@ import { Card } from 'react-native-elements'
 import { LinearGradient } from "expo-linear-gradient";
 import Beer from './beer'
 import styles from "../style/styles"
+import View from "react-native-web/dist/exports/View";
 
 
 export default class BeerListSearch extends Component {
@@ -12,7 +13,7 @@ export default class BeerListSearch extends Component {
     }
 
     static navigationOptions = {
-        header: null,
+        header: null
     }
 
     renderItem = ({item}) => {
@@ -31,6 +32,7 @@ export default class BeerListSearch extends Component {
                 style={styles.linearGradient}
             >
             <FlatList  data={beers}
+                       style={styles.marginTop}
                        renderItem={this.renderItem}
                        numColumns={2}
                        keyExtractor={(item, index) => index.toString()}

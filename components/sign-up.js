@@ -9,10 +9,10 @@ import {
     Alert,
     KeyboardAvoidingView
 } from 'react-native';
-import * as Facebook from 'expo-facebook';
 import {db} from '../server/db'
 import {LinearGradient} from "expo-linear-gradient";
-import styles from "../style/styles"
+import styles from "../style/styles";
+import logInWithFacebook from "./facebook-signin";
 
 export default class SignUpView extends Component {
 
@@ -39,38 +39,15 @@ export default class SignUpView extends Component {
             return;
         }
         try {
-            email = email.trim().toLowerCase()
+            email = email.trim().toLowerCase();
+            fullName = fullName.trim();
             let { user } = await firebase.auth().createUserWithEmailAndPassword(email, password)
-            await db.collection('users').doc(user.uid).set({email: this.state.email, fullName: this.state.fullName});
+            await db.collection('users').doc(user.uid).set({email: email, fullName: fullName});
             this.props.navigation.navigate('Dashboard')
         } catch (err) {
             console.log(err)
-
         }
     }
-
-    async logInWithFacebook() {
-        try {
-            const {
-                type,
-                token,
-            } = await Facebook.logInWithReadPermissionsAsync('463520067716247', {
-                permissions: ['public_profile'],
-            });
-            if (type === 'success') {
-                // Get the user's name using Facebook's Graph API
-                //const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
-                Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
-                this.props.navigation.navigate('Dashboard')
-
-            } else {
-                // type === 'cancel'
-            }
-        } catch ({ message }) {
-            alert(`Facebook Login Error: ${message}`);
-        }
-    }
-
     render() {
         return (
             <LinearGradient
@@ -82,7 +59,6 @@ export default class SignUpView extends Component {
                 <Image source={require('../style/StumblrLogo.png')} style={styles.image}
             />
                 <View style={styles.authInputContainer}>
-
                     <Image style={styles.authInputIcon} source={{uri: 'https://png.icons8.com/male-user/ultraviolet/50/3498db'}}/>
                     <TextInput style={styles.authInputs}
                                placeholder="Full name"
@@ -90,7 +66,6 @@ export default class SignUpView extends Component {
                                underlineColorAndroid='transparent'
                                onChangeText={(fullName) =>  this.setState({fullName})}/>
                 </View>
-
                 <View style={styles.authInputContainer}>
                     <Image style={styles.authInputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
                     <TextInput style={styles.authInputs}
@@ -99,7 +74,6 @@ export default class SignUpView extends Component {
                                underlineColorAndroid='transparent'
                                onChangeText={(email) => this.setState({email})}/>
                 </View>
-
                 <View style={styles.authInputContainer}>
                     <Image style={styles.authInputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
                     <TextInput style={styles.authInputs}
@@ -108,16 +82,13 @@ export default class SignUpView extends Component {
                                underlineColorAndroid='transparent'
                                onChangeText={(password) => this.setState({password})}/>
                 </View>
-
-                <TouchableHighlight style={[styles.authButtonContainer, styles.authButton]} onPress={() => this.signUp(this.state.email, this.state.password, this.state.fullName)}>
+                <TouchableHighlight underlayColor='red' style={[styles.authButtonContainer, styles.authButton]} onPress={() => this.signUp(this.state.email, this.state.password, this.state.fullName)}>
                     <Text style={styles.authText}>Sign up</Text>
                 </TouchableHighlight>
-
-                <TouchableHighlight style={[styles.authButtonContainer, styles.authButton]} onPress={() => this.logInWithFacebook()}>
+                <TouchableHighlight underlayColor='red' style={[styles.authButtonContainer, styles.authButton]} onPress={() => logInWithFacebook()}>
                     <Text style={styles.authText}>Sign up with Facebook</Text>
                 </TouchableHighlight>
-
-                <TouchableHighlight style={[styles.authButtonContainer, styles.authButton]} onPress={() => this.props.navigation.navigate('SignInScreen')
+                <TouchableHighlight underlayColor='red' style={[styles.authButtonContainer, styles.authButton]} onPress={() => this.props.navigation.navigate('SignInScreen')
                 }>
                     <Text style={styles.authText}>Have an account? Sign in</Text>
                 </TouchableHighlight>

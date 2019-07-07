@@ -16,7 +16,8 @@ export default class BeerList extends Component{
     }
 
     static navigationOptions = {
-        header: null
+        header:  null,
+        headerTransparent: true,
     }
 
     componentDidMount(){

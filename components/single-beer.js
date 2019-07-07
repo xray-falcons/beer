@@ -19,6 +19,9 @@ export default class SingleBeer extends Component {
       dislike:false
     }
   }
+    static navigationOptions = {
+        headerTransparent: true
+        }
 
   componentDidMount = async () =>{
     const userId = firebase.auth().currentUser.uid
@@ -42,7 +45,7 @@ export default class SingleBeer extends Component {
                 style={styles.linearGradient}
             >
         <View style={styles.container}>
-          <ScrollView>
+          <ScrollView style={styles.marginTop}>
             <Text style={styles.headText}>{beer.name}</Text>
             <Text style={styles.textBold}>{beer.style.category.name}</Text>
             <Text style={styles.textBold}>abv: {beer.abv} ibu: {beer.ibu}</Text>
