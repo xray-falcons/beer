@@ -33,7 +33,7 @@
     "redux-firestore": "^0.8.0",
     "redux-thunk": "^2.3.0",
     "react-native-gesture-handler": "^1.1.0",
-    "expo-facebook": "latest"
+    "expo-facebook": "5.0.1"
   },
   "devDependencies": {
     "babel-preset-expo": "^5.1.1"
