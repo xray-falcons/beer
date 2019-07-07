@@ -25,9 +25,9 @@ const getBars = userLocation => {
                     coords: business.coordinates,
                     // rating: business.rating,
                     // categories: business.categories,
-                    // address: business.location.address1,
-                    // price: business.price,
-                    // hours: business.hours
+                    address: business.location.address1,
+                    price: business.price,
+                    hours: business.hours
 
                 }
             })

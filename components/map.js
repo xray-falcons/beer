@@ -29,7 +29,7 @@ export default class Map extends Component {
     }
     renderMarkers() {
         return this.state.bars.map((place, i) => (
-            <Marker key={i} title={place.name} coordinate={place.coords} />
+            <Marker key={i} title={place.name} coordinate={place.coords} subtitle={place.hours} description={place.price} />
         ))
     }
     getBars = async () => {
