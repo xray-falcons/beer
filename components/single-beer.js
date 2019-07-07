@@ -85,11 +85,11 @@ export default class SingleBeer extends Component {
             <Text style={styles.textBold}>Contribute your notes here!</Text>
             <Text style={styles.text}>{this.state.notes || null}</Text>
             <TextInput style={styles.notebox} placeholder="Your notes..." onChangeText={(text)=>this.setState({text})} value={this.state.text}/>
-            <Button buttonStyle={styles.attentionButton} title="Submit" onPress={()=>{
+            <Button buttonStyle={styles.attentionButton} title="Submit" onPress={this.state.text?()=>{
               let beerRef = db.doc(`users/${userId}/beers/${beer.id}`)
               beerRef.set({"userNotes":this.state.text, "beer":beer }, {"merge":true})
               this.setState({text:""})
-            }} />
+            }:null} />
           </ScrollView>
         </View>
       </LinearGradient>
