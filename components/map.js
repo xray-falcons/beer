@@ -12,18 +12,18 @@ export default class Map extends Component {
     constructor(props) {
         super()
         this.state = {
-            location: null,
+            region: null,
             errorMessage: null,
         };
     }
     componentWillMount() {
-        if (Platform.OS === 'android') {
-            this.setState({
-                errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
-            });
-        } else {
+        // if (Platform.OS === 'android') {
+        //     this.setState({
+        //         errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
+        //     });
+        // } else {
             this._getLocationAsync();
-        }
+
     }
 
     _getLocationAsync = async () => {
@@ -35,8 +35,14 @@ export default class Map extends Component {
         }
 
         let location = await Location.getCurrentPositionAsync({});
-        this.setState({ location });
-    };
+        const region = {
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421
+
+        };
+        await this.setState({ region });    };
 
     static navigationOptions = {
         header: null
@@ -46,7 +52,13 @@ export default class Map extends Component {
 
 
         return (
-            <MapView style={{flex: 1}} />
+            <MapView
+                style={{flex: 1}}
+                region={this.state.region}
+                showsUserLocation
+                showsMyLocationButton
+
+            />
         );
     }
 }
