@@ -11,19 +11,34 @@ import {LinearGradient} from "expo-linear-gradient";
 
 export default class SingleBeer extends Component {
 
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state={
-      text:""
+      text:"",
+      like:false,
+      dislike:false
     }
   }
     static navigationOptions = {
         headerTransparent: true
         }
 
-    render() {
+  componentDidMount = async () =>{
+    const userId = firebase.auth().currentUser.uid
+    const beer = this.props.navigation.getParam('beer')
+    const beerQuery = await db.collection("users").doc(`${userId}`).collection("beers").doc(`${beer.id}`).get()
+    if(beerQuery){
+      if(beerQuery.data().rating === 1){
+        this.setState({like:true, dislike:false})
+      } else if(beerQuery.data().rating === -1){
+        this.setState({like:false, dislike:true})
+      }
+    }
+  }
+
+    render(){
         const userId = firebase.auth().currentUser.uid
-        const beer = this.props.navigation.getParam('beer')
+        const beer = this.props.navigation.getParam('beer');
         return (
           <LinearGradient
                 colors={["#c36f09", "#eeba0b"]}
@@ -37,13 +52,16 @@ export default class SingleBeer extends Component {
             <Image source={{ uri: beer.labels.large }} style={styles.image} />
             <Text style={styles.text}>{beer.description}</Text>
             <View style={styles.buttonRow}>
-              <Icon name="thumbs-up" style={styles.iconButton} onPress={()=>{
-                  db.collection("users").doc(`${userId}`).collection("beers").doc(`${beer.id}`).set({
-                  "name":beer.name,"rating":1, "beer":beer}, {"merge":true})
-                }} />
-              <Icon name="thumbs-down" color='red' style={styles.iconButton} onPress={()=>{
+              <Icon name="thumbs-up" style={this.state.like ? styles.iconButtonPressed : styles.iconButton} onPress={()=>{
                 db.collection("users").doc(`${userId}`).collection("beers").doc(`${beer.id}`).set({
-                "name":beer.name,"rating":-1, "beer":beer}, {"merge":true})
+                  "name":beer.name,"rating":1, "beer":beer
+                  }, {"merge":true});
+                  this.setState({like:true, dislike:false})
+              }} />
+              <Icon name="thumbs-down" style={this.state.dislike ?styles.iconButtonPressed : styles.iconButton} onPress={()=>{
+                db.collection("users").doc(`${userId}`).collection("beers").doc(`${beer.id}`).set({
+                  "name":beer.name,"rating":-1, "beer":beer}, {"merge":true});
+                  this.setState({like:false, dislike:true})
               }} />
               <Icon name="beer" style={styles.iconButton} onPress={()=>{
                   const beerRef = db.doc(`users/${userId}/beers/${beer.id}`)
