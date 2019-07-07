@@ -9,10 +9,10 @@ import {
     Alert,
     KeyboardAvoidingView
 } from 'react-native';
-import * as Facebook from 'expo-facebook';
 import {db} from '../server/db'
 import {LinearGradient} from "expo-linear-gradient";
-import styles from "../style/styles"
+import styles from "../style/styles";
+import logInWithFacebook from "./facebook-signin";
 
 export default class SignUpView extends Component {
 
@@ -41,36 +41,13 @@ export default class SignUpView extends Component {
         try {
             email = email.trim().toLowerCase()
             let { user } = await firebase.auth().createUserWithEmailAndPassword(email, password)
-            await db.collection('users').doc(user.uid).set({email: this.state.email, fullName: this.state.fullName});
+            await db.collection('users').doc(user.uid).set({email: email, fullName: this.state.fullName});
             this.props.navigation.navigate('Dashboard')
         } catch (err) {
             console.log(err)
 
         }
     }
-
-    async logInWithFacebook() {
-        try {
-            const {
-                type,
-                token,
-            } = await Facebook.logInWithReadPermissionsAsync('463520067716247', {
-                permissions: ['public_profile'],
-            });
-            if (type === 'success') {
-                // Get the user's name using Facebook's Graph API
-                //const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
-                Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
-                this.props.navigation.navigate('Dashboard')
-
-            } else {
-                // type === 'cancel'
-            }
-        } catch ({ message }) {
-            alert(`Facebook Login Error: ${message}`);
-        }
-    }
-
     render() {
         return (
             <LinearGradient
@@ -113,7 +90,7 @@ export default class SignUpView extends Component {
                     <Text style={styles.authText}>Sign up</Text>
                 </TouchableHighlight>
 
-                <TouchableHighlight style={[styles.authButtonContainer, styles.authButton]} onPress={() => this.logInWithFacebook()}>
+                <TouchableHighlight style={[styles.authButtonContainer, styles.authButton]} onPress={() => logInWithFacebook()}>
                     <Text style={styles.authText}>Sign up with Facebook</Text>
                 </TouchableHighlight>
 

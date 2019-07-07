@@ -10,7 +10,6 @@ import SignUpView from "../components/sign-up";
 import SignInView from "../components/sign-in";
 import Search from "../components/search-bar";
 import BeerListSearch from "../components/beer-list-search";
-import Beer from "../components/beer";
 import Random from "../components/random";
 
 //Add navigators with screens in this file

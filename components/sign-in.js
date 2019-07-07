@@ -9,9 +9,9 @@ import {
     Alert,
     KeyboardAvoidingView
 } from 'react-native';
-import * as Facebook from 'expo-facebook';
 import {LinearGradient} from "expo-linear-gradient";
-import styles from "../style/styles"
+import styles from "../style/styles";
+import logInWithFacebook from "./facebook-signin";
 
 
 export default class SignInView extends Component {
@@ -25,41 +25,21 @@ export default class SignInView extends Component {
 
     }
     static navigationOptions = {
-        header: null
+        headerTransparent: true,
+        headerTitle: 'Back  to sign-up',
     }
 
-    signIn(email, password) {
+    signIn  = async (email, password) =>  {
+        email = email.toLowerCase().trim();
+        console.log(email, password);
         try {
-            firebase.auth().signInWithEmailAndPassword(email, password)
-            this.props.navigation.navigate('Dashboard')
-        } catch (err) {
-            console.log(err)
-        }
-    }
-
-    async logInWithFacebook() {
-        try {
-            const {
-                type,
-                token,
-            } = await Facebook.logInWithReadPermissionsAsync('463520067716247', {
-                permissions: ['public_profile'],
-            });
-            if (type === 'success') {
-                // Get the user's name using Facebook's Graph API
-                const response = await fetch(`https://graph.facebook.com/me?access_token=${token}`);
-                Alert.alert('Logged in!', `Hi ${(await response.json()).name}!`);
-                this.props.navigation.navigate('Dashboard')
-
-            } else {
-                // type === 'cancel'
-                Alert.alert('Oops!', 'Something went wrong...');
-
-            }
-        } catch ({ message }) {
-            alert(`Facebook Login Error: ${message}`);
-        }
-    }
+           await firebase.auth().signInWithEmailAndPassword(email, password).catch(function (err) {
+                Alert.alert('Oh no!', "Password or email is incorrect")
+            })
+        } catch (e) {
+            Alert.alert('Oh no!', "Password or email is incorrect")
+            console.error("big hu?", e);
+        }}
 
     render() {
         return (
@@ -94,7 +74,7 @@ export default class SignInView extends Component {
                     <Text style={styles.authText}>Sign in</Text>
                 </TouchableHighlight>
 
-                <TouchableHighlight style={[styles.authButtonContainer, styles.authButton]} onPress={() => this.logInWithFacebook()}>
+                <TouchableHighlight style={[styles.authButtonContainer, styles.authButton]} onPress={() => logInWithFacebook()}>
                     <Text style={styles.authText}>Sign in with Facebook</Text>
                 </TouchableHighlight>
             </KeyboardAvoidingView>

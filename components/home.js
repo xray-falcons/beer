@@ -19,6 +19,7 @@ export default class Home extends React.Component {
         }
     }
     static navigationOptions = {
+        headerTransparent: true,
         headerTitle: "",
         headerRight: (
             <Button type="solid" buttonStyle={styles.attentionButton} title='Logout' onPress={() => firebase.auth().signOut()}/>
@@ -94,7 +95,7 @@ export default class Home extends React.Component {
                 colors={["#c36f09", "#eeba0b"]}
                 style={styles.linearGradient}>
                         <ScrollView>
-                            <View>
+                            <View style={{marginTop: 80}}>
                                 <Text style={styles.titleText}>Your recent beers: </Text>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                     {this.state.recentBeers.length ? this.state.recentBeers.map(eachBeer =>
