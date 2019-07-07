@@ -38,7 +38,7 @@ export default class Home extends React.Component {
             })
             this.setState({frequentBeers})
         } catch(err) {
-            console.err(err)
+            console.log(err)
         }
     }
 
@@ -55,7 +55,7 @@ export default class Home extends React.Component {
             })
             this.setState({recentBeers})
         } catch(err) {
-            console.err(err)
+            console.log(err)
         }
     }
 
@@ -76,7 +76,7 @@ export default class Home extends React.Component {
             })
             this.setState({recommendedBeers})
         } catch(err) {
-            console.err(err)
+            console.log(err)
         }
     }
 
