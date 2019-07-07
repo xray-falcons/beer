@@ -31,7 +31,6 @@ export default class SignInView extends Component {
 
     signIn  = async (email, password) =>  {
         email = email.toLowerCase().trim();
-        console.log(email, password);
         try {
            await firebase.auth().signInWithEmailAndPassword(email, password).catch(function (err) {
                 Alert.alert('Oh no!', "Password or email is incorrect")

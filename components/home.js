@@ -15,7 +15,8 @@ export default class Home extends React.Component {
         this.state = {
             recentBeers: [],
             frequentBeers: [],
-            recommendedBeers: []
+            recommendedBeers: [],
+            userId: ''
         }
     }
     static navigationOptions = {
@@ -26,17 +27,16 @@ export default class Home extends React.Component {
         ),
     };
 
-    componentDidMount(){
+    componentDidMount = async () => {
+        const userId = await firebase.auth().currentUser.uid
+        this.setState({userId: userId})
         this.getFrequentBeers()
         this.getRecentBeers()
         this.getRecommendations()
     }
 
     getFrequentBeers = async () => {
-        const user = this.props.navigation.getParam('user')
-        console.log(user)
-        const userId = firebase.auth().currentUser.uid
-        const userBeersRef = db.collection(`users/${userId}/beers`)
+        const userBeersRef = db.collection(`users/${this.state.userId}/beers`)
         try {
             let frequentBeers = []
             const query = userBeersRef.orderBy("times", "desc").limit(3)
@@ -52,8 +52,7 @@ export default class Home extends React.Component {
     }
 
     getRecentBeers = async () => {
-        const userId = firebase.auth().currentUser.uid
-        const userBeersRef = db.collection(`users/${userId}/beers`)
+        const userBeersRef = db.collection(`users/${this.state.userId}/beers`)
         try {
             let recentBeers = []
             const query = userBeersRef.orderBy("lastHad", "desc").limit(3)
@@ -69,11 +68,10 @@ export default class Home extends React.Component {
     }
 
     getRecommendations = async () => {
-        const userId = firebase.auth().currentUser.uid
         const recommendedBeers = []
         try {
             const beers = await db.collection('beers')
-            const userQuery = await db.doc(`users/${userId}`).get()
+            const userQuery = await db.doc(`users/${this.state.userId}`).get()
             const preferences = userQuery.data().preferences
             const beerQuery = beers
                 .where('taste', 'array-contains', preferences[1])
@@ -95,7 +93,7 @@ export default class Home extends React.Component {
                 colors={["#c36f09", "#eeba0b"]}
                 style={styles.linearGradient}>
                         <ScrollView>
-                            <View style={{marginTop: 80}}>
+                            <View style={{marginTop: 80, justifyContent: "space-between"}}>
                                 <Text style={styles.titleText}>Your recent beers: </Text>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                     {this.state.recentBeers.length ? this.state.recentBeers.map(eachBeer =>

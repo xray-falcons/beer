@@ -128,6 +128,9 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    marginTop: {
+        marginTop: 70
+    },
     notebox:{
         height:100,
         backgroundColor:"#f0f0f0",

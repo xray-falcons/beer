@@ -43,6 +43,7 @@ export default class Taste extends Component {
                 let beer = doc.data();
                 beerArray.push(beer)
             });
+            console.log(beerArray.length)
             let filtered = beerArray.filter(beer => {
                 for (let i = 0; i < beer.taste.length; i ++) {
                     for (let j = 1; j < tastes.length; j ++) {
@@ -53,7 +54,7 @@ export default class Taste extends Component {
                 }
             })
             this.props.navigation.navigate('List', {
-                beers: filtered
+                beers: beerArray
             })
         } catch (err)  {
             console.log(err)
