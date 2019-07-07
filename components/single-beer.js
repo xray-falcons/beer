@@ -16,25 +16,36 @@ export default class SingleBeer extends Component {
     this.state={
       text:"",
       like:false,
-      dislike:false
+      dislike:false,
+      notes:""
     }
   }
     static navigationOptions = {
         headerTransparent: true
         }
 
-  componentDidMount = async () =>{
-    const userId = firebase.auth().currentUser.uid
-    const beer = this.props.navigation.getParam('beer')
-    const beerQuery = await db.collection("users").doc(`${userId}`).collection("beers").doc(`${beer.id}`).get()
-    if(beerQuery){
-      if(beerQuery.data().rating === 1){
-        this.setState({like:true, dislike:false})
-      } else if(beerQuery.data().rating === -1){
-        this.setState({like:false, dislike:true})
-      }
+    componentDidMount=async()=>{
+      const userId = firebase.auth().currentUser.uid
+      const beer = this.props.navigation.getParam('beer')
+      const beerQuery = await db.collection("users").doc(`${userId}`).collection("beers").doc(`${beer.id}`).get()
+      if(beerQuery){
+        if(beerQuery.data().rating === 1){
+          this.setState({like:true, dislike:false})
+        } else if(beerQuery.data().rating === -1){
+          this.setState({like:false, dislike:true})
+        }
+      };
+      const notes = await beerQuery.data().userNotes;
+      this.setState({notes:notes})
     }
-  }
+
+    componentDidUpdate=async()=>{
+      const userId = firebase.auth().currentUser.uid
+      const beer = this.props.navigation.getParam('beer')
+      const beerQuery = await db.collection("users").doc(`${userId}`).collection("beers").doc(`${beer.id}`).get()
+      const notes = await beerQuery.data().userNotes;
+      this.setState({notes:notes})
+    }
 
     render(){
         const userId = firebase.auth().currentUser.uid
@@ -72,6 +83,7 @@ export default class SingleBeer extends Component {
             </View>
             <Text style={styles.text}>Like, dislike, or drink this beer</Text>
             <Text style={styles.textBold}>Contribute your notes here!</Text>
+            <Text style={styles.text}>{this.state.notes || null}</Text>
             <TextInput style={styles.notebox} placeholder="Your notes..." onChangeText={(text)=>this.setState({text})} value={this.state.text}/>
             <Button buttonStyle={styles.attentionButton} title="Submit" onPress={()=>{
               let beerRef = db.doc(`users/${userId}/beers/${beer.id}`)
