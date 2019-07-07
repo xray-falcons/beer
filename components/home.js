@@ -15,22 +15,31 @@ export default class Home extends React.Component {
         this.state = {
             recentBeers: [],
             frequentBeers: [],
-            recommendedBeers: []
+            recommendedBeers: [],
+            userId: ''
         }
     }
+    static navigationOptions = {
+        headerTransparent: true,
+        headerTitle: "",
+        headerRight: (
+            <Button type="solid" buttonStyle={styles.attentionButton} title='Logout' onPress={() => firebase.auth().signOut()}/>
+        ),
+    };
 
-    componentDidMount(){
+    componentDidMount = async () => {
+        const userId = await firebase.auth().currentUser.uid
+        this.setState({userId: userId})
         this.getFrequentBeers()
         this.getRecentBeers()
         this.getRecommendations()
     }
 
     getFrequentBeers = async () => {
-        const userId = firebase.auth().currentUser.uid
-        const userBeersRef = db.collection(`users/${userId}/beers`)
+        const userBeersRef = db.collection(`users/${this.state.userId}/beers`)
         try {
             let frequentBeers = []
-            const query = userBeersRef.orderBy("times", "desc").limit(3)
+            const query = userBeersRef.orderBy("times", "desc").limit(10)
             const querySnapshot = await query.get()
             querySnapshot.forEach(doc=>{
                 let beer = doc.data()
@@ -38,16 +47,15 @@ export default class Home extends React.Component {
             })
             this.setState({frequentBeers})
         } catch(err) {
-            console.err(err)
+            console.log(err)
         }
     }
 
     getRecentBeers = async () => {
-        const userId = firebase.auth().currentUser.uid
-        const userBeersRef = db.collection(`users/${userId}/beers`)
+        const userBeersRef = db.collection(`users/${this.state.userId}/beers`)
         try {
             let recentBeers = []
-            const query = userBeersRef.orderBy("lastHad", "desc").limit(3)
+            const query = userBeersRef.orderBy("lastHad", "desc").limit(10)
             const querySnapshot = await query.get()
             querySnapshot.forEach(doc=>{
                 let beer = doc.data()
@@ -55,16 +63,15 @@ export default class Home extends React.Component {
             })
             this.setState({recentBeers})
         } catch(err) {
-            console.err(err)
+            console.log(err)
         }
     }
 
     getRecommendations = async () => {
-        const userId = firebase.auth().currentUser.uid
         const recommendedBeers = []
         try {
             const beers = await db.collection('beers')
-            const userQuery = await db.doc(`users/${userId}`).get()
+            const userQuery = await db.doc(`users/${this.state.userId}`).get()
             const preferences = userQuery.data().preferences
             const beerQuery = beers
                 .where('taste', 'array-contains', preferences[1])
@@ -76,7 +83,7 @@ export default class Home extends React.Component {
             })
             this.setState({recommendedBeers})
         } catch(err) {
-            console.err(err)
+            console.log(err)
         }
     }
 
@@ -86,28 +93,33 @@ export default class Home extends React.Component {
                 colors={["#c36f09", "#eeba0b"]}
                 style={styles.linearGradient}>
                         <ScrollView>
-                            <View>
+                            <View style={{marginTop: 80, justifyContent: "space-between"}}>
                                 <Text style={styles.titleText}>Your recent beers: </Text>
+                                <View style={{justifyContent: "space-between", marginTop: 15}}>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                     {this.state.recentBeers.length ? this.state.recentBeers.map(eachBeer =>
                                         <Beer key={eachBeer.beer.id} beer={eachBeer.beer} navigation={this.props.navigation}/>) : <Text style={styles.text}>Like some beers to show here!</Text>}
                                 </ScrollView>
+                                </View>
                             </View>
-                            <View>
+                            <View style={{marginTop: 10, justifyContent: "space-between"}}>
                                 <Text style={styles.titleText}>Top beers: </Text>
+                                <View style={{justifyContent: "space-between", marginTop: 15}}>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                     {this.state.frequentBeers.length ? this.state.frequentBeers.map(eachBeer =>
                                         <Beer key={eachBeer.beer.id} beer={eachBeer.beer} navigation={this.props.navigation}/>) : <Text style={styles.text}>Like some beers to show here!</Text>}
                                 </ScrollView>
+                                </View>
                             </View>
-                            <View>
+                            <View style={{marginTop: 10, justifyContent: "space-between"}}>
                                 <Text style={styles.titleText}>Top picks for you: </Text>
+                                <View style={{justifyContent: "space-between", marginTop: 15}}>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                     {this.state.recommendedBeers.length ? this.state.recommendedBeers.map(eachBeer =>
                                         <Beer key={eachBeer.id} beer={eachBeer} />) : <Text style={styles.text}>Like some beers to show here!</Text>}
                                 </ScrollView>
+                                </View>
                             </View>
-                            <Button type="solid" buttonStyle={styles.attentionButton} title='Logout' onPress={() => firebase.auth().signOut()}/>
                         </ScrollView>
             </LinearGradient>
         );

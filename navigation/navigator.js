@@ -1,16 +1,14 @@
 import React from "react";
 import { createSwitchNavigator, createAppContainer, createStackNavigator } from "react-navigation";
 import Loading from "../components/loading";
-import Drawer from "./drawer-navigator";
 import { AuthNavigator } from "./stack-navigator";
+import BottomTabNavigator from "./bottom-tab-navigator";
 
 const AppSwitchNavigator = createSwitchNavigator({
     LoadingScreen: Loading,
     Welcome: AuthNavigator,
-    Dashboard: {
-        screen: Drawer
-    }
-},
+    Dashboard: BottomTabNavigator,
+    },
 {
         initialRouteName: 'LoadingScreen'
     }

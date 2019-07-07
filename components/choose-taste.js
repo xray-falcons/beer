@@ -3,7 +3,7 @@ import { View, ScrollView } from 'react-native';
 import { CheckBox, Button } from 'react-native-elements'
 import { db } from '../server/db';
 import { LinearGradient } from "expo-linear-gradient";
-import styles from "../style/styles"
+import styles, { beerTastes } from "../style/styles"
 
 export default class Taste extends Component {
     constructor(props) {
@@ -35,6 +35,9 @@ export default class Taste extends Component {
 
     try = async (tastes) => {
         try {
+            this.setState({
+                checked: []
+            })
             const beers = await db.collection('beers');
             let beerArray =[]
             const query = await beers.where('taste', 'array-contains', tastes[0]);
@@ -43,25 +46,29 @@ export default class Taste extends Component {
                 let beer = doc.data();
                 beerArray.push(beer)
             });
+            console.log(beerArray.length)
             let filtered = beerArray.filter(beer => {
-                for (let i = 0; i < beer.taste.length; i ++) {
-                    for (let j = 1; j < tastes.length; j ++) {
-                        if (beer.taste[i] === tastes[j]){
+                for (let j = 1; j < tastes.length; j ++) {
+                    console.log(tastes[j])
+                    for (let i = 0; i < beer.taste.length; i++) {
+                        if (beer.taste[i] === tastes[j]) {
                             return beer
                         }
                     }
                 }
             })
+            if (!filtered.length) {
+                filtered = beerArray
+            }
             this.props.navigation.navigate('List', {
                 beers: filtered
             })
         } catch (err)  {
-            console.err(err)
+            console.log(err)
         }
     }
 
     render(){
-        const beerTastes = ["sweet", "chocolate", "hoppy", "citrus","full-bodied","sour","spicy", "fruit","light","coffee","earthy", "tropical", "roast", "caramel", "coconut", "porter", "dark", "barley", "malt", "ipa", "grapefruit", "stout", "smokey", "banana", "vanilla", "bitter", "zest", "crispy", "lemon", "raspberries", "oak", "smooth", "bavaria"]
         return(
             <LinearGradient
                 colors={["#c36f09", "#eeba0b"]}
@@ -76,7 +83,6 @@ export default class Taste extends Component {
                         uncheckedIcon='circle-o'
                         checked={this.isItemChecked(elem)}
                         onPress={evt => this.manageToggle(evt, elem)}
-
                     />
                     </View>)
                 })

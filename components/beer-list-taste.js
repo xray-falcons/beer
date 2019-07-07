@@ -13,6 +13,10 @@ export default class BeerListTaste extends React.Component{
             data:[]
         }
     }
+    static navigationOptions = {
+        header:  null,
+        headerTransparent: true,
+    }
 
     renderItem = ({item}) => {
         return(

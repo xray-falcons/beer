@@ -17,6 +17,9 @@ export default class SingleBeer extends Component {
       text:""
     }
   }
+    static navigationOptions = {
+        headerTransparent: true
+        }
 
     render() {
         const userId = firebase.auth().currentUser.uid
@@ -27,7 +30,7 @@ export default class SingleBeer extends Component {
                 style={styles.linearGradient}
             >
         <View style={styles.container}>
-          <ScrollView>
+          <ScrollView style={styles.marginTop}>
             <Text style={styles.headText}>{beer.name}</Text>
             <Text style={styles.textBold}>{beer.style.category.name}</Text>
             <Text style={styles.textBold}>abv: {beer.abv} ibu: {beer.ibu}</Text>
@@ -38,7 +41,7 @@ export default class SingleBeer extends Component {
                   db.collection("users").doc(`${userId}`).collection("beers").doc(`${beer.id}`).set({
                   "name":beer.name,"rating":1, "beer":beer}, {"merge":true})
                 }} />
-              <Icon name="thumbs-down" style={styles.iconButton} onPress={()=>{
+              <Icon name="thumbs-down" color='red' style={styles.iconButton} onPress={()=>{
                 db.collection("users").doc(`${userId}`).collection("beers").doc(`${beer.id}`).set({
                 "name":beer.name,"rating":-1, "beer":beer}, {"merge":true})
               }} />
