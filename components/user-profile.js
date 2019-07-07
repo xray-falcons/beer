@@ -1,17 +1,9 @@
 import React, { Component } from "react";
-import {
-    StyleSheet,
-    View,
-    Button,
-    FlatList,
-    ScrollView,
-    Text,
-    Alert
-} from 'react-native';
+import {Button, ScrollView, Alert} from 'react-native';
 import firebase from "firebase";
 import { db } from '../server/db';
 import {LinearGradient} from "expo-linear-gradient";
-
+import styles from "../style/styles"
 
 export default class UserProfile extends Component{
     constructor() {
@@ -40,8 +32,8 @@ export default class UserProfile extends Component{
                 style={styles.linearGradient}
             >
             <ScrollView>
-                {beerTastes.map((elem, idx) =>
-                    <Button key={idx} title={elem = elem[0].toUpperCase() + elem.slice(1)} onPress={() => {
+                {beerTastes.map((elem) =>
+                    <Button key={elem} title={elem = elem[0].toUpperCase() + elem.slice(1)} onPress={() => {
                     	this.setState({userProfile: [...this.state.userProfile, elem]})
                     }}
                     />
@@ -51,26 +43,3 @@ export default class UserProfile extends Component{
             </LinearGradient>
     )}
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 20,
-        marginBottom: 20
-    },
-    textBold:{
-        fontWeight: "bold",
-        fontStyle: 'italic',
-        textAlign: 'center'
-    },
-    linearGradient: {
-        width: '100%',
-        height: '100%',
-        flex: 1,
-        left: 0,
-        right: 0,
-        top: 0,
-    },
-})

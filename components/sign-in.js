@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import {
-    StyleSheet,
     Text,
     View,
     TextInput,
@@ -12,6 +11,7 @@ import {
 } from 'react-native';
 import * as Facebook from 'expo-facebook';
 import {LinearGradient} from "expo-linear-gradient";
+import styles from "../style/styles"
 
 
 export default class SignInView extends Component {
@@ -75,95 +75,33 @@ export default class SignInView extends Component {
 
                 <Image source={require('../style/StumblrLogo.png')} style={styles.image}
                 />
-                <View style={styles.inputContainer}>
-                    <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
-                    <TextInput style={styles.inputs}
+                <View style={styles.authInputContainer}>
+                    <Image style={styles.authInputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
+                    <TextInput style={styles.authInputs}
                                placeholder="Email"
                                keyboardType="email-address"
                                underlineColorAndroid='transparent'
                                onChangeText={(email) => this.setState({email})}/>
                 </View>
 
-                <View style={styles.inputContainer}>
-                    <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
-                    <TextInput style={styles.inputs}
+                <View style={styles.authInputContainer}>
+                    <Image style={styles.authInputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
+                    <TextInput style={styles.authInputs}
                                placeholder="Password"
                                secureTextEntry={true}
                                underlineColorAndroid='transparent'
                                onChangeText={(password) => this.setState({password})}/>
                 </View>
 
-                <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.signIn(this.state.email, this.state.password)}>
-                    <Text style={styles.signUpText}>Sign in</Text>
+                <TouchableHighlight style={[styles.authButtonContainer, styles.authButton]} onPress={() => this.signIn(this.state.email, this.state.password)}>
+                    <Text style={styles.authText}>Sign in</Text>
                 </TouchableHighlight>
 
-                <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.logInWithFacebook()}>
-                    <Text style={styles.signUpText}>Sign in with Facebook</Text>
+                <TouchableHighlight style={[styles.authButtonContainer, styles.authButton]} onPress={() => this.logInWithFacebook()}>
+                    <Text style={styles.authText}>Sign in with Facebook</Text>
                 </TouchableHighlight>
             </KeyboardAvoidingView>
             </LinearGradient>
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    inputContainer: {
-        borderBottomColor: '#F5FCFF',
-        backgroundColor: '#FFFFFF',
-        borderRadius:30,
-        borderBottomWidth: 1,
-        width: 200,
-        height: 35,
-        marginBottom:2,
-        flexDirection: 'row',
-        alignItems:'center'
-    },
-    inputs:{
-        height:40,
-        marginLeft:16,
-        borderBottomColor: '#FFFFFF',
-        flex:1,
-    },
-    inputIcon:{
-        width:15,
-        height:15,
-        marginLeft:15,
-        justifyContent: 'center'
-    },
-    buttonContainer: {
-        height:25,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: 1,
-        width:200,
-        borderRadius:30,
-    },
-    signupButton: {
-        backgroundColor: "#710000",
-    },
-    signUpText: {
-        color: 'white',
-    },
-    image:{
-        width:200,
-        height:200,
-        marginBottom: 20,
-        borderRadius: 100
-    },
-    linearGradient: {
-        width: '100%',
-        height: '100%',
-        flex: 1,
-        left: 0,
-        right: 0,
-        top: 0,
-        //CHECK DOCS!!!!! cause this could not work on different devices
-        // height: 1000
-    },
-});

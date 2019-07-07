@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import {
-    StyleSheet,
-    View,
-    Button,
-} from 'react-native';
+import { View } from 'react-native';
 import {db} from "../server/db";
-import Beer from "./beer";
 import { LinearGradient } from "expo-linear-gradient";
-import {Text} from "react-native-elements";
+import {Text, Button} from "react-native-elements";
+import styles from "../style/styles"
 
 export default class Random extends Component {
     constructor(props){
@@ -47,7 +43,7 @@ export default class Random extends Component {
                     style={styles.linearGradient}
                 ><View style={styles.container}>
                     <Text>Sorry, we did not find your beer... But maybe you feel lucky?</Text>
-                    <Button title={'Try random!'} onPress={() => {
+                    <Button title="Try random!" buttonStyle={styles.attentionButton} onPress={() => {
                         this.generateRandomNumber();
                     }}
                     />
@@ -59,7 +55,7 @@ export default class Random extends Component {
                     colors={["#c36f09", "#eeba0b"]}
                     style={styles.linearGradient}
                 ><View style={styles.container}>
-                <Button title={'Try random!'} onPress={() => {
+                <Button title="Try random!" buttonStyle={styles.attentionButton} onPress={() => {
                     this.generateRandomNumber();
                 }}
                 />
@@ -67,20 +63,3 @@ export default class Random extends Component {
             </LinearGradient>)
     }
 }
-
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    linearGradient: {
-        width: '100%',
-        height: '100%',
-        flex: 1,
-        left: 0,
-        right: 0,
-        top: 0,
-    },
-})

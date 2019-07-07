@@ -1,19 +1,8 @@
 import React, { Component } from 'react';
-import {
-    StyleSheet,
-    Text,
-    View,
-    TextInput,
-    Button,
-    TouchableHighlight,
-    Image,
-    Alert, ScrollView
-} from 'react-native';
-import firebase from 'firebase';
-import { db } from '../server/db';
-import BeerList from './beer-list';
+import {View, ScrollView} from 'react-native';
+import {Button} from "react-native-elements"
 import {LinearGradient} from "expo-linear-gradient";
-import {styles} from "../style/styles";
+import styles from "../style/styles";
 
 export default class Category extends Component {
 
@@ -28,33 +17,17 @@ export default class Category extends Component {
                 colors={["#c36f09", "#eeba0b"]}
                 style={styles.linearGradient}
             >
-                <View style={styles1.container}>
-                    <ScrollView>
-                    {beerStyles.map((elem, idx) => {
-                        return <Button key={idx} title={elem} color='black' onPress={()=> 
-                            this.props.navigation.navigate('List', { name : elem}) }/>
-                        })
-                    }
-                    </ScrollView>
-                </View>
-            </LinearGradient>
-        )
+            <View style={styles.container}>
+            <ScrollView>
+            {beerStyles.map((elem) => {
+            return  <Button key={elem} title={elem} type="clear" titleStyle={styles.buttonText} onPress={() => this.props.navigation.navigate('List', { name : elem}) }/>
+            })
+            }
+            </ScrollView>
+        </View>
+
+            </LinearGradient>)
     }
 }
-
-const styles1 = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 20,
-        marginBottom: 20
-    },
-    textBold:{
-        fontWeight: "bold",
-        fontStyle: 'italic',
-        textAlign: 'center'
-    }
-})
 
 

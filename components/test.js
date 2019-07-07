@@ -1,16 +1,10 @@
 import React, { Component } from 'react';
-
+import styles from "../style/styles"
 import {
-    StyleSheet,
     Text,
     View,
-    TextInput,
-    Button,
-    TouchableHighlight,
-    Image,
-    Alert
+    Button
 } from 'react-native';
-import firebase from 'firebase';
 
 
 
@@ -26,13 +20,3 @@ export default class Test extends Component {
         </View>
     }
 }
-
-
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
-})

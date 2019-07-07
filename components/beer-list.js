@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import {StyleSheet,FlatList,} from 'react-native';
+import {FlatList,} from 'react-native';
 import { Card } from 'react-native-elements'
-import firebase from 'firebase';
 import 'firebase/firestore';
 import { db } from '../server/db';
 import { LinearGradient } from "expo-linear-gradient";
 import Beer from './beer'
-
+import styles from "../style/styles"
 
 export default class BeerList extends Component{
     constructor(props){
@@ -43,13 +42,9 @@ export default class BeerList extends Component{
 
     renderItem = ({item}) => {
         return(
-            <LinearGradient
-                colors={["#c36f09", "#eeba0b"]}
-                style={styles.linearGradient}>
-                <Card>
-                    <Beer beer={item} navigation={this.props.navigation} />
-                </Card>
-            </LinearGradient>
+            <Card containerStyle={styles.cardContainer}>
+                <Beer beer={item} navigation={this.props.navigation} />
+            </Card>
       )}
 
     render() {
@@ -59,7 +54,6 @@ export default class BeerList extends Component{
                 style={styles.linearGradient}
             >
                 <FlatList
-                    style={{marginTop: 16}}
                     numColumns={2}
                     data={this.state.data}
                     renderItem={this.renderItem}
@@ -69,33 +63,3 @@ export default class BeerList extends Component{
         )
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        marginTop: 20,
-
-    },
-    item: {
-        borderBottomWidth: 1,
-        justifyContent: "space-around"
-    },
-    itemText:{
-        fontSize: 26,
-        padding:25
-    },
-    itemImage:{
-        width:"100%",
-        height: 200,
-        resizeMode: 'cover'
-    },
-    linearGradient: {
-        width: '100%',
-        height: '100%',
-        flex: 1,
-        left: 0,
-        right: 0,
-        top: 0,
-
-    },
-})

@@ -1,23 +1,14 @@
-import React, { Component } from 'react';
-import {
-    StyleSheet,
-    FlatList,
-    Text,
-    View,
-    TextInput,
-    Button,
-    TouchableHighlight,
-    Image,
-    Alert, Category
-} from 'react-native';
+import React from 'react';
+import {Text, View} from 'react-native';
+import {Button} from "react-native-elements"
 import {LinearGradient} from "expo-linear-gradient";
 import firebase from 'firebase';
 import { db } from "../server/db";
 import { ScrollView } from 'react-native-gesture-handler';
-import { styles } from '../style/styles';
+import styles from '../style/styles';
 import Beer from "./beer"
 
-export default class Home extends Component {
+export default class Home extends React.Component {
 
     constructor(){
         super()
@@ -27,7 +18,7 @@ export default class Home extends Component {
             recommendedBeers: []
         }
     }
-    //TODO: COMPONENTS DONT UPDATE! SHOULD WE USE componentDidUpdate()?
+
     componentDidMount(){
         this.getFrequentBeers()
         this.getRecentBeers()
@@ -70,23 +61,18 @@ export default class Home extends Component {
 
     getRecommendations = async () => {
         const userId = firebase.auth().currentUser.uid
-        console.log("THIS IS THE USER ID", userId)
         const recommendedBeers = []
         try {
             const beers = await db.collection('beers')
             const userQuery = await db.doc(`users/${userId}`).get()
             const preferences = userQuery.data().preferences
-            console.log("PREFERENCE", preferences[1]) 
             const beerQuery = beers
-                //.where('taste', 'array-contains', preferences[0])
                 .where('taste', 'array-contains', preferences[1])
-                // .where('taste', 'array-contains', preferences[2])
                 .limit(3)
             const querySnapshot = await beerQuery.get()
             querySnapshot.forEach(doc=>{
                 let beer = doc.data()
                 recommendedBeers.push(beer)
-                console.log(beer.id)
             })
             this.setState({recommendedBeers})
         } catch(err) {
@@ -101,56 +87,32 @@ export default class Home extends Component {
                 style={styles.linearGradient}>
                         <ScrollView>
                             <View>
-                                <Text style={{fontSize:24}}>Your recent beers: </Text>
+                                <Text style={styles.titleText}>Your recent beers: </Text>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                     {this.state.recentBeers.length ? this.state.recentBeers.map(eachBeer =>
-                                        <Beer key={eachBeer.beer.id} beer={eachBeer.beer} navigation={this.props.navigation}/>) : <Text style={style.itemText}>Like some beers to show here!</Text>}
+                                        <Beer key={eachBeer.beer.id} beer={eachBeer.beer} navigation={this.props.navigation}/>) : <Text style={styles.text}>Like some beers to show here!</Text>}
                                 </ScrollView>
                             </View>
                             <View>
-                                <Text style={{fontSize:24}}>Top beers: </Text>
+                                <Text style={styles.titleText}>Top beers: </Text>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                     {this.state.frequentBeers.length ? this.state.frequentBeers.map(eachBeer =>
-                                        <Beer key={eachBeer.beer.id} beer={eachBeer.beer} navigation={this.props.navigation}/>) : <Text style={style.itemText}>Like some beers to show here!</Text>}
+                                        <Beer key={eachBeer.beer.id} beer={eachBeer.beer} navigation={this.props.navigation}/>) : <Text style={styles.text}>Like some beers to show here!</Text>}
                                 </ScrollView>
                             </View>
                             <View>
-                                <Text style={{fontSize:24}}>Top picks for you: </Text>
+                                <Text style={styles.titleText}>Top picks for you: </Text>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                     {this.state.recommendedBeers.length ? this.state.recommendedBeers.map(eachBeer =>
-                                        <Beer key={eachBeer.id} beer={eachBeer} />) : <Text style={{fontSize:16}}>Like some beers to show here!</Text>}
+                                        <Beer key={eachBeer.id} beer={eachBeer} />) : <Text style={styles.text}>Like some beers to show here!</Text>}
                                 </ScrollView>
                             </View>
-                            <Button color='black' title='Logout' onPress={() => firebase.auth().signOut()}/>
+                            <Button type="solid" buttonStyle={styles.attentionButton} title='Logout' onPress={() => firebase.auth().signOut()}/>
                         </ScrollView>
             </LinearGradient>
         );
     }
 }
-
-const style = StyleSheet.create({
-textBold:{
-    fontWeight: "bold",
-    fontStyle: 'italic',
-    textAlign: 'center',
-    fontSize: 24
-  },
-    itemText:{
-        fontSize: 16,
-        padding:25,
-        marginTop: 25,
-        marginBottom: 25,
-        textAlign: 'center',
-    },
-    headText: {
-        fontSize: 40,
-        fontWeight: "bold",
-        textAlign: 'center',
-        fontStyle: 'italic',
-        marginBottom: 15
-      },
-})
-
 
 
 
