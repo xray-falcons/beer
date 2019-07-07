@@ -68,19 +68,22 @@ export default class Home extends React.Component {
     }
 
     getRecommendations = async () => {
-        const recommendedBeers = []
         try {
+            const recommendedBeers = []
             const beers = await db.collection('beers')
             const userQuery = await db.doc(`users/${this.state.userId}`).get()
-            const preferences = userQuery.data().preferences
-            const beerQuery = beers
-                .where('taste', 'array-contains', preferences[1])
-                .limit(3)
-            const querySnapshot = await beerQuery.get()
-            querySnapshot.forEach(doc=>{
-                let beer = doc.data()
-                recommendedBeers.push(beer)
-            })
+            const preferences = userQuery.data().preferences.map(elem => elem.toLowerCase())
+            for (let i = 0; i < preferences.length; i++){
+                const beerQuery = beers
+                    .where('taste', 'array-contains', preferences[i])
+                    .limit(1)
+                const querySnapshot = await beerQuery.get()
+                querySnapshot.forEach(function(doc){
+                    let beer = doc.data()
+                    recommendedBeers.push(beer)
+                })
+
+            }
             this.setState({recommendedBeers})
         } catch(err) {
             console.log(err)
