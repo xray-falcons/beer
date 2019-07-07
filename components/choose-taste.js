@@ -35,6 +35,9 @@ export default class Taste extends Component {
 
     try = async (tastes) => {
         try {
+            this.setState({
+                checked: []
+            })
             const beers = await db.collection('beers');
             let beerArray =[]
             const query = await beers.where('taste', 'array-contains', tastes[0]);
@@ -45,16 +48,19 @@ export default class Taste extends Component {
             });
             console.log(beerArray.length)
             let filtered = beerArray.filter(beer => {
-                for (let i = 0; i < beer.taste.length; i ++) {
-                    for (let j = 1; j < tastes.length; j ++) {
+                for (let j = 1; j < tastes.length; j ++) {
+                    console.log(tastes[j])
+                    for (let i = 0; i < beer.taste.length; i ++) {
                         if (beer.taste[i] === tastes[j]){
                             return beer
-                        }
                     }
                 }
             })
+            if (!filtered.length) {
+                filtered = beerArray
+            }
             this.props.navigation.navigate('List', {
-                beers: beerArray
+                beers: filtered
             })
         } catch (err)  {
             console.log(err)
