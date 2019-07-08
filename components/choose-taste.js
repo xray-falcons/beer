@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView, FlatList, TouchableOpacity, Text } from 'react-native';
+import { View, FlatList } from 'react-native';
 import { CheckBox, Button } from 'react-native-elements'
 import { db } from '../server/db';
 import { LinearGradient } from "expo-linear-gradient";
@@ -47,10 +47,8 @@ export default class Taste extends Component {
                 let beer = doc.data();
                 beerArray.push(beer)
             });
-            console.log(beerArray.length)
             let filtered = beerArray.filter(beer => {
                 for (let j = 1; j < tastes.length; j ++) {
-                    console.log(tastes[j])
                     for (let i = 0; i < beer.taste.length; i++) {
                         if (beer.taste[i] === tastes[j]) {
                             return beer
@@ -65,12 +63,11 @@ export default class Taste extends Component {
                 beers: filtered
             })
         } catch (err)  {
-            console.log(err)
+            console.trace(err)
         }
     }
 
     renderItem = (elem, idx) => {
-        console.log('elem', elem.item, 'type', typeof elem.item)
         return  (<View key={idx} style={{width: 187}}>
             <CheckBox
                 title={elem.item}
