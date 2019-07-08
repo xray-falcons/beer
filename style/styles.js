@@ -43,6 +43,10 @@ export default StyleSheet.create({
     authText: {
         color: 'white',
     },
+    badgePosition:{
+        left: -25,
+        top:-1
+    },
     buttonRow:{
         flexDirection:"row",
         justifyContent: "center"

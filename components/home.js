@@ -27,7 +27,7 @@ export default class Home extends React.Component {
         ),
     };
 
-    componentDidMount = async () => {
+    async componentDidMount () {
         const userId = await firebase.auth().currentUser.uid
         this.setState({userId: userId})
         this.getFrequentBeers()
@@ -88,6 +88,7 @@ export default class Home extends React.Component {
             console.log(err)
         }
     }
+
 
     render() {
         return (
