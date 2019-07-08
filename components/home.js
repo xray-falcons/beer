@@ -85,13 +85,14 @@ export default class Home extends React.Component {
     getRecommendations = async () => {
         const recommendedBeers = []
         try {
+            console.log(this.state.userId)
             const beers = await db.collection('beers')
             const userQuery = await db.doc(`users/${this.state.userId}`).get()
             const preferences = userQuery.data().preferences.map(elem => elem.toLowerCase())
             for (let i = 0; i < preferences.length; i++){
                 const beerQuery = beers
                     .where('taste', 'array-contains', preferences[i])
-                    .limit(1)
+                    .limit(2)
                 const querySnapshot = await beerQuery.get()
                 querySnapshot.forEach(function(doc){
                     let beer = doc.data()
@@ -104,24 +105,24 @@ export default class Home extends React.Component {
         }
     }
 
-    getBetterRecommendations = async () => {
-        const beerTastes = ["", "sweet", "chocolate", "hoppy", "citrus","sour","spicy", "fruit","light","coffee","earthy", "tropical", "roast", "caramel", "coconut", "porter", "dark", "barley", "malt", "ipa", "grapefruit", "stout", "smokey", "banana", "vanilla", "bitter", "zest", "crispy", "lemon", "raspberries", "oak", "smooth", "bavaria"]
+    // getBetterRecommendations = async () => {
+    //     const beerTastes = ["", "sweet", "chocolate", "hoppy", "citrus","sour","spicy", "fruit","light","coffee","earthy", "tropical", "roast", "caramel", "coconut", "porter", "dark", "barley", "malt", "ipa", "grapefruit", "stout", "smokey", "banana", "vanilla", "bitter", "zest", "crispy", "lemon", "raspberries", "oak", "smooth", "bavaria"]
 
-        const recommendedBeers = []
-        try {
-            // const userQuery = await db.doc(`users/${this.state.userId}`).get()
-            // const preferences = userQuery.data().preferences.map(elem => elem.toLowerCase())
-            const beers = await db.collection('beers').get()
-            const tastes = await db.collection('tastes').get()
-            beers.forEach(doc=>{
-                let beerId = doc.id
-                let beer = doc.data()
-            })    
-            this.setState({recommendedBeers})
-        } catch(err) {
-            console.log(err)
-        }
-    }
+    //     const recommendedBeers = []
+    //     try {
+    //         // const userQuery = await db.doc(`users/${this.state.userId}`).get()
+    //         // const preferences = userQuery.data().preferences.map(elem => elem.toLowerCase())
+    //         const beers = await db.collection('beers').get()
+    //         const tastes = await db.collection('tastes').get()
+    //         beers.forEach(doc=>{
+    //             let beerId = doc.id
+    //             let beer = doc.data()
+    //         })    
+    //         this.setState({recommendedBeers})
+    //     } catch(err) {
+    //         console.log(err)
+    //     }
+    // }
 
     render() {
         return (
@@ -136,6 +137,7 @@ export default class Home extends React.Component {
                                     {this.state.recentBeers.length ? this.state.recentBeers.map(eachBeer =>
                                         <Beer key={eachBeer.beer.id} beer={eachBeer.beer} navigation={this.props.navigation}/>) : <Text style={styles.text}>Like some beers to show here!</Text>}
                                 </ScrollView>
+                                <Button onPress={this.getRecentBeers} title="Refresh" />
                                 </View>
                             </View>
                             <View style={{marginTop: 10, justifyContent: "space-between"}}>
@@ -145,6 +147,7 @@ export default class Home extends React.Component {
                                     {this.state.frequentBeers.length ? this.state.frequentBeers.map(eachBeer =>
                                         <Beer key={eachBeer.beer.id} beer={eachBeer.beer} navigation={this.props.navigation}/>) : <Text style={styles.text}>Like some beers to show here!</Text>}
                                 </ScrollView>
+                                <Button onPress={this.getFrequentBeers} title="Refresh" />
                                 </View>
                             </View>
                             <View style={{marginTop: 10, justifyContent: "space-between"}}>
@@ -152,8 +155,9 @@ export default class Home extends React.Component {
                                 <View style={{justifyContent: "space-between", marginTop: 15}}>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                     {this.state.recommendedBeers.length ? this.state.recommendedBeers.map(eachBeer =>
-                                        <Beer key={eachBeer.id} beer={eachBeer} />) : <Text style={styles.text}>Like some beers to show here!</Text>}
+                                        <Beer key={eachBeer.id} beer={eachBeer} navigation={this.props.navigation} />) : <Text style={styles.text}>Like some beers to show here!</Text>}
                                 </ScrollView>
+                                <Button onPress={this.getRecommendations} title="Get New Recommendations" />
                                 </View>
                             </View>
                         </ScrollView>
