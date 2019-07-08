@@ -4,7 +4,6 @@ import { Card } from 'react-native-elements'
 import { LinearGradient } from "expo-linear-gradient";
 import Beer from './beer'
 import styles from "../style/styles"
-import View from "react-native-web/dist/exports/View";
 
 
 export default class BeerListSearch extends Component {
