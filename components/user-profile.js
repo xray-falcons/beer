@@ -19,7 +19,7 @@ export default class UserProfile extends Component{
         if (this.state.userProfile.length >=3) {
             await userRef.set({preferences:this.state.userProfile},{merge:true});
             this.setState({userProfile:[]});
-            this.props.navigation.navigate("Home")
+            this.props.navigation.navigate("Dashboard")
         } else {
             Alert.alert("We'll need a few more than that to give you a good recommendation ;)")}
         }
