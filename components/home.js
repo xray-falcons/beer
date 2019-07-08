@@ -33,7 +33,6 @@ export default class Home extends React.Component {
         this.getFrequentBeers()
         this.getRecentBeers()
         this.getRecommendations()
-        this.getBetterRecommendations()
     }
 
     getFrequentBeers = async () => {
@@ -67,7 +66,7 @@ export default class Home extends React.Component {
             console.log(err)
         }
     }
-    
+
     getRecommendations = async () => {
         const recommendedBeers = []
         try {
@@ -77,7 +76,7 @@ export default class Home extends React.Component {
             for (let i = 0; i < preferences.length; i++){
                 const beerQuery = beers
                     .where('taste', 'array-contains', preferences[i])
-                    .limit(1)
+                    .limit(2)
                 const querySnapshot = await beerQuery.get()
                 querySnapshot.forEach(function(doc){
                     let beer = doc.data()
@@ -90,20 +89,6 @@ export default class Home extends React.Component {
         }
     }
 
-    getBetterRecommendations = async () => {
-        const recommendedBeers = []
-        try {
-            const beers = await db.collection('beers').get()
-            const tastes = await db.collection('tastes').get()
-            beers.forEach(doc=>{
-                let beerId = doc.id
-                let beer = doc.data()
-            })    
-            this.setState({recommendedBeers})
-        } catch(err) {
-            console.log(err)
-        }
-    }
 
     render() {
         return (
@@ -118,6 +103,7 @@ export default class Home extends React.Component {
                                     {this.state.recentBeers.length ? this.state.recentBeers.map(eachBeer =>
                                         <Beer key={eachBeer.beer.id} beer={eachBeer.beer} navigation={this.props.navigation}/>) : <Text style={styles.text}>Like some beers to show here!</Text>}
                                 </ScrollView>
+                                <Button onPress={this.getRecentBeers} title="Refresh" />
                                 </View>
                             </View>
                             <View style={{marginTop: 10, justifyContent: "space-between"}}>
@@ -127,6 +113,7 @@ export default class Home extends React.Component {
                                     {this.state.frequentBeers.length ? this.state.frequentBeers.map(eachBeer =>
                                         <Beer key={eachBeer.beer.id} beer={eachBeer.beer} navigation={this.props.navigation}/>) : <Text style={styles.text}>Like some beers to show here!</Text>}
                                 </ScrollView>
+                                <Button onPress={this.getFrequentBeers} title="Refresh" />
                                 </View>
                             </View>
                             <View style={{marginTop: 10, justifyContent: "space-between"}}>
@@ -134,8 +121,9 @@ export default class Home extends React.Component {
                                 <View style={{justifyContent: "space-between", marginTop: 15}}>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                                     {this.state.recommendedBeers.length ? this.state.recommendedBeers.map(eachBeer =>
-                                        <Beer key={eachBeer.id} beer={eachBeer} />) : <Text style={styles.text}>Like some beers to show here!</Text>}
+                                        <Beer key={eachBeer.id} beer={eachBeer} navigation={this.props.navigation} />) : <Text style={styles.text}>Like some beers to show here!</Text>}
                                 </ScrollView>
+                                <Button onPress={this.getRecommendations} title="Get New Recommendations" />
                                 </View>
                             </View>
                         </ScrollView>
