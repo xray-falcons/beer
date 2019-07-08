@@ -62,8 +62,6 @@ export default class Map extends Component {
     }
 
     render() {
-
-
         return (
             <MapView
                 style={styles1.container}
@@ -71,7 +69,6 @@ export default class Map extends Component {
                 showsUserLocation={true}
                 showsMyLocationButton={false}
                 zoomEnabled = {true}
-
             >{this.renderMarkers()}
             </MapView>
         );

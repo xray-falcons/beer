@@ -1,6 +1,5 @@
 import { Alert } from "react-native";
 import * as Facebook from 'expo-facebook';
-import firebase from 'firebase';
 
 const logInWithFacebook = async() => {
     try {

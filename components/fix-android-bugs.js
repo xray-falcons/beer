@@ -1,9 +1,3 @@
-/////////////////////////////////////////////////////////////////////////////
-////// temporary fix to bug about 'Setting a timer' /////////////////////////
-////// See: https://github.com/pusher/pusher-js/issues/248 //////////////////
-////// See: https://github.com/facebook/react-native/issues/12981 ///////////
-////// See: https://github.com/firebase/firebase-js-sdk/issues/97 ///////////
-/////////////////////////////////////////////////////////////////////////////
 import { Platform, InteractionManager } from 'react-native';
 const _setTimeout = global.setTimeout;
 const _clearTimeout = global.clearTimeout;

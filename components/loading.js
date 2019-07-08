@@ -5,7 +5,6 @@ import firebase from "firebase";
 import styles from "../style/styles"
 
 export default class Loading extends React.Component {
-  //we check if a user has an account in the firebase
   componentDidMount() {
     this.checkIfLoggedIn();
   }
