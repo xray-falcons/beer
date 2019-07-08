@@ -1,6 +1,6 @@
 import 'react-native';
 import React from 'react';
-import Loading from "./beer-list";
+import Loading from "../components/beer-list";
 
 import renderer from 'react-test-renderer';
 

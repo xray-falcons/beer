@@ -1,5 +1,5 @@
 import React from 'react';
-import Beer from "./beer";
+import Beer from "../components/beer";
 import 'react-native';
 
 import renderer from 'react-test-renderer';
