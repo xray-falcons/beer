@@ -43,7 +43,7 @@ export default class SignUpView extends Component {
             fullName = fullName.trim();
             let { user } = await firebase.auth().createUserWithEmailAndPassword(email, password)
             await db.collection('users').doc(user.uid).set({email: email, fullName: fullName});
-            this.props.navigation.navigate('Dashboard')
+            this.props.navigation.navigate('Preferences')
         } catch (err) {
             console.log(err)
         }

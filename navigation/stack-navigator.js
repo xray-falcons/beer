@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { createStackNavigator } from "react-navigation";
 import Home from "../components/home";
 import Category from "../components/choose-category";
