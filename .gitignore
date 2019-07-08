@@ -10,10 +10,11 @@ web-build/
 web-report/
 .serviceAcctKey.json
 .ds_store
+.data-sandbox.json
 
 
 configs/*
 # package-lock.json
 
 # api secrets
-.data-sandbox.json
+
