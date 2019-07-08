@@ -120,8 +120,8 @@ export default class Home extends React.Component {
                                 <Text style={styles.titleText}>Top picks for you: </Text>
                                 <View style={{justifyContent: "space-between", marginTop: 15}}>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
-                                    {this.state.recommendedBeers.length ? this.state.recommendedBeers.map(eachBeer =>
-                                        <Beer key={eachBeer.id} beer={eachBeer} navigation={this.props.navigation} />) : <Text style={styles.text}>Like some beers to show here!</Text>}
+                                    {this.state.recommendedBeers.length ? this.state.recommendedBeers.map((eachBeer, idx) =>
+                                        <Beer key={idx} beer={eachBeer} navigation={this.props.navigation} />) : <Text style={styles.text}>Like some beers to show here!</Text>}
                                 </ScrollView>
                                 <Button onPress={this.getRecommendations} title="Get New Recommendations" />
                                 </View>
