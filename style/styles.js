@@ -160,6 +160,16 @@ export default StyleSheet.create({
         backgroundColor: "#eeba0b",
         alignItems: 'center',
     },
+    filterButton:{
+        width: 250,
+        height: 50,
+        backgroundColor: 'blue'
+    },
+    filterButtonPressed:{
+        width: 250,
+        height: 50,
+        backgroundColor: 'pink'
+    },
     text: {
         fontSize: 20,
         textAlign: 'justify'

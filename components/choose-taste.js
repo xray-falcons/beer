@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, FlatList, Text, View } from 'react-native';
+import { TouchableOpacity, FlatList, Text} from 'react-native';
 import { Button, Card } from 'react-native-elements'
 import { db } from '../server/db';
 import { LinearGradient } from "expo-linear-gradient";
@@ -19,7 +19,6 @@ export default class Taste extends Component {
     }
 
     isItemChecked(taste) {
-        console.log('in checked', taste)
         return this.state.checked.indexOf(taste) > -1
     }
 
@@ -69,11 +68,11 @@ export default class Taste extends Component {
     }
 
     renderItem = (elem, idx) => {
-        return  (
-            <TouchableOpacity style={styles.cardContainer}  onPress={(evt) => this.manageToggle(evt, elem.item)} >
-            <Card style={{width: 300}}>
+        return (
+            <TouchableOpacity style={this.state.checked.includes(elem.item) ? styles.filterButtonPressed : styles.filterButton} onPress={(evt) => this.manageToggle(evt, elem.item)} >
+
                 <Text>{elem.item}</Text>
-                </Card>
+
               </TouchableOpacity>
         )
     }
@@ -92,7 +91,9 @@ export default class Taste extends Component {
             numColumns={2}
             keyExtractor={(elem, index) => index.toString()}
           />
-          <Text>You selected: {this.state.checked.map( elem => <Text>{elem} </Text>)} </Text>
+          <Text>You selected: {this.state.checked.map( elem =>
+            <Text>{elem} </Text>)}
+          </Text>
     </LinearGradient>)
     }
 }
