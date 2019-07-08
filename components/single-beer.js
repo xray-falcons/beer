@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import { View, Text, Image, ScrollView} from "react-native";
-import {Button} from "react-native-elements"
+import {Button, Badge} from "react-native-elements"
 import Icon from "react-native-vector-icons/FontAwesome";
 import firebase from "firebase";
 import { db } from "../server/db";
@@ -17,7 +17,8 @@ export default class SingleBeer extends Component {
       text:"",
       like:false,
       dislike:false,
-      notes:""
+      notes:"",
+      times:0
     }
   }
     static navigationOptions = {
@@ -37,6 +38,8 @@ export default class SingleBeer extends Component {
       };
       const notes = await beerQuery.data().userNotes;
       this.setState({notes:notes})
+      const times = await beerQuery.data().times;
+      this.setState({times:Number(times)})
     }
 
     componentDidUpdate=async()=>{
@@ -47,14 +50,14 @@ export default class SingleBeer extends Component {
       this.setState({notes:notes})
     }
 
-    render(){
-        const userId = firebase.auth().currentUser.uid
-        const beer = this.props.navigation.getParam('beer');
-        return (
-          <LinearGradient
-                colors={["#c36f09", "#eeba0b"]}
-                style={styles.linearGradient}
-            >
+  render(){
+    const userId = firebase.auth().currentUser.uid
+    const beer = this.props.navigation.getParam('beer');
+    return (
+      <LinearGradient
+        colors={["#c36f09", "#eeba0b"]}
+        style={styles.linearGradient}
+      >
         <View style={styles.container}>
           <ScrollView style={styles.marginTop}>
             <Text style={styles.headText}>{beer.name}</Text>
@@ -62,6 +65,7 @@ export default class SingleBeer extends Component {
             <Text style={styles.textBold}>abv: {beer.abv} ibu: {beer.ibu}</Text>
             <Image source={{ uri: beer.labels.large }} style={styles.image} />
             <Text style={styles.text}>{beer.description}</Text>
+
             <View style={styles.buttonRow}>
               <Icon name="thumbs-up" style={this.state.like ? styles.iconButtonPressed : styles.iconButton} onPress={()=>{
                 db.collection("users").doc(`${userId}`).collection("beers").doc(`${beer.id}`).set({
@@ -79,8 +83,13 @@ export default class SingleBeer extends Component {
                   if(!beerRef.times) beerRef.times = 0;
                   beerRef.update({"times":firebase.firestore.FieldValue.increment(1)})
                   beerRef.set({"lastHad":new Date(), "beer":beer }, {"merge":true})
+                  let countIncrementer = 1;
+                  countIncrementer+=this.state.times
+                  this.setState({times:countIncrementer})
                 }} />
+              <Badge value={this.state.times} status="primary" containerStyle={{left: -25, top:-1}}/>
             </View>
+
             <Text style={styles.text}>Like, dislike, or drink this beer</Text>
             <Text style={styles.textBold}>Contribute your notes here!</Text>
             <Text style={styles.text}>{this.state.notes || null}</Text>
