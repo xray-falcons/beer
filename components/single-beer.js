@@ -33,7 +33,7 @@ export default class SingleBeer extends Component {
       const userId = this.state.userId
       const beer = this.state.beer
       const beerQuery = await db.collection("users").doc(`${userId}`).collection("beers").doc(`${beer.id}`).get()
-      if(beerQuery){
+      if(beerQuery.data()){
         if(beerQuery.data().rating === 1){
           this.setState({like:true, dislike:false})
         } else if(beerQuery.data().rating === -1){
