@@ -19,13 +19,13 @@ export default class UserProfile extends Component{
         if (this.state.userProfile.length >=3) {
             await userRef.set({preferences:this.state.userProfile},{merge:true});
             this.setState({userProfile:[]});
-            this.props.navigation.navigate("Home")
+            this.props.navigation.navigate("Dashboard")
         } else {
             Alert.alert("We'll need a few more than that to give you a good recommendation ;)")}
         }
 
         render(){
-		const beerTastes = ["sweet", "chocolate", "hoppy", "citrus","full-bodied","sour","spicy", "fruit","light","coffee","earthy", "tropical", "roast", "caramel", "coconut", "porter", "dark", "barley", "malt", "ipa", "grapefruit", "stout", "smokey", "banana", "vanilla", "bitter", "zest", "crispy", "lemon", "raspberries", "oak", "smooth", "bavaria"]
+		const beerTastes = ["sweet", "chocolate", "hoppy", "citrus","sour","spicy", "fruit","light","coffee","earthy", "tropical", "roast", "caramel", "coconut", "porter", "dark", "barley", "malt", "ipa", "grapefruit", "stout", "smokey", "banana", "vanilla", "bitter", "zest", "crispy", "lemon", "raspberries", "oak", "smooth", "bavaria"]
         return(
             <LinearGradient
                 colors={["#c36f09", "#eeba0b"]}
