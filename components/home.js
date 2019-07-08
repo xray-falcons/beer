@@ -33,7 +33,6 @@ export default class Home extends React.Component {
         this.getFrequentBeers()
         this.getRecentBeers()
         this.getRecommendations()
-        this.getBetterRecommendations()
     }
 
     getFrequentBeers = async () => {
@@ -68,24 +67,9 @@ export default class Home extends React.Component {
         }
     }
 
-    /*
-    Better Logic:
-    - Get n preferences
-    - Query1 = db.collection(beers).where() w/ all preferences
-    - Q1 length > 8 ? choose 8 : continue
-    - Outer where loop over length of preferences, reducing by one each time
-        - inner for loop over every combination of preferences
-    - Q2a = db.collection(beers).where() w/ first len-1
-    - Q2b = db.collection(beers).where() w/ last len-1
-    - Q2a.concat(Q2b).length > 8 - Q1.len ? choose 8 - Q1.len : continue
-    ...
-    - Qn = db.collection(beers).where() w/ first len-1
-    */
-    
     getRecommendations = async () => {
         const recommendedBeers = []
         try {
-            console.log(this.state.userId)
             const beers = await db.collection('beers')
             const userQuery = await db.doc(`users/${this.state.userId}`).get()
             const preferences = userQuery.data().preferences.map(elem => elem.toLowerCase())
@@ -104,25 +88,6 @@ export default class Home extends React.Component {
             console.log(err)
         }
     }
-
-    // getBetterRecommendations = async () => {
-    //     const beerTastes = ["", "sweet", "chocolate", "hoppy", "citrus","sour","spicy", "fruit","light","coffee","earthy", "tropical", "roast", "caramel", "coconut", "porter", "dark", "barley", "malt", "ipa", "grapefruit", "stout", "smokey", "banana", "vanilla", "bitter", "zest", "crispy", "lemon", "raspberries", "oak", "smooth", "bavaria"]
-
-    //     const recommendedBeers = []
-    //     try {
-    //         // const userQuery = await db.doc(`users/${this.state.userId}`).get()
-    //         // const preferences = userQuery.data().preferences.map(elem => elem.toLowerCase())
-    //         const beers = await db.collection('beers').get()
-    //         const tastes = await db.collection('tastes').get()
-    //         beers.forEach(doc=>{
-    //             let beerId = doc.id
-    //             let beer = doc.data()
-    //         })    
-    //         this.setState({recommendedBeers})
-    //     } catch(err) {
-    //         console.log(err)
-    //     }
-    // }
 
     render() {
         return (
