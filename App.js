@@ -5,26 +5,19 @@ import styles from "./style/styles";
 import { AppNavigator } from "./navigation/navigator";
 import "./components/fix-android-bugs";
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLoadingComplete: false
-    };
-  }
-  render() {
+
+const App = () => {
     return (
         <View style={styles.containerApp}>
-
-          <LinearGradient
-            colors={["#c36f09", "#eeba0b"]}
-            style={styles.linearGradient}
-          >
-              {Platform.OS === 'ios'}
-              <AppNavigator />
-          </LinearGradient>
+            <LinearGradient
+                colors={["#c36f09", "#eeba0b"]}
+                style={styles.linearGradient}
+            >
+                {Platform.OS === 'ios'}
+                <AppNavigator />
+            </LinearGradient>
         </View>
-
     );
-  }
-}
+};
+
+export default App;
