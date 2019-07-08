@@ -114,20 +114,9 @@ export default class Home extends React.Component {
             const beers = await db.collection('beers').get()
             const tastes = await db.collection('tastes').get()
             beers.forEach(doc=>{
-                //console.log(beer.data())
+                let beerId = doc.id
                 let beer = doc.data()
-                //console.log(beer.weightArr)
-                let weights = beer.weightArr
-                for (i=0; i < weights.length; i++){
-                    if (beer.taste.includes(beerTastes[i])==true){
-                        weights[i] = 1
-                    }
-                }
-                console.log(beer.weightArr)
             })    
-            //do stuff here
-            //set values on beers 
-            //
             this.setState({recommendedBeers})
         } catch(err) {
             console.log(err)
