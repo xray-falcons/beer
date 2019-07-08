@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View, FlatList } from 'react-native';
-import { CheckBox, Button } from 'react-native-elements'
+import { TouchableOpacity, FlatList, Text, View } from 'react-native';
+import { Button, Card } from 'react-native-elements'
 import { db } from '../server/db';
 import { LinearGradient } from "expo-linear-gradient";
-import styles, { beerTastes } from "../style/styles"
+import styles, { beerTastes } from "../style/styles";
 
 export default class Taste extends Component {
     constructor(props) {
@@ -19,6 +19,7 @@ export default class Taste extends Component {
     }
 
     isItemChecked(taste) {
+        console.log('in checked', taste)
         return this.state.checked.indexOf(taste) > -1
     }
 
@@ -68,18 +69,17 @@ export default class Taste extends Component {
     }
 
     renderItem = (elem, idx) => {
-        return  (<View key={idx} style={{width: 187}}>
-            <CheckBox
-                title={elem.item}
-                checkedIcon='dot-circle-o'
-                uncheckedIcon='circle-o'
-                checked={this.isItemChecked(elem.item)}
-                onPress={evt => this.manageToggle(evt, elem.item)}
-            />
-            </View>)
+        return  (
+            <TouchableOpacity style={styles.cardContainer}  onPress={(evt) => this.manageToggle(evt, elem.item)} >
+            <Card style={{width: 300}}>
+                <Text>{elem.item}</Text>
+                </Card>
+              </TouchableOpacity>
+        )
     }
 
     render(){
+
         return(
             <LinearGradient
                 colors={["#c36f09", "#eeba0b"]}
@@ -90,7 +90,9 @@ export default class Taste extends Component {
             <FlatList data={this.state.data.sort()}
             renderItem={this.renderItem}
             numColumns={2}
-            keyExtractor={(elem, index) => index.toString()}  />
+            keyExtractor={(elem, index) => index.toString()}
+          />
+          <Text>You selected: {this.state.checked.map( elem => <Text>{elem} </Text>)} </Text>
     </LinearGradient>)
     }
 }
