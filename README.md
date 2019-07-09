@@ -6,7 +6,7 @@ Stumblr is an intelligent beer recommendation application for Android and iOS bu
 
 ![stumblr logo](style/StumblrLogo.png)
 
-It allows a user to track which beers they like and dislike, how many times they've has them...
+It allows a user to track which beers they like and dislike, how many times they've had them...
 
 ![single-beer component](style/interact_with_a_beer.jpg)
 
