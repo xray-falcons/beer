@@ -16,25 +16,25 @@ const PAGES = [
     {
         title: 'Consectetur adipisicing',
         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor ",
-        backgroundColor: '#1abc9c',
+        backgroundColor: '#bc7804',
         image: 'https://github.com/xray-falcons/beer/blob/master/style/browse_by_flavor_input.png?raw=true'
     },
     {
         title: 'Adipisicing elitt',
         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor",
-        backgroundColor: '#d35400',
+        backgroundColor: '#d3901a',
         image: 'https://unsplash.it/400/400?image=900'
     },
     {
         title: 'sit amet',
         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor",
-        backgroundColor: '#34495e',
+        backgroundColor: '#e9a709',
         image: 'https://unsplash.it/400/400?image=999'
     },
     {
         title: 'Sed do eiusmod',
         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor",
-        backgroundColor: '#127186',
+        backgroundColor: '#d3901a',
         image: 'https://unsplash.it/400/400?image=1011'
     },
 ]
@@ -53,8 +53,6 @@ export default class Walk extends Component {
             inputRange: PAGES.map((_, i) => i),
             outputRange: PAGES.map(p => p.backgroundColor),
         });
-        console.log(PAGE_WIDTH)
-        console.log(PAGE_HEIGHT)
 
         return (
             <View style={walkStyles.container}>

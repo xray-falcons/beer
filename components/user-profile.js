@@ -38,7 +38,7 @@ export default class UserProfile extends Component{
                     }}
                     />
                 )}
-            	<Button color="#fff" title="submit" onPress={this.submitHandler}/>
+            	<Button title="submit" onPress={this.submitHandler}/>
             </ScrollView>
             </LinearGradient>
     )}
