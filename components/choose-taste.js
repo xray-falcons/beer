@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, FlatList } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { CheckBox, Button } from 'react-native-elements'
 import { db } from '../server/db';
 import { LinearGradient } from "expo-linear-gradient";
@@ -10,7 +10,6 @@ export default class Taste extends Component {
         super(props);
         this.state = {
            checked: [],
-           data: beerTastes
        }
     }
 
@@ -28,6 +27,7 @@ export default class Taste extends Component {
                 checked: this.state.checked.filter(i => i !== taste)
             })
         } else {
+            console.log(taste)
             this.setState({
                 checked: [...this.state.checked, taste]
             })
@@ -67,30 +67,47 @@ export default class Taste extends Component {
         }
     }
 
-    renderItem = (elem, idx) => {
-        return  (<View key={idx} style={{width: 187}}>
-            <CheckBox
-                title={elem.item}
-                checkedIcon='dot-circle-o'
-                uncheckedIcon='circle-o'
-                checked={this.isItemChecked(elem.item)}
-                onPress={evt => this.manageToggle(evt, elem.item)}
-            />
-            </View>)
-    }
 
     render(){
+        const firstTastesArr = beerTastes.slice(0, (beerTastes.length-1)/2);
+        const secondTastesArr = beerTastes.slice((beerTastes.length-1)/2);
         return(
             <LinearGradient
                 colors={["#c36f09", "#eeba0b"]}
                 style={styles.linearGradient}
             >
-            <Button type='solid' buttonStyle={styles.attentionButton} title='Find Your beers!' onPress={() => this.try(this.state.checked)}/>
-
-            <FlatList data={this.state.data.sort()}
-            renderItem={this.renderItem}
-            numColumns={2}
-            keyExtractor={(elem, index) => index.toString()}  />
-    </LinearGradient>)
+                <ScrollView>
+                <View style={{flex: 1, flexDirection: "row", justifyContent: 'center'}}>
+                    <View>
+                        {firstTastesArr.map((elem, idx) => {
+                            return (
+                                <CheckBox
+                                    key={idx}
+                                    title={elem}
+                                    checkedIcon='dot-circle-o'
+                                    uncheckedIcon='circle-o'
+                                            checked={this.isItemChecked(elem)}
+                                            onPress={evt => this.manageToggle(evt, elem)}
+                                        />
+                                )
+                            })}
+                    </View>
+                    <View>
+                        {secondTastesArr.map((elem, idx) => {
+                            return (
+                                <CheckBox
+                                    key={idx}
+                                    title={elem}
+                                    checkedIcon='dot-circle-o'
+                                    uncheckedIcon='circle-o'
+                                    checked={this.isItemChecked(elem)}
+                                    onPress={evt => this.manageToggle(evt, elem)}
+                                />
+                            )
+                        })}
+                    </View>
+                </View>
+                </ScrollView>
+            </LinearGradient>)
     }
 }
