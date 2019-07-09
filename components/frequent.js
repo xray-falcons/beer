@@ -35,7 +35,7 @@ function getFrequent (){
 	return frequentBeers
 }
 
-const Frequent = () => {
+const Frequent = (props) => {
 
 	const frequentBeers = getFrequent()
 
@@ -45,7 +45,7 @@ const Frequent = () => {
                 <View style={{justifyContent: "space-between", marginTop: 15}}>
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false} >
                     {frequentBeers.length ? frequentBeers.map(eachBeer =>
-                        <Beer key={eachBeer.beer.id} beer={eachBeer.beer} />) : <Text style={styles.text}>Like some beers to show here!</Text>}
+                        <Beer key={eachBeer.beer.id} beer={eachBeer.beer} navigation={props.navigation}/>) : <Text style={styles.text}>Like some beers to show here!</Text>}
                 </ScrollView>
                 </View>
         </View>

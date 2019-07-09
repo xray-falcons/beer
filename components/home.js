@@ -123,7 +123,7 @@ export default class Home extends React.Component {
                                 <Button onPress={this.getRecentBeers} title="Refresh" />
                                 </View>
                             </View>
-                            <Frequent userId={this.state.userId}/>
+                            <Frequent navigation={this.props.navigation}/>
                             <View style={{marginTop: 10, justifyContent: "space-between"}}>
                                 <Text style={styles.titleText}>Top picks for you: </Text>
                                 <View style={{justifyContent: "space-between", marginTop: 15}}>
