@@ -49,21 +49,13 @@ export default class SingleBeer extends Component {
     }
   }
 
-  onLike = async() => {
+  onLike = async(stateObj, rating) => {
     const userId = this.state.userId
     const beer = this.state.beer
-    this.setState({like:true, dislike:false})
+    this.setState(stateObj)
     await db.collection("users").doc(`${userId}`).collection("beers").doc(`${beer.id}`).set({
-      "name":beer.name,"rating":1, "beer":beer
+      "name":beer.name,"rating":rating, "beer":beer
       }, {"merge":true});
-  }
-
-  onDislike = async() => {
-    const userId = this.state.userId
-    const beer = this.state.beer
-    this.setState({like:false, dislike:true})
-    await db.collection("users").doc(`${userId}`).collection("beers").doc(`${beer.id}`).set({
-      "name":beer.name,"rating":-1, "beer":beer}, {"merge":true});
   }
 
   onDrink = async() => {
@@ -78,12 +70,8 @@ export default class SingleBeer extends Component {
     this.setState({times:countIncrementer})
   }
 
-  glowButton = () => {
-    this.setState({drinkPress:true})
-  }
-
-  unGlowButton = () => {
-    this.setState({drinkPress:false})
+  glowButton = (bool) => {
+    this.setState({drinkPress:bool})
   }
 
   submitNote = async() => {
@@ -97,26 +85,11 @@ export default class SingleBeer extends Component {
     }
   }
 
-  getLikeStyle = () => {
-    if (this.state.like) {
+  getStyle = (bool) => {
+    if (bool) {
       return styles.iconButtonPressed
     } else {
       return styles.iconButton}
-  }
-
-  getDislikeStyle = () => {
-    if (this.state.dislike) {
-      return styles.iconButtonPressed
-    } else {
-      return styles.iconButton
-    }
-  }
-
-  getDrinkStyle = () => {
-    if (this.state.drinkPress) {
-      return styles.iconButtonPressed
-     } else {
-       return styles.iconButton}
   }
 
   render(){
@@ -135,17 +108,17 @@ export default class SingleBeer extends Component {
             <Text style={styles.text}>{beer.description}</Text>
 
             <View style={styles.buttonRow}>
-              <Icon name="thumbs-up" style={this.getLikeStyle()} onPress={this.onLike} />
-              <Icon name="thumbs-down" style={this.getDislikeStyle()} onPress={this.onDislike} />
-              <TouchableWithoutFeedback onPressIn={this.glowButton} onPress={this.onDrink} onPressOut={this.unGlowButton}>
-                <Icon name="beer" style={this.getDrinkStyle()}  />
+              <Icon name="thumbs-up" style={this.getStyle(this.state.like)} onPress={()=>{this.onLike({like:true, dislike:false}, 1)}} />
+              <Icon name="thumbs-down" style={this.getStyle(this.state.dislike)} onPress={()=>{this.onLike({like:false, dislike:true}, -1)}} />
+              <TouchableWithoutFeedback onPressIn={()=>{this.glowButton(true)}} onPress={this.onDrink} onPressOut={()=>{this.glowButton(false)}}>
+                <Icon name="beer" style={this.getStyle(this.state.drinkPress)} />
               </TouchableWithoutFeedback>
               <Badge value={this.state.times} status="primary" containerStyle={styles.badgePosition}/>
             </View>
 
             <Text style={styles.text}>Like, dislike, or drink this beer</Text>
             <Text style={styles.textBold}>Contribute your notes here!</Text>
-            <Text style={styles.text}>{this.state.notes || null}</Text>
+            <Text style={styles.textBox}>{this.state.notes || null}</Text>
             <TextInput style={styles.notebox} placeholder="Your notes..." onChangeText={(text)=>this.setState({text})} value={this.state.text}/>
             <Button buttonStyle={styles.attentionButton} title="Submit" onPress={this.submitNote} />
           </ScrollView>
@@ -154,4 +127,3 @@ export default class SingleBeer extends Component {
     );
   }
 }
-
