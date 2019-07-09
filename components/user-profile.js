@@ -17,9 +17,9 @@ export default class UserProfile extends Component{
         const userId = firebase.auth().currentUser.uid
         const userRef = db.doc(`users/${userId}`)
         if (this.state.userProfile.length >=3) {
+            console.log(this.state.userProfile)
             await userRef.set({preferences:this.state.userProfile},{merge:true});
             this.setState({userProfile:[]});
-            this.props.navigation.navigate("Dashboard")
         } else {
             Alert.alert("We'll need a few more than that to give you a good recommendation ;)")}
         }
@@ -33,7 +33,7 @@ export default class UserProfile extends Component{
             >
             <ScrollView>
                 {beerTastes.map((elem) =>
-                    <Button key={elem} title={elem = elem[0].toUpperCase() + elem.slice(1)} onPress={() => {
+                    <Button key={elem} title={elem} onPress={() => {
                     	this.setState({userProfile: [...this.state.userProfile, elem]})
                     }}
                     />

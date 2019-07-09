@@ -5,6 +5,11 @@ export default StyleSheet.create({
         backgroundColor:"#841574",
         borderRadius:5
     },
+    attentionButtonFixed:{
+        backgroundColor:"#841574",
+        borderRadius:5,
+        position: "relative",
+    },
     authButton: {
         backgroundColor: "#710000",
     },
@@ -59,11 +64,16 @@ export default StyleSheet.create({
         backgroundColor:"transparent",
         width:150
     },
+    columns: {
+        flex: 1,
+        flexDirection: "row",
+        justifyContent: "center",
+    },
     container: {
         flex: 1,
-        alignItems: 'center',
+        alignItems: "center",
         justifyContent: 'center',
-        flexDirection: 'column',
+        flexDirection: "column",
         margin: 20
     },
     containerApp: {
@@ -72,13 +82,13 @@ export default StyleSheet.create({
     containerImage: {
         width: "30%",
         height: "40%",
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: "center",
+        alignItems: "center",
     },
     headText: {
         fontSize: 38,
         fontWeight: "bold",
-        textAlign: 'center',
+        textAlign: "center",
         marginBottom: 15
       },
     iconButton: {
@@ -176,6 +186,7 @@ export default StyleSheet.create({
         textAlign: 'center',
         fontSize:22
     },
+
 });
 
 
