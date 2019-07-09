@@ -15,7 +15,7 @@ function getFrequent (){
 			try {
 		 		const userId = await firebase.auth().currentUser.uid
 	        	const userBeersRef = db.collection(`users/${userId}/beers`)
-	            const query = userBeersRef.orderBy("times", "desc").limit(5)
+	            const query = userBeersRef.orderBy("times", "desc").limit(10)
 	            const unsubscribe = await query.onSnapshot( snapshot => {
 	                const frequent = snapshot.docs.map(doc => ({
 	                	...doc.data()

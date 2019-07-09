@@ -20,7 +20,7 @@ function getRecommendations (){
                 for (let i = 0; i < preferences.length; i++){
                     const beerQuery = beers
                         .where('taste', 'array-contains', preferences[i])
-                        .limit(2)
+                        .limit(10)
                     const unsubscribe = await beerQuery.onSnapshot(snapshot => {
                         const recs = snapshot.docs.map(doc => ({
                             ...doc.data()
