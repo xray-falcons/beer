@@ -3,6 +3,7 @@ import { Animated, Text, View, Dimensions, StyleSheet } from 'react-native';
 
 import Constants from 'expo-constants';
 import UserProfile from "./user-profile";
+import {Button} from "react-native-elements";
 
 const PAGE_WIDTH = Dimensions.get('window').width;
 const PAGE_HEIGHT = Dimensions.get('window').height;
@@ -17,7 +18,7 @@ const PAGES = [
         title: 'Consectetur adipisicing',
         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor ",
         backgroundColor: '#bc7804',
-        image: 'https://github.com/xray-falcons/beer/blob/master/style/browse_by_flavor_input.png?raw=true'
+        image: 'https://github.com/xray-falcons/beer/blob/master/style/bottom_bar.png?raw=true'
     },
     {
         title: 'Adipisicing elitt',
@@ -100,23 +101,31 @@ export default class Walk extends Component {
 
                         </View>
                     ))}
-                    <View style={walkStyles.page}>
+                    <View style={{width: PAGE_WIDTH,
+                        height: PAGE_HEIGHT+50,
+                        paddingTop: Constants.statusBarHeight + 48}}>
                         <View style={[ walkStyles.card ]}>
-                            <Text style={walkStyles.title}>Welcome to Stumblr!</Text>
-                            <Text style={walkStyles.desc}>"Please give"</Text>
+                            <Text style={{
+                                fontSize: PAGE_WIDTH / 20,
+                                color: '#fff',
+                                backgroundColor: 'transparent',
+                                marginTop: 20,
+                                lineHeight: 25,
+                                textAlign: 'center'
+                            }}>Please help us to prepare list of beers for you! Choose at least three preferences below!</Text>
 
                         </View>
-                        <Animated.View style={[ walkStyles.frame, walkStyles.shadow, { transform: [{ translateX: Animated.multiply(Animated.add(position, -6), -200) }] } ]}>
-                            < UserProfile />
+                        <Animated.View style={[ walkStyles.frame1, walkStyles.shadow, { transform: [{ translateX: Animated.multiply(Animated.add(position, -6), -200) }] } ]}>
+                            <UserProfile />
                         </Animated.View>
 
                     </View>
 
                 </Animated.ScrollView>
 
-                <View style={walkStyles.button}>
-                    <Text style={walkStyles.buttonText} onPress={() => this.props.navigation.navigate('Dashboard')}>{"GET STARTED"}</Text>
-                </View>
+                {/*<View style={walkStyles.button}>*/}
+                    {/*<Text style={walkStyles.buttonText} onPress={() => this.props.navigation.navigate('Dashboard')}>{"GET STARTED"}</Text>*/}
+                {/*</View>*/}
             </View>
         );
     }
@@ -176,6 +185,15 @@ const walkStyles = StyleSheet.create({
         height: PAGE_WIDTH -100,
         width: PAGE_WIDTH - 100,
         margin: 50,
+    },
+    frame1: {
+        position: 'absolute',
+        left: 0,
+        bottom: 160,
+        borderRadius: (PAGE_WIDTH -100)/2,
+        height: PAGE_HEIGHT - 300,
+        width: PAGE_WIDTH - 60,
+        margin: 30,
     },
     button: {
         backgroundColor: 'rgba(0,0,0, 0.3)',
