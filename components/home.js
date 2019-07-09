@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Text, View} from 'react-native';
 import {Button} from "react-native-elements"
 import {LinearGradient} from "expo-linear-gradient";
@@ -30,21 +30,36 @@ export default class Home extends React.Component {
     async componentDidMount () {
         const userId = await firebase.auth().currentUser.uid
         this.setState({userId: userId})
-        this.getFrequentBeers()
+        this.unsub = this.getFrequentBeers()
         this.getRecentBeers()
         this.getRecommendations()
     }
 
+    componentWillUnmount(){
+        this.unsub()
+    }
+
+
+
     getFrequentBeers = async () => {
-        const userBeersRef = db.collection(`users/${this.state.userId}/beers`)
+        const userBeersRef = await db.collection(`users/${this.state.userId}/beers`).get().data()
+        console.log('userref', userBeersRef)
         try {
             let frequentBeers = []
-            const query = userBeersRef.orderBy("times", "desc").limit(10)
-            const querySnapshot = await query.get()
-            querySnapshot.forEach(doc=>{
-                let beer = doc.data()
-                frequentBeers.push(beer)
-            })
+            //let recentBeers = []
+            // const query = userBeersRef
+            // .orderBy("times", "desc")
+            // .limit(10)
+            // const querySnapshot = await query.get()
+            // await query.onSnapshot( snapshot => {
+            //     snapshot.docs.map(doc => {
+            //         frequentBeers.push(doc.data())
+            //     })
+            // })
+            // querySnapshot.forEach(doc=>{
+            //     let beer = doc.data()
+            //     frequentBeers.push(beer)
+            // })
             this.setState({frequentBeers})
         } catch(err) {
             console.log(err)
