@@ -76,8 +76,8 @@ export default class Taste extends Component {
                 colors={["#c36f09", "#eeba0b"]}
                 style={styles.linearGradient}
             >
+                <Button type='solid' buttonStyle={styles.attentionButtonFixed} title='Find Your beers!' onPress={() => this.try(this.state.checked)}/>
                 <ScrollView>
-                    <Button type='solid' buttonStyle={styles.attentionButtonFixed} title='Find Your beers!' onPress={() => this.try(this.state.checked)}/>
                     <View style={styles.columns}>
                     <View>
                         {firstTastesArr.map((elem, idx) => {
