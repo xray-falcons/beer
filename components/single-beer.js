@@ -118,7 +118,7 @@ export default class SingleBeer extends Component {
 
             <Text style={styles.text}>Like, dislike, or drink this beer</Text>
             <Text style={styles.textBold}>Contribute your notes here!</Text>
-            <Text style={styles.text}>{this.state.notes || null}</Text>
+            <Text style={styles.textBox}>{this.state.notes || null}</Text>
             <TextInput style={styles.notebox} placeholder="Your notes..." onChangeText={(text)=>this.setState({text})} value={this.state.text}/>
             <Button buttonStyle={styles.attentionButton} title="Submit" onPress={this.submitNote} />
           </ScrollView>
