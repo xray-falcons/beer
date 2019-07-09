@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import {Button, ScrollView, Alert} from 'react-native';
+import {Button, ScrollView, Alert, FlatList} from 'react-native';
 import firebase from "firebase";
 import { db } from '../server/db';
 import {LinearGradient} from "expo-linear-gradient";
 import styles from "../style/styles"
+import {Card} from "react-native-elements";
+import Beer from "./beer-list";
 
 export default class UserProfile extends Component{
     constructor() {
@@ -25,19 +27,25 @@ export default class UserProfile extends Component{
         }
 
         render(){
-		const beerTastes = ["sweet", "chocolate", "hoppy", "citrus","sour","spicy", "fruit","light","coffee","earthy", "tropical", "roast", "caramel", "coconut", "porter", "dark", "barley", "malt", "ipa", "grapefruit", "stout", "smokey", "banana", "vanilla", "bitter", "zest", "crispy", "lemon", "raspberries", "oak", "smooth", "bavaria"]
+		const beerTastes = ["sweet", "chocolate", "caramel","hoppy", "porter", "light","citrus","sour","spicy", "fruit","coffee","earthy", "tropical", "roast", "coconut",  "dark", "barley", "malt", "ipa", "grapefruit", "stout", "smokey", "banana", "vanilla", "bitter", "zest", "crispy", "lemon", "raspberries", "oak", "smooth", "bavaria"]
         return(
             <LinearGradient
                 colors={["#c36f09", "#eeba0b"]}
                 style={styles.linearGradient}
             >
+                <FlatList
+                    numColumns={4}
+                    data={beerTastes}
+                    renderItem={({item}) => {
+                        return(
+                            <Button key={item} title={item} onPress={() => {
+                                this.setState({userProfile: [...this.state.userProfile, item]})
+                            }}
+                            />
+                        )}}
+                    keyExtractor={(item, index) => index.toString()}
+                />
             <ScrollView>
-                {beerTastes.map((elem) =>
-                    <Button key={elem} title={elem} onPress={() => {
-                    	this.setState({userProfile: [...this.state.userProfile, elem]})
-                    }}
-                    />
-                )}
             	<Button title="submit" onPress={this.submitHandler}/>
             </ScrollView>
             </LinearGradient>
