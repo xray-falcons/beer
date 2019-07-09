@@ -77,7 +77,8 @@ export default class Taste extends Component {
                 style={styles.linearGradient}
             >
                 <ScrollView>
-                <View style={{flex: 1, flexDirection: "row", justifyContent: 'center'}}>
+                    <Button type='solid' buttonStyle={styles.attentionButtonFixed} title='Find Your beers!' onPress={() => this.try(this.state.checked)}/>
+                    <View style={styles.columns}>
                     <View>
                         {firstTastesArr.map((elem, idx) => {
                             return (
@@ -86,10 +87,9 @@ export default class Taste extends Component {
                                     title={elem}
                                     checkedIcon='dot-circle-o'
                                     uncheckedIcon='circle-o'
-                                            checked={this.isItemChecked(elem)}
-                                            onPress={evt => this.manageToggle(evt, elem)}
-                                        />
-                                )
+                                    checked={this.isItemChecked(elem)}
+                                    onPress={evt => this.manageToggle(evt, elem)}
+                                />)
                             })}
                     </View>
                     <View>
@@ -102,8 +102,7 @@ export default class Taste extends Component {
                                     uncheckedIcon='circle-o'
                                     checked={this.isItemChecked(elem)}
                                     onPress={evt => this.manageToggle(evt, elem)}
-                                />
-                            )
+                                />)
                         })}
                     </View>
                 </View>
