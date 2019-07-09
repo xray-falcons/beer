@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Alert } from 'react-native';
 import { CheckBox, Button } from 'react-native-elements'
 import { db } from '../server/db';
 import { LinearGradient } from "expo-linear-gradient";
@@ -27,8 +27,10 @@ export default class Taste extends Component {
                 checked: this.state.checked.filter(i => i !== taste)
             })
         } else {
-            console.log(taste)
-            this.setState({
+            if (this.state.checked.length === 3) {
+                Alert.alert(' ', 'For best results choose at most three tastes at a time')
+                return;
+            }            this.setState({
                 checked: [...this.state.checked, taste]
             })
         }
