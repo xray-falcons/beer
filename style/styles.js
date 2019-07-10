@@ -207,36 +207,36 @@ export const PAGES = [
     {
         title: 'Choose your beer',
         description: "You can find beer you like by category:",
-        backgroundColor: '#5e3105',
-        image: 'https://unsplash.it/400/400?image=999',
+        backgroundColor: '#e9a709',
+        image: 'https://raw.githubusercontent.com/malyavka/GroupProject.FullBlastAcademy/master/20190710_004841.jpg?token=AJFKIIWBBC4YCTS7IUAGGXK5F2UQ4',
     imageBottom: "https://raw.githubusercontent.com/malyavka/GroupProject.FullBlastAcademy/master/20190709_210409.jpg?token=AJFKIIVWFR3DAKJPMW3SPR25F2RVQ"
     },
     {
         title: 'Choose your taste',
         description: "You can find beer you like filtering your tastes",
-        backgroundColor: '#5e3105',
-        image: 'https://unsplash.it/400/400?image=999',
+        backgroundColor: '#ffce11',
+        image: 'https://raw.githubusercontent.com/malyavka/GroupProject.FullBlastAcademy/master/20190710_004810.jpg?token=AJFKIIW5MN5ZDZYMZCIFWAK5F2UO2',
         imageBottom: "https://raw.githubusercontent.com/malyavka/GroupProject.FullBlastAcademy/master/20190709_210409.jpg?token=AJFKIIVWFR3DAKJPMW3SPR25F2RVQ"
     },
     {
         title: 'Know the name?',
         description: "Perfect! Just put it in the search bar! And our smart engine will find it for you!",
         backgroundColor: '#d35400',
-        image: 'https://unsplash.it/400/400?image=900',
+        image: 'https://raw.githubusercontent.com/malyavka/GroupProject.FullBlastAcademy/master/20190710_005142.jpg?token=AJFKIITTQQUCS7DQDPCHF4C5F2UZC',
         imageBottom: "https://raw.githubusercontent.com/malyavka/GroupProject.FullBlastAcademy/master/20190709_210350.jpg?token=AJFKIIXA5ZFLVKY2SFSGBQC5F2RSW"
     },
     {
         title: 'Know what you want?',
         description: "We can find the nearest bar to you using geolocation! ",
         backgroundColor: '#863705',
-        image: 'https://unsplash.it/400/400?image=1011',
+        image: 'https://raw.githubusercontent.com/malyavka/GroupProject.FullBlastAcademy/master/20190710_004303.jpg?token=AJFKIIWRQTZXRAGVOGC7YYC5F2UAU',
     imageBottom: "https://raw.githubusercontent.com/malyavka/GroupProject.FullBlastAcademy/master/20190709_210159.jpg?token=AJFKIISUB6JVYP3XFJG5ATK5F2RY6"
     },
     {
         title: 'I feel lucky',
         description: "You are curious and want to leave your comfort zone? Try random beer!",
         backgroundColor: '#bc870c',
-        image: 'https://raw.githubusercontent.com/malyavka/GroupProject.FullBlastAcademy/master/20190709_210431.jpg?token=AJFKIIQKU5RWSONIDO6YL625FZ2VY',
+        image: 'https://raw.githubusercontent.com/malyavka/GroupProject.FullBlastAcademy/master/20190710_004316.jpg?token=AJFKIIWPW77CGBBVUMMOPXC5F2T62',
         imageBottom: "https://raw.githubusercontent.com/malyavka/GroupProject.FullBlastAcademy/master/20190709_210121.jpg?token=AJFKIIUBAAYRS5WMCUKFF425F2ROY"
 
     },

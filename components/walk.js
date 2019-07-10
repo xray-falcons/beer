@@ -402,6 +402,6 @@ const styles = StyleSheet.create({
     },
     photo: {
         flex: 1,
-        borderRadius: (PAGE_WIDTH -100)/2,
+        // borderRadius: (PAGE_WIDTH -100)/2,
     }
 });
