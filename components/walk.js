@@ -3,7 +3,7 @@ import { Animated, Text, View, Dimensions, StyleSheet } from 'react-native';
 
 import Constants from 'expo-constants';
 import {Image} from "react-native-elements";
-import { PAGES } from "../style/styles";
+import PAGES from "./pages";
 import UserProfile from "./user-profile";
 
 const PAGE_WIDTH = Dimensions.get('window').width;

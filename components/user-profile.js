@@ -41,7 +41,7 @@ export default class UserProfile extends Component{
                             <Button
                                 type="outline"
                                 disabledStyle={{backgroundColor: 'grey'}}
-                                buttonStyle={{backgroundColor:"#841574",borderRadius: 50, margin: 1, marginBottom: 10, alignItems: "center"}}
+                                buttonStyle={{backgroundColor:"#710000",borderRadius: 50, margin: 1, marginBottom: 10, alignItems: "center"}}
                                 key={item}
                                 title={item}
                                 onPress={() => {
