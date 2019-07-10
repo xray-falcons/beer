@@ -3,10 +3,20 @@ import React from "react";
 import { View, Text, ActivityIndicator } from "react-native";
 import firebase from "firebase";
 import styles from "../style/styles"
+import { Audio } from 'expo-av';
 
 export default class Loading extends React.Component {
-  componentDidMount() {
-    this.checkIfLoggedIn();
+
+  async componentDidMount() {
+    this.checkIfLoggedIn(); 
+    
+    try{
+        const pourBeerSound = new Audio.Sound()
+        await pourBeerSound.loadAsync(require('../sounds/pour_beer.m4a')) 
+        await pourBeerSound.playAsync()
+    } catch (err){
+      console.log(err)
+    }
   }
 
   checkIfLoggedIn() {
