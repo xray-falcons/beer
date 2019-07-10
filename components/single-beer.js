@@ -70,9 +70,9 @@ export default class SingleBeer extends Component {
         let countIncrementer = 1;
         countIncrementer+=this.state.times
         this.setState({times:countIncrementer})
-        const soundObj = new Audio.Sound()
-        await soundObj.loadAsync(require('../sounds/open_beer.m4a')) 
-        await soundObj.playAsync()
+        const openBeerSound = new Audio.Sound()
+        await openBeerSound.loadAsync(require('../sounds/open_beer.m4a')) 
+        await openBeerSound.playAsync()
     } catch (err){
       console.log(err)
     }
