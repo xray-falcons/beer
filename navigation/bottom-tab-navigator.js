@@ -36,6 +36,9 @@ const BottomTabNavigator = createBottomTabNavigator(
             screen: Map
         },
         "I feel lucky!": RandomNavigator,
+        Pref: {
+            screen: Walk
+        }
     },
     {
         defaultNavigationOptions: ({ navigation }) => ({

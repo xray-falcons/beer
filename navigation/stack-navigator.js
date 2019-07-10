@@ -22,9 +22,6 @@ export const RandomNavigator = createStackNavigator({
     Random: { screen: Random },
     Beer: { screen: SingleBeer },
 });
-export const WalkNavigator = createStackNavigator({
-    Walk: { screen: Walk },
-});
 
 export const StyleNavigator = createStackNavigator({
     Style: { screen: Category },
@@ -47,6 +44,9 @@ export const SearchNavigator = createStackNavigator({
 export const AuthNavigator =  createStackNavigator({
     SignUpScreen: { screen: SignUpView },
     SignInScreen: { screen: SignInView },
+    Preferences: {
+        screen: Walk
+    }
     }
 );
 
