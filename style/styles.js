@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
     attentionButton:{
-        backgroundColor:"#8f5f11",
+        backgroundColor:"#bf5f11",
         borderRadius:5
     },
     attentionButtonFixed:{

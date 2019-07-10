@@ -8,6 +8,8 @@ import UserProfile from "./user-profile";
 
 const PAGE_WIDTH = Dimensions.get('window').width;
 
+// This walkthrough displays correctly on iPhoneX but
+// not on other devices. The sizing would benefit from flexbox
 
 export default class Walk extends Component {
     state = {
