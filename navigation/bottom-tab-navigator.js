@@ -4,7 +4,6 @@ import { createBottomTabNavigator } from "react-navigation";
 import { HomeNavigator, RandomNavigator, SearchNavigator } from "./stack-navigator";
 import TopTabNavigator from "./top-tab-navigator";
 import Map from "../components/map";
-import Walk from "../components/walk";
 
 const getTabBarIcon = (navigation, focused, tintColor) => {
     const { routeName } = navigation.state;
@@ -36,9 +35,6 @@ const BottomTabNavigator = createBottomTabNavigator(
             screen: Map
         },
         "I feel lucky!": RandomNavigator,
-        Pref: {
-            screen: Walk
-        }
     },
     {
         defaultNavigationOptions: ({ navigation }) => ({

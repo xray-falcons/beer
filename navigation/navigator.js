@@ -8,7 +8,6 @@ import Walk from "../components/walk";
 const AppSwitchNavigator = createSwitchNavigator({
     LoadingScreen: Loading,
     Welcome: AuthNavigator,
-    Preferences: Walk,
     Dashboard: BottomTabNavigator,
     },
 {

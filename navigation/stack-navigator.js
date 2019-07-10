@@ -12,7 +12,6 @@ import Search from "../components/search-bar";
 import BeerListSearch from "../components/beer-list-search";
 import Random from "../components/random";
 import Walk from "../components/walk";
-import UserProfile from "../components/user-profile";
 
 //Add navigators with screens in this file
 export const HomeNavigator = createStackNavigator({
@@ -44,9 +43,7 @@ export const SearchNavigator = createStackNavigator({
 export const AuthNavigator =  createStackNavigator({
     SignUpScreen: { screen: SignUpView },
     SignInScreen: { screen: SignInView },
-    Preferences: {
-        screen: Walk
-    }
+    Preferences: { screen: Walk }
     }
 );
 
