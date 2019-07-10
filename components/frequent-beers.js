@@ -6,17 +6,18 @@ import { ScrollView } from 'react-native-gesture-handler';
 import styles from '../style/styles';
 import Beer from "./beer"
 
-function getFrequent (){
+
+const Frequent = (props) => {
 
 	const [frequentBeers, setFrequent] = React.useState([])
 
-	useEffect(
-		() => {
+	useEffect(() => {
+		const fetchData = async () => {
 			try {
-		 		const userId = firebase.auth().currentUser.uid
+		 		const userId = await firebase.auth().currentUser.uid
 	        	const userBeersRef = db.collection(`users/${userId}/beers`)
 	            const query = userBeersRef.orderBy("times", "desc").limit(10)
-	            const unsubscribe = query.onSnapshot( snapshot => {
+	            const unsubscribe = await query.onSnapshot( snapshot => {
 	                const frequent = snapshot.docs.map(doc => ({
 	                	...doc.data()
 	                }))
@@ -26,14 +27,11 @@ function getFrequent (){
 		    	}
 	        catch(err){
 	        	console.log(err)
-	        }
-	    	}, []
-	)
-	return frequentBeers
-}
+			}
+		}
+		fetchData()
+		}, [])
 
-const Frequent = (props) => {
-	const frequentBeers = getFrequent()
     return (
     	<View style={{marginTop: 10, justifyContent: "space-between"}}>
                 <Text style={styles.titleText}>In your heavy rotation: </Text>
