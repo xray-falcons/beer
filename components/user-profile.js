@@ -3,6 +3,7 @@ import { ScrollView, Alert, FlatList, View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 import firebase from "firebase";
 import { db } from '../server/db';
+import {beerTastes} from '../style/styles'
 
 export default class UserProfile extends Component{
     constructor() {
@@ -26,7 +27,7 @@ export default class UserProfile extends Component{
 
 
         render(){
-		const beerTastes = ["sweet", "caramel","hoppy","malt", "light","citrus","sour", "raspberries","fruit", "chocolate","coffee","earthy", "tropical","porter", 'ipa',"roast", "coconut",  "dark", "barley", "crispy","zest","vanilla",  "smooth", "stout", "lemon","smokey", "banana", "oak", "bitter", "bavaria", "grapefruit",  ]
+		// const beerTastes = ["sweet", "caramel","hoppy","malt", "light","citrus","sour", "raspberries","fruit", "chocolate","coffee","earthy", "tropical","porter", 'ipa',"roast", "coconut",  "dark", "barley", "crispy","zest","vanilla",  "smooth", "stout", "lemon","smokey", "banana", "oak", "bitter", "bavaria", "grapefruit",]
         return(
           <View>
               <Text style={{alignItems: "center", justifyContent: "center", fontSize: 24, marginBottom: 10
