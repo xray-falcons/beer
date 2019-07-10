@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { ScrollView, Alert, FlatList, View } from 'react-native';
+import { ScrollView, Alert, FlatList, View, Text } from 'react-native';
 import { Button } from 'react-native-elements';
 import firebase from "firebase";
 import { db } from '../server/db';
@@ -29,6 +29,8 @@ export default class UserProfile extends Component{
 		const beerTastes = ["sweet", "caramel","hoppy","malt", "light","citrus","sour", "raspberries","fruit", "chocolate","coffee","earthy", "tropical","porter", 'ipa',"roast", "coconut",  "dark", "barley", "crispy","zest","vanilla",  "smooth", "stout", "lemon","smokey", "banana", "oak", "bitter", "bavaria", "grapefruit",  ]
         return(
           <View>
+              <Text style={{alignItems: "center", justifyContent: "center", fontSize: 24, marginBottom: 10
+              }}>Your choice: {this.state.userProfile.join(', ')} </Text>
                 <FlatList
                     columnWrapperStyle={{alignItems: "center", justifyContent: "center"}}
                     numColumns={4}
@@ -51,7 +53,7 @@ export default class UserProfile extends Component{
                     keyExtractor={(item, index) => index.toString()}
                 />
             	<Button
-                    type="outline"
+                    type="solid"
                     disabledStyle={{backgroundColor: 'grey'}}
                     buttonStyle={{backgroundColor:"#842749", marginTop: 10, borderRadius: 20}}
                     title="GET STARTED!" onPress={this.submitHandler}/>

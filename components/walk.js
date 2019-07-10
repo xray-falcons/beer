@@ -284,7 +284,7 @@ export default class Walk extends Component {
                                         <Text style={styles.desc}>{page.description}</Text>
                                     </View>
                                     :
-                                    <Text style={styles.desc}>{page.description}</Text>
+                                    <Text style={styles.desc1}>{page.description}</Text>
                                 }
                             {(i < PAGES.length-1)
                                 ?
@@ -295,7 +295,7 @@ export default class Walk extends Component {
                                 />
                             </Animated.View>
                                 :
-                                <Animated.View style={[ styles.frame,  { transform: [{ translateX: Animated.multiply(Animated.add(position, -i), -200) }] } ]}>
+                                <Animated.View style={[ styles.frame1,  { transform: [{ translateX: Animated.multiply(Animated.add(position, -i), -200) }] } ]}>
 
                                 <UserProfile/>
                                 </Animated.View>
@@ -341,6 +341,14 @@ const styles = StyleSheet.create({
         lineHeight: 25,
         textAlign: 'center'
     },
+    desc1: {
+        fontSize: PAGE_WIDTH / 20,
+        color: '#fff',
+        backgroundColor: 'transparent',
+        marginTop: 20,
+        lineHeight: 25,
+        textAlign: 'center'
+    },
     page: {
         width: PAGE_WIDTH,
         paddingTop: Constants.statusBarHeight + 48,
@@ -358,6 +366,15 @@ const styles = StyleSheet.create({
         paddingBottom: 140,
     },
     frame: {
+        position: 'absolute',
+        left: 0,
+        bottom: 160,
+        borderRadius: (PAGE_WIDTH -100)/2,
+        height: PAGE_WIDTH -100,
+        width: PAGE_WIDTH - 100,
+        margin: 50,
+    },
+    frame1: {
         position: 'absolute',
         left: 0,
         bottom: 160,
