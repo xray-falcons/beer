@@ -9,7 +9,7 @@ export default class Taste extends Component {
     constructor(props) {
         super(props);
         this.state = {
-           checked: [],
+           userProfile: [],
        }
     }
 
@@ -18,20 +18,20 @@ export default class Taste extends Component {
     }
 
     isItemChecked(taste) {
-        return this.state.checked.indexOf(taste) > -1
+        return this.state.userProfile.indexOf(taste) > -1
     }
 
     manageToggle = (evt, taste) => {
         if (this.isItemChecked(taste)) {
             this.setState({
-                checked: this.state.checked.filter(i => i !== taste)
+                userProfile: this.state.userProfile.filter(i => i !== taste)
             })
         } else {
-            if (this.state.checked.length === 3) {
+            if (this.state.userProfile.length === 3) {
                 Alert.alert(' ', 'For best results choose at most three tastes at a time')
                 return;
             }            this.setState({
-                checked: [...this.state.checked, taste]
+                userProfile: [...this.state.userProfile, taste]
             })
         }
     }
@@ -39,7 +39,7 @@ export default class Taste extends Component {
     try = async (tastes) => {
         try {
             this.setState({
-                checked: []
+                userProfile: []
             })
             const beers = await db.collection('beers');
             let beerArray =[]
@@ -78,7 +78,7 @@ export default class Taste extends Component {
                 colors={["#c36f09", "#eeba0b"]}
                 style={styles.linearGradient}
             >
-                <Button type='solid' buttonStyle={styles.attentionButtonFixed} title='Find Your beers!' onPress={() => this.try(this.state.checked)}/>
+                <Button type='solid' buttonStyle={styles.attentionButtonFixed} title='Find Your beers!' onPress={() => this.try(this.state.userProfile)}/>
                 <ScrollView>
                     <View style={styles.columns}>
                     <View>

@@ -16,6 +16,10 @@ export default class Random extends Component {
     static navigationOptions = {
         header: null
     }
+    componentDidMount() {
+        this.generateRandomNumber()
+    }
+
     generateRandomNumber = async () => {
         let RandomNumber = Math.floor(Math.random() * (300-100+1)) + 100 ;
         this.setState({

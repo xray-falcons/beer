@@ -1,14 +1,13 @@
 import React from "react";
 import { createSwitchNavigator, createAppContainer } from "react-navigation";
 import Loading from "../components/loading";
-import { AuthNavigator } from "./stack-navigator";
-import UserProfile from "../components/user-profile";
+import {AuthNavigator, WalkNavigator} from "./stack-navigator";
 import BottomTabNavigator from "./bottom-tab-navigator";
 
 const AppSwitchNavigator = createSwitchNavigator({
     LoadingScreen: Loading,
     Welcome: AuthNavigator,
-    Preferences: {screen: UserProfile},
+    Preferences: WalkNavigator,
     Dashboard: BottomTabNavigator,
     },
 {
