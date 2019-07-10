@@ -29,14 +29,16 @@ export default class UserProfile extends Component{
         return(
           <View>
                 <FlatList
+                    columnWrapperStyle={{alignItems: "center", justifyContent: "center"}}
                     numColumns={4}
                     data={beerTastes}
                     renderItem={({item}) => {
                         return(
 
                             <Button
-                                type='solid'
-                                buttonStyle={{backgroundColor:"#841574",borderRadius: 50, margin: 1}}
+                                type="outline"
+                                disabledStyle={{backgroundColor: 'grey'}}
+                                buttonStyle={{backgroundColor:"#841574",borderRadius: 50, margin: 1, marginBottom: 10, alignItems: "center"}}
                                 key={item}
                                 title={item}
                                 onPress={() => {
@@ -47,8 +49,10 @@ export default class UserProfile extends Component{
                     keyExtractor={(item, index) => index.toString()}
                 />
             	<Button
-                    buttonStyle={{backgroundColor:"#842749", }}
-                    title="submit" onPress={this.submitHandler}/>
+                    type="outline"
+                    disabledStyle={{backgroundColor: 'grey'}}
+                    buttonStyle={{backgroundColor:"#842749", marginTop: 10, borderRadius: 20}}
+                    title="GET STARTED!" onPress={this.submitHandler}/>
           </View>
     )}
 }

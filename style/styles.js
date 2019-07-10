@@ -156,13 +156,13 @@ export default StyleSheet.create({
         borderRadius:5
     },
     searchBar:{
-        marginTop: 35,
+        marginTop: 120,
         backgroundColor:"transparent"
     },
     searchLogo:{
         width:200,
         height:200,
-        marginBottom: 20,
+        marginBottom: 200,
         borderRadius: 100
     },
     tabBarOptions:{
@@ -194,4 +194,40 @@ export default StyleSheet.create({
 
 export const beerStyles = ["British Origin Ales", "Irish Origin Ales", "North American Origin Ales","German Origin Ales", "Belgian And French Origin Ales","International Ale Styles","European-germanic Lager","North American Lager", "International Styles","Hybrid/mixed Beer","Mead, Cider, & Perry","Malternative Beverages"]
 export const beerTastes = ["sweet", "chocolate", "hoppy", "citrus","sour","spicy", "fruit","light","coffee","earthy", "tropical", "roast", "caramel", "coconut", "porter", "dark", "barley", "malt", "ipa", "grapefruit", "stout", "smokey", "banana", "vanilla", "bitter", "zest", "crispy", "lemon", "raspberries", "smooth", "bavaria"]
-console.log(beerTastes.length)
+export const PAGES = [
+    {
+        title: 'Welcome to Stumblr!',
+        description: "An intelligent beer recommendation engine powered by your delightful taste! We will get your info in a moment but first let us show you around!",
+        backgroundColor: '#bc6400',
+        image: 'https://raw.githubusercontent.com/xray-falcons/beer/master/style/StumblrLogo.png',
+        imageBottom: ""
+    },
+    // {
+    //     title: 'Consectetur adipisicing',
+    //     description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor ",
+    //     backgroundColor: '#bc870c',
+    //     image: 'https://raw.githubusercontent.com/malyavka/GroupProject.FullBlastAcademy/master/20190709_210431.jpg?token=AJFKIIQKU5RWSONIDO6YL625FZ2VY'
+    // },
+    // {
+    //     title: 'Adipisicing elitt',
+    //     description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor",
+    //     backgroundColor: '#d35400',
+    //     image: 'https://unsplash.it/400/400?image=900'
+    // },
+    // {
+    //     title: 'sit amet',
+    //     description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor",
+    //     backgroundColor: '#5e3105',
+    //     image: 'https://unsplash.it/400/400?image=999'
+    // },
+    // {
+    //     title: 'Sed do eiusmod',
+    //     description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor",
+    //     backgroundColor: '#863705',
+    //     image: 'https://unsplash.it/400/400?image=1011'
+    // },
+    {
+        description: "Please help us to prepare list of beers for you! Choose at least three preferences below!",
+        backgroundColor: '#863705',
+    },
+]
