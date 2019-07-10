@@ -16,7 +16,9 @@ import UserProfile from "../components/user-profile";
 
 //Add navigators with screens in this file
 export const HomeNavigator = createStackNavigator({
-    Home: { screen: Home }
+    Home: { screen: Home },
+    Beer: { screen: SingleBeer
+    }
 });
 export const RandomNavigator = createStackNavigator({
     Random: { screen: Random },
