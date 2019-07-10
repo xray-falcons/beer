@@ -174,6 +174,14 @@ export default StyleSheet.create({
         fontSize: 20,
         textAlign: 'justify'
     },
+    textBox: {
+        fontSize: 20,
+        textAlign: 'justify',
+        padding:4,
+        borderWidth:2,
+        borderColor:"#443000",
+        margin:5
+    },
     titleText:{
         fontSize: 26,
         alignItems: 'center',
