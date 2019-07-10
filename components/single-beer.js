@@ -24,8 +24,8 @@ export default class SingleBeer extends Component {
     }
   }
     static navigationOptions = {
-        headerTransparent: true
-        }
+        header: null
+    }
 
   componentDidMount = async()=>{
     try {
