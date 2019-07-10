@@ -11,7 +11,7 @@ export default [
       description: "Filter beers by a variety of styles from around the world.",
       backgroundColor: '#e9a709',
       image: 'https://raw.githubusercontent.com/malyavka/GroupProject.FullBlastAcademy/master/20190710_004841.jpg?token=AJFKIIWBBC4YCTS7IUAGGXK5F2UQ4',
-  imageBottom: "https://raw.githubusercontent.com/xray-falcons/beer/walkthrough/style/bottom_bar_browse.jpg"
+      imageBottom: "https://raw.githubusercontent.com/xray-falcons/beer/walkthrough/style/bottom_bar_browse.jpg"
   },
   {
       title: 'Browse by taste',
@@ -22,10 +22,17 @@ export default [
   },
   {
       title: 'Know the name?',
-      description: "Perfect! Just put it in the search bar! And our smart engine will find it for you!",
+      description: "Just put it in the search bar! And our smart engine will find it for you!",
       backgroundColor: '#d35400',
       image: 'https://raw.githubusercontent.com/malyavka/GroupProject.FullBlastAcademy/master/20190710_005142.jpg?token=AJFKIITTQQUCS7DQDPCHF4C5F2UZC',
       imageBottom: "https://raw.githubusercontent.com/xray-falcons/beer/walkthrough/style/bottom_bar_search.jpg"
+  },
+  {
+    title: 'There it is!',
+    description: "Press the mug each time you've had this beer, and mark if you liked it or not. This info helps us provide informed recommendations! You can also keep notes for yourself below.",
+    backgroundColor: '#e9a709',
+    image: 'https://raw.githubusercontent.com/malyavka/GroupProject.FullBlastAcademy/master/20190710_005142.jpg?token=AJFKIITTQQUCS7DQDPCHF4C5F2UZC',
+    imageBottom: "https://raw.githubusercontent.com/xray-falcons/beer/walkthrough/style/bottom_bar_search.jpg"
   },
   {
       title: 'Still have no beer?',
