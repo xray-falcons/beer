@@ -21,8 +21,8 @@ export default class Home extends React.Component {
                 style={styles.linearGradient}>
                         { <ScrollView>
                             <Recent navigation={this.props.navigation} />
-                            {/* <Frequent navigation={this.props.navigation}/>
-                            <Recommended navigation={this.props.navigation} /> */}
+                            <Frequent navigation={this.props.navigation}/>
+                            <Recommended navigation={this.props.navigation} />
                             <Button type="solid" title='Logout' onPress={() => {firebase.auth().signOut()}}/>
                          </ScrollView>}
             </LinearGradient>

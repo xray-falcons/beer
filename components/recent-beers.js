@@ -16,14 +16,14 @@ const Recent = (props) => {
 			try {
 		 		const userId = await firebase.auth().currentUser.uid
 	        	const userBeersRef = db.collection(`users/${userId}/beers`)
-	            const query = await userBeersRef.orderBy("lastHad", "desc").limit(10)
+	            const query = userBeersRef.orderBy("lastHad", "desc").limit(10)
 	            const unsubscribe = await query.onSnapshot( snapshot => {
 	                const recent = snapshot.docs.map(doc => ({
 	                	...doc.data()
 	                }))
 	                setRecent(recent)
                 })
-		        return unsubscribe
+		        return () => unsubscribe()
 		    	}
 	        catch(err){
 	        	console.log(err)
@@ -31,7 +31,6 @@ const Recent = (props) => {
         }
         fetchData()
         }, [])
-
 
     return (
     	<View style={{marginTop: 80, justifyContent: "space-between"}}>
