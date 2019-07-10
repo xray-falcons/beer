@@ -62,9 +62,10 @@ export default class Walk extends Component {
                                 </Animated.View>
                                 }
                             {((i > 0) && (i < PAGES.length-1)) ?  <View style={styles.button}>
-                                <Image style={{width: 380, height: 90, justifyContent: "center", alignItems: "center" } } source={{uri: page.imageBottom}}/>
+                                <Image style={{width: 380, height: 59, justifyContent: "center", alignItems: "center", borderRadius: 15, marginBottom: 60 } } source={{uri: page.imageBottom}}/>
                             </View> : <Text style={styles.buttonText}> </Text> }
-
+                            <View style={styles.button}>
+                            </View>
                         </View>
                     )})}
                 </Animated.ScrollView>
@@ -76,6 +77,7 @@ export default class Walk extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+
     },
     shadow: {
         elevation: 16,
@@ -134,6 +136,8 @@ const styles = StyleSheet.create({
         height: PAGE_WIDTH -100,
         width: PAGE_WIDTH - 100,
         margin: 50,
+        marginBottom: 100
+
     },
     frame1: {
         position: 'absolute',
@@ -143,6 +147,7 @@ const styles = StyleSheet.create({
         height: PAGE_WIDTH -60,
         width: PAGE_WIDTH - 100,
         margin: 50,
+        marginBottom: 100
     },
     button: {
         // backgroundColor: 'rgba(0,0,0, 0.3)',
@@ -163,6 +168,6 @@ const styles = StyleSheet.create({
     },
     photo: {
         flex: 1,
-        // borderRadius: (PAGE_WIDTH -100)/2,
+        borderRadius: 10,
     }
 });
