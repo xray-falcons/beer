@@ -9,7 +9,7 @@ export default class Beer extends Component {
     if(route === 'Home'){
       return (
         <TouchableOpacity onPress={() => this.props.navigation.navigate('Beer', {beer: beer}) }>
-        <View style={{backgroundColor:"transparent"}}>
+        <View style={{backgroundColor:"transparent", padding: 10}}>
           <Image source={{uri:beer.labels.medium}} style={styles.itemImageSmall}/>
         </View>
         </TouchableOpacity>
