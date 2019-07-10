@@ -31,7 +31,7 @@ export default [
     title: 'There it is!',
     description: "Press the mug each time you've had this beer, and mark if you liked it or not. This info helps us provide informed recommendations! You can also keep notes for yourself below.",
     backgroundColor: '#e9a709',
-    image: 'https://raw.githubusercontent.com/malyavka/GroupProject.FullBlastAcademy/master/20190710_005142.jpg?token=AJFKIITTQQUCS7DQDPCHF4C5F2UZC',
+    image: 'https://raw.githubusercontent.com/xray-falcons/beer/walkthrough/style/singlebeerscreenshot.jpg',
     imageBottom: "https://raw.githubusercontent.com/xray-falcons/beer/walkthrough/style/bottom_bar_search.jpg"
   },
   {

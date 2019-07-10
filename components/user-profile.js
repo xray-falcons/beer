@@ -43,7 +43,7 @@ export default class UserProfile extends Component{
                             <Button
                                 type="outline"
                                 disabledStyle={{backgroundColor: 'grey'}}
-                                buttonStyle={{backgroundColor:"#710000",borderRadius: 50, margin: 1, marginBottom: 10, alignItems: "center"}}
+                                buttonStyle={{backgroundColor:"#ffc622",borderRadius: 50, margin: 1, marginBottom: 10, alignItems: "center"}}
                                 key={item}
                                 title={item}
                                 onPress={() => {
@@ -57,7 +57,7 @@ export default class UserProfile extends Component{
             	<Button
                     type="solid"
                     disabledStyle={{backgroundColor: 'grey'}}
-                    buttonStyle={{backgroundColor:"#842749", marginTop: 10, borderRadius: 20}}
+                    buttonStyle={{backgroundColor:"#710000", marginTop: 10, borderRadius: 20}}
                     title="GET STARTED!" onPress={this.submitHandler}/>
           </View>
     )}
