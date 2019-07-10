@@ -30,7 +30,8 @@ export default class SingleBeer extends Component {
 
   componentDidMount = async()=>{
     try {
-      this.setState({userId: await firebase.auth().currentUser.uid})
+      const idFromFirebase = await firebase.auth().currentUser.uid
+      this.setState({userId: idFromFirebase})
       const userId = this.state.userId
       const beer = this.state.beer
       const beerQuery = await db.collection("users").doc(`${userId}`).collection("beers").doc(`${beer.id}`).get()
@@ -42,7 +43,7 @@ export default class SingleBeer extends Component {
         }
         const notes = await beerQuery.data().userNotes;
         this.setState({notes:notes})
-        const times = await beerQuery.data().times;
+        const times = await beerQuery.data().times || 0;
         this.setState({times:Number(times)})
       }
     }catch(error){
@@ -60,18 +61,20 @@ export default class SingleBeer extends Component {
   }
 
   onDrink = async() => {
-    try {      
-        const userId = this.state.userId
-        const beer = this.state.beer
-        const beerRef = await db.doc(`users/${userId}/beers/${beer.id}`)
-        if(!beerRef.times) beerRef.times = 0;
-        beerRef.update({"times":firebase.firestore.FieldValue.increment(1)})
-        beerRef.set({"lastHad":new Date(), "beer":beer }, {"merge":true})
+    try {
         let countIncrementer = 1;
         countIncrementer+=this.state.times
         this.setState({times:countIncrementer})
+        const userId = this.state.userId
+        const beer = this.state.beer
+        const beerRef = db.doc(`users/${userId}/beers/${beer.id}`)
+        const snap = await beerRef.get()
+        const beerSnapshot = snap.doc()
+        if(!beerSnapshot.times) beerSnapshot.times = 0;
+        beerSnapshot.set({"times":this.state.times}, {"merge":true})
+        beerSnapshot.set({"lastHad":new Date(), "beer":beer }, {"merge":true})
         const openBeerSound = new Audio.Sound()
-        await openBeerSound.loadAsync(require('../sounds/open_beer.m4a')) 
+        await openBeerSound.loadAsync(require('../sounds/open_beer.m4a'))
         await openBeerSound.playAsync()
     } catch (err){
       console.log(err)
