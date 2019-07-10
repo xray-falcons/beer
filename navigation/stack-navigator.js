@@ -47,6 +47,7 @@ export const SearchNavigator = createStackNavigator({
 export const AuthNavigator =  createStackNavigator({
     SignUpScreen: { screen: SignUpView },
     SignInScreen: { screen: SignInView },
+    Preferences: { screen: Walk }
     }
 );
 

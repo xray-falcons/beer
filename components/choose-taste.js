@@ -3,7 +3,9 @@ import { View, ScrollView, Alert } from 'react-native';
 import { CheckBox, Button } from 'react-native-elements'
 import { db } from '../server/db';
 import { LinearGradient } from "expo-linear-gradient";
-import styles, { beerTastes } from "../style/styles"
+import styles from "../style/styles"
+import { beerTastes } from './beerAttributeArrays'
+
 
 export default class Taste extends Component {
     constructor(props) {

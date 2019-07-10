@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { Animated, Text, View, Dimensions, StyleSheet } from 'react-native';
-
 import Constants from 'expo-constants';
 import {Image} from "react-native-elements";
-import { PAGES } from "../style/styles";
+import PAGES from "./pages";
 import UserProfile from "./user-profile";
-
 const PAGE_WIDTH = Dimensions.get('window').width;
 
+// This walkthrough displays correctly on iPhoneX but
+// not on other devices. The sizing would benefit from flexbox
 
 export default class Walk extends Component {
     state = {
@@ -45,24 +45,32 @@ export default class Walk extends Component {
                                     :
                                     <Text style={styles.desc1}>{page.description}</Text>
                                 }
-                            {(i < PAGES.length-1)
-                                ?
-                            <Animated.View style={[ styles.frame, styles.shadow, { transform: [{ translateX: Animated.multiply(Animated.add(position, -i), -200) }] } ]}>
-                                <Animated.Image
-                                    source={{uri: page.image}}
-                                    style={styles.photo}
-                                />
-                            </Animated.View>
-                                :
-                                <Animated.View style={[ styles.frame1,  { transform: [{ translateX: Animated.multiply(Animated.add(position, -i), -200) }] } ]}>
-
-                                <UserProfile navigation={this.props.navigation}/>
+                            {(i === 0)
+                            ? <Animated.View style={[ styles.frame, styles.shadow, { transform: [{ translateX: Animated.multiply(Animated.add(position, -i), -200) }] } ]}>
+                                    <Animated.Image
+                                        source={{uri: page.image}}
+                                        style={ {
+                                            flex: 1,
+                                            borderRadius: (PAGE_WIDTH -100)/2,
+                                        }}
+                                    />
                                 </Animated.View>
-                                }
+                                : (i < PAGES.length-1)
+                                ?  <Animated.View style={[ styles.frame, styles.shadow, { transform: [{ translateX: Animated.multiply(Animated.add(position, -i), -200) }] } ]}>
+                                        <Animated.Image
+                                            source={{uri: page.image}}
+                                            style={styles.photo}
+                                        />
+                                    </Animated.View>
+                                    : <Animated.View style={[ styles.frame1,  { transform: [{ translateX: Animated.multiply(Animated.add(position, -i), -200) }] } ]}>
+                                        <UserProfile navigation={this.props.navigation}/>
+                                    </Animated.View>
+                            }
                             {((i > 0) && (i < PAGES.length-1)) ?  <View style={styles.button}>
-                                <Image style={{width: 380, height: 90, justifyContent: "center", alignItems: "center" } } source={{uri: page.imageBottom}}/>
+                                <Image style={{width: 380, height: 59, justifyContent: "center", alignItems: "center", borderRadius: 15, marginBottom: 60 } } source={{uri: page.imageBottom}}/>
                             </View> : <Text style={styles.buttonText}> </Text> }
-
+                            <View style={styles.button}>
+                            </View>
                         </View>
                     )})}
                 </Animated.ScrollView>
@@ -91,7 +99,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         textAlign: 'center'
     },
-
     desc: {
         fontSize: PAGE_WIDTH / 24,
         color: '#fff',
@@ -132,6 +139,7 @@ const styles = StyleSheet.create({
         height: PAGE_WIDTH -100,
         width: PAGE_WIDTH - 100,
         margin: 50,
+        marginBottom: 100
     },
     frame1: {
         position: 'absolute',
@@ -141,14 +149,12 @@ const styles = StyleSheet.create({
         height: PAGE_WIDTH -60,
         width: PAGE_WIDTH - 100,
         margin: 50,
+        marginBottom: 100
     },
     button: {
-        // backgroundColor: 'rgba(0,0,0, 0.3)',
         position: 'absolute',
         margin: 12,
         marginTop: 40,
-        // left: (PAGE_WIDTH / 2) - 100,
-        // borderRadius: 50,
         alignItems: 'center',
         bottom: 30,
     },
@@ -161,6 +167,6 @@ const styles = StyleSheet.create({
     },
     photo: {
         flex: 1,
-        // borderRadius: (PAGE_WIDTH -100)/2,
+        borderRadius: 10,
     }
 });
