@@ -1,8 +1,8 @@
 # Readme
 
-## Welcome to Stumbr!
+## Welcome to Stumblr!
 
-Stumblr is an intelligent beer recommendation application for Android and iOS built with React Native and powered by Firebase.
+Stumblr is an intelligent beer discovery and recommendation application for Android and iOS built with React Native and powered by Firebase.
 
 ![stumblr logo](style/StumblrLogo.png)
 

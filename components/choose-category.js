@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {View, ScrollView} from 'react-native';
 import {Button} from "react-native-elements"
 import {LinearGradient} from "expo-linear-gradient";
-import styles, { beerStyles } from "../style/styles";
+import styles from "../style/styles";
+import { beerStyles } from './beerAttributeArrays'
 
 export default class Category extends Component {
 
