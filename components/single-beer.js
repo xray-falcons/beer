@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import { View, Text, Image, ScrollView, TouchableWithoutFeedback} from "react-native";
-import {Button, Badge} from "react-native-elements"
+import { Audio } from 'expo-av';
+import {Button, Badge} from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 import firebase from "firebase";
 import { db } from "../server/db";
@@ -59,15 +60,22 @@ export default class SingleBeer extends Component {
   }
 
   onDrink = async() => {
-    const userId = this.state.userId
-    const beer = this.state.beer
-    const beerRef = await db.doc(`users/${userId}/beers/${beer.id}`)
-    if(!beerRef.times) beerRef.times = 0;
-    beerRef.update({"times":firebase.firestore.FieldValue.increment(1)})
-    beerRef.set({"lastHad":new Date(), "beer":beer }, {"merge":true})
-    let countIncrementer = 1;
-    countIncrementer+=this.state.times
-    this.setState({times:countIncrementer})
+    try {      
+        const userId = this.state.userId
+        const beer = this.state.beer
+        const beerRef = await db.doc(`users/${userId}/beers/${beer.id}`)
+        if(!beerRef.times) beerRef.times = 0;
+        beerRef.update({"times":firebase.firestore.FieldValue.increment(1)})
+        beerRef.set({"lastHad":new Date(), "beer":beer }, {"merge":true})
+        let countIncrementer = 1;
+        countIncrementer+=this.state.times
+        this.setState({times:countIncrementer})
+        const soundObj = new Audio.Sound()
+        await soundObj.loadAsync(require('../sounds/open_beer.m4a')) 
+        await soundObj.playAsync()
+    } catch (err){
+      console.log(err)
+    }
   }
 
   glowButton = (bool) => {
@@ -115,7 +123,6 @@ export default class SingleBeer extends Component {
               </TouchableWithoutFeedback>
               <Badge value={this.state.times} status="primary" containerStyle={styles.badgePosition}/>
             </View>
-
             <Text style={styles.text}>Like, dislike, or drink this beer</Text>
             <Text style={styles.textBold}>Contribute your notes here!</Text>
             <Text style={styles.textBox}>{this.state.notes || null}</Text>
