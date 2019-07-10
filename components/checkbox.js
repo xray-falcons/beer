@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Alert, CheckBox } from 'react-native';
-import styles from "../style/styles"
 import { beerTastes } from './beerAttributeArrays'
+import styles from "../style/styles"
+
 
 
 const TasteCheckbox = (props) => {

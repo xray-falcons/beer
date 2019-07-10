@@ -6,42 +6,38 @@ import { ScrollView } from 'react-native-gesture-handler';
 import styles from '../style/styles';
 import Beer from "./beer"
 
-function getRecommendations (){
+const Recommended = (props) => {
+    const [recommendedBeers, setRecs] = React.useState([])
 
-	const [recommendedBeers, setRecs] = React.useState([])
-
-	useEffect(
-		() => {
+	useEffect(() => {
+        const fetchData = async () => {
 			try {
-                const userId = firebase.auth().currentUser.uid
-                const beers = db.collection('beers')
-                const userQuery = db.doc(`users/${userId}`).get()
-                const preferences = userQuery.data().preferences.map(elem => elem.toLowerCase())
-                for (let i = 0; i < preferences.length; i++){
-                    const beerQuery = beers
-                        .where('taste', 'array-contains', preferences[i])
-                        .limit(10)
-                    const unsubscribe = beerQuery.onSnapshot(snapshot => {
-                        const recs = snapshot.docs.map(doc => ({
-                            ...doc.data()
-                        }))
-                        setRecs(recs)
-
-                    })
-                    return () => unsubscribe()
-                }
-
+                const userId = await firebase.auth().currentUser.uid
+                const beersRef = db.collection('beers')
+                const user = await db.doc(`users/${userId}`).get()
+                const preferences = user.data().preferences.map(elem => elem.toLowerCase())
+                const query = beersRef.where('taste', 'array-contains', preferences[0])
+                const snapshot = await query.get()
+                let recs = [];
+                snapshot.forEach(doc => {
+                    const beer = doc.data()
+                    for (let i = 1; i < preferences.length; i++){
+                        for (let j = 0; j < beer.taste.length; j++){
+                            if (beer.taste[j] === preferences[i] && !(recs.includes(beer))){
+                                recs.push(beer)
+                            }
+                        }
+                    }
+                })
+                setRecs(recs)
             }
             catch(err){
 	        	console.log(err)
-	        }
-	    	}, []
-    )
-	return recommendedBeers
-}
+            }
+        }
+        fetchData()
+        }, [])
 
-const Recommended = (props) => {
-    const recommendedBeers = getRecommendations()
     return (
     	<View style={{marginTop: 10, justifyContent: "space-between"}}>
             <Text style={styles.titleText}>Top picks for you: </Text>

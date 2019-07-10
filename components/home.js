@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button} from "react-native-elements"
+import {View} from 'react-native'
 import {LinearGradient} from "expo-linear-gradient";
 import firebase from 'firebase';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -23,7 +24,9 @@ export default class Home extends React.Component {
                             <Recent navigation={this.props.navigation} />
                             <Frequent navigation={this.props.navigation}/>
                             <Recommended navigation={this.props.navigation} />
-                            <Button type="solid" title='Logout' onPress={() => {firebase.auth().signOut()}}/>
+                            <View style={styles.container}>
+                                <Button buttonStyle={styles.attentionButton} type="solid" title='Logout' onPress={() => {firebase.auth().signOut()}}/>
+                            </View>
                          </ScrollView>}
             </LinearGradient>
         );

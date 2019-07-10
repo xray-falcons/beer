@@ -7,6 +7,7 @@ import styles from '../style/styles'
 import { beerTastes } from './beerAttributeArrays'
 
 
+
 export default class UserProfile extends Component{
     constructor() {
         super();
@@ -29,6 +30,7 @@ export default class UserProfile extends Component{
 
 
         render(){
+
         return(
           <View>
               <Text style={{alignItems: "center", justifyContent: "center", fontSize: 24, marginBottom: 10

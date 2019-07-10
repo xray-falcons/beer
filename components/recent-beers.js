@@ -6,40 +6,31 @@ import { ScrollView } from 'react-native-gesture-handler';
 import styles from '../style/styles';
 import Beer from "./beer"
 
-// function getRecent (){
-
-
-// 	return recentBeers
-// }
-	//const recentBeers = getRecent()
 
 const Recent = (props) => {
 
 	const [recentBeers, setRecent] = React.useState([])
 
-	useEffect(
-
-		() => {
+	useEffect(() => {
+        const fetchData = async () => {
 			try {
-		 		const userId = firebase.auth().currentUser.uid
+		 		const userId = await firebase.auth().currentUser.uid
 	        	const userBeersRef = db.collection(`users/${userId}/beers`)
 	            const query = userBeersRef.orderBy("lastHad", "desc").limit(10)
-	            const unsubscribe = query.onSnapshot( snapshot => {
+	            const unsubscribe = await query.onSnapshot( snapshot => {
 	                const recent = snapshot.docs.map(doc => ({
 	                	...doc.data()
 	                }))
 	                setRecent(recent)
-	            })
+                })
 		        return () => unsubscribe()
 		    	}
 	        catch(err){
 	        	console.log(err)
-	        }
-
-	    	}, []
-
-	)
-
+            }
+        }
+        fetchData()
+        }, [])
 
     return (
     	<View style={{marginTop: 80, justifyContent: "space-between"}}>

@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { Animated, Text, View, Dimensions, StyleSheet } from 'react-native';
-
 import Constants from 'expo-constants';
 import {Image} from "react-native-elements";
 import PAGES from "./pages";
 import UserProfile from "./user-profile";
-
 const PAGE_WIDTH = Dimensions.get('window').width;
 
 // This walkthrough displays correctly on iPhoneX but
@@ -65,10 +63,8 @@ export default class Walk extends Component {
                                         />
                                     </Animated.View>
                                     : <Animated.View style={[ styles.frame1,  { transform: [{ translateX: Animated.multiply(Animated.add(position, -i), -200) }] } ]}>
-
                                         <UserProfile navigation={this.props.navigation}/>
                                     </Animated.View>
-
                             }
                             {((i > 0) && (i < PAGES.length-1)) ?  <View style={styles.button}>
                                 <Image style={{width: 380, height: 59, justifyContent: "center", alignItems: "center", borderRadius: 15, marginBottom: 60 } } source={{uri: page.imageBottom}}/>
@@ -86,7 +82,6 @@ export default class Walk extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-
     },
     shadow: {
         elevation: 16,
@@ -104,7 +99,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         textAlign: 'center'
     },
-
     desc: {
         fontSize: PAGE_WIDTH / 24,
         color: '#fff',
@@ -146,7 +140,6 @@ const styles = StyleSheet.create({
         width: PAGE_WIDTH - 100,
         margin: 50,
         marginBottom: 100
-
     },
     frame1: {
         position: 'absolute',
@@ -159,12 +152,9 @@ const styles = StyleSheet.create({
         marginBottom: 100
     },
     button: {
-        // backgroundColor: 'rgba(0,0,0, 0.3)',
         position: 'absolute',
         margin: 12,
         marginTop: 40,
-        // left: (PAGE_WIDTH / 2) - 100,
-        // borderRadius: 50,
         alignItems: 'center',
         bottom: 30,
     },
