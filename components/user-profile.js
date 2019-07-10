@@ -19,12 +19,13 @@ export default class UserProfile extends Component{
             console.log(this.state.userProfile)
             await userRef.set({preferences:this.state.userProfile},{merge:true});
             this.setState({userProfile:[]});
+            this.props.navigation.navigate('Dashboard');
         } else {
             Alert.alert("We'll need a few more than that to give you a good recommendation ;)")}
         }
 
         render(){
-		const beerTastes = ["sweet", "chocolate", "caramel","hoppy", "porter", "light","citrus","sour","spicy", "fruit","coffee","earthy", "tropical", "roast", "coconut",  "dark", "barley", "malt", "ipa", "grapefruit", "stout", "smokey", "banana", "vanilla", "bitter", "zest", "crispy", "lemon", "raspberries", "oak", "smooth", "bavaria"]
+		const beerTastes = ["sweet", "caramel","hoppy","malt", "light","citrus","sour", "raspberries","fruit", "chocolate","coffee","earthy", "tropical","porter", 'ipa',"roast", "coconut",  "dark", "barley", "crispy","zest","vanilla",  "smooth", "stout", "lemon","smokey", "banana", "oak", "bitter", "bavaria", "grapefruit",  ]
         return(
           <View>
                 <FlatList
@@ -32,17 +33,22 @@ export default class UserProfile extends Component{
                     data={beerTastes}
                     renderItem={({item}) => {
                         return(
-                            <Button key={item}
-                                    title={item}
-                                    type="solid"
-                                    onPress={() => {
+
+                            <Button
+                                type='solid'
+                                buttonStyle={{backgroundColor:"#841574",borderRadius: 50, margin: 1}}
+                                key={item}
+                                title={item}
+                                onPress={() => {
                                 this.setState({userProfile: [...this.state.userProfile, item]})
                             }}
                             />
                         )}}
                     keyExtractor={(item, index) => index.toString()}
                 />
-            	<Button title="submit" onPress={this.submitHandler}/>
+            	<Button
+                    buttonStyle={{backgroundColor:"#842749", }}
+                    title="submit" onPress={this.submitHandler}/>
           </View>
     )}
 }

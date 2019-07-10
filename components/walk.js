@@ -3,7 +3,6 @@ import { Animated, Text, View, Dimensions, StyleSheet } from 'react-native';
 
 import Constants from 'expo-constants';
 import UserProfile from "./user-profile";
-import {Button} from "react-native-elements";
 
 const PAGE_WIDTH = Dimensions.get('window').width;
 const PAGE_HEIGHT = Dimensions.get('window').height;
@@ -68,10 +67,29 @@ export default class Walk extends Component {
                         [ { nativeEvent: { contentOffset: { x: this.state.scroll } } } ],
                     )}>
 
+
                     <View style={walkStyles.page}>
                         <View style={[ walkStyles.card ]}>
                             <Text style={walkStyles.title}>Welcome to Stumblr!</Text>
-                            <Text style={walkStyles.desc}>"An intelligent beer recommendation engine powered by your delightful taste! We will get your info in a moment but first let us show you around!"</Text>
+                            <Text style={walkStyles.desc}>An intelligent beer recommendation engine powered by your delightful taste! We will get your info in a moment but first let us show you around!</Text>
+
+                        </View>
+                        <Animated.View style={[ walkStyles.frame, walkStyles.shadow, { transform: [{ translateX: Animated.multiply(Animated.add(position, -0), -200) }] } ]}>
+                            <Animated.Image
+                                source={{uri: 'https://raw.githubusercontent.com/xray-falcons/beer/master/style/StumblrLogo.png'}}
+                                style={{
+                                    flex: 1,
+                                    borderRadius: (PAGE_WIDTH -100)/2,
+                                }}
+                            />
+                        </Animated.View>
+
+                    </View>
+
+                    <View style={walkStyles.page}>
+                        <View style={[ walkStyles.card ]}>
+                            <Text style={walkStyles.title}>Welcome to Stumblr!</Text>
+                            <Text style={walkStyles.desc}>An intelligent beer recommendation engine powered by your delightful taste! We will get your info in a moment but first let us show you around!</Text>
 
                         </View>
                         <Animated.View style={[ walkStyles.frame, walkStyles.shadow, { transform: [{ translateX: Animated.multiply(Animated.add(position, -0), -200) }] } ]}>
@@ -115,8 +133,11 @@ export default class Walk extends Component {
                             }}>Please help us to prepare list of beers for you! Choose at least three preferences below!</Text>
 
                         </View>
-                        <Animated.View style={[ walkStyles.frame1, walkStyles.shadow, { transform: [{ translateX: Animated.multiply(Animated.add(position, -6), -200) }] } ]}>
+                        <Animated.View style={[ walkStyles.frame1,  { transform: [{ translateX: Animated.multiply(Animated.add(position, -6), -200) }] } ]}>
+                            <View style={{justifyContent: 'center', alignItems: 'center',
+                            }}>
                             <UserProfile />
+                            </View>
                         </Animated.View>
 
                     </View>
@@ -167,7 +188,7 @@ const walkStyles = StyleSheet.create({
     },
     card: {
         position: 'absolute',
-        margin: 12,
+        margin: 5,
         marginTop: 40,
         left: 12,
         top: 0,
@@ -175,7 +196,7 @@ const walkStyles = StyleSheet.create({
         borderRadius: 8,
         paddingHorizontal: 24,
         paddingTop: 16,
-        paddingBottom: 140,
+        // paddingBottom: 140,
     },
     frame: {
         position: 'absolute',
@@ -217,3 +238,4 @@ const walkStyles = StyleSheet.create({
         // borderRadius: (PAGE_WIDTH -100)/2,
     }
 });
+
