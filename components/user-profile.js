@@ -24,6 +24,7 @@ export default class UserProfile extends Component{
             Alert.alert("We'll need a few more than that to give you a good recommendation ;)")}
         }
 
+
         render(){
 		const beerTastes = ["sweet", "caramel","hoppy","malt", "light","citrus","sour", "raspberries","fruit", "chocolate","coffee","earthy", "tropical","porter", 'ipa',"roast", "coconut",  "dark", "barley", "crispy","zest","vanilla",  "smooth", "stout", "lemon","smokey", "banana", "oak", "bitter", "bavaria", "grapefruit",  ]
         return(
@@ -43,6 +44,7 @@ export default class UserProfile extends Component{
                                 title={item}
                                 onPress={() => {
                                 this.setState({userProfile: [...this.state.userProfile, item]})
+
                             }}
                             />
                         )}}
@@ -56,3 +58,5 @@ export default class UserProfile extends Component{
           </View>
     )}
 }
+
+
