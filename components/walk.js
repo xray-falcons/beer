@@ -47,20 +47,29 @@ export default class Walk extends Component {
                                     :
                                     <Text style={styles.desc1}>{page.description}</Text>
                                 }
-                            {(i < PAGES.length-1)
-                                ?
-                            <Animated.View style={[ styles.frame, styles.shadow, { transform: [{ translateX: Animated.multiply(Animated.add(position, -i), -200) }] } ]}>
-                                <Animated.Image
-                                    source={{uri: page.image}}
-                                    style={styles.photo}
-                                />
-                            </Animated.View>
-                                :
-                                <Animated.View style={[ styles.frame1,  { transform: [{ translateX: Animated.multiply(Animated.add(position, -i), -200) }] } ]}>
-
-                                <UserProfile navigation={this.props.navigation}/>
+                            {(i === 0)
+                            ? <Animated.View style={[ styles.frame, styles.shadow, { transform: [{ translateX: Animated.multiply(Animated.add(position, -i), -200) }] } ]}>
+                                    <Animated.Image
+                                        source={{uri: page.image}}
+                                        style={ {
+                                            flex: 1,
+                                            borderRadius: (PAGE_WIDTH -100)/2,
+                                        }}
+                                    />
                                 </Animated.View>
-                                }
+                                : (i < PAGES.length-1)
+                                ?  <Animated.View style={[ styles.frame, styles.shadow, { transform: [{ translateX: Animated.multiply(Animated.add(position, -i), -200) }] } ]}>
+                                        <Animated.Image
+                                            source={{uri: page.image}}
+                                            style={styles.photo}
+                                        />
+                                    </Animated.View>
+                                    : <Animated.View style={[ styles.frame1,  { transform: [{ translateX: Animated.multiply(Animated.add(position, -i), -200) }] } ]}>
+
+                                        <UserProfile navigation={this.props.navigation}/>
+                                    </Animated.View>
+
+                            }
                             {((i > 0) && (i < PAGES.length-1)) ?  <View style={styles.button}>
                                 <Image style={{width: 380, height: 59, justifyContent: "center", alignItems: "center", borderRadius: 15, marginBottom: 60 } } source={{uri: page.imageBottom}}/>
                             </View> : <Text style={styles.buttonText}> </Text> }
