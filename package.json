@@ -20,7 +20,7 @@
     "axios": "^0.19.0",
     "expo": "^33.0.0",
     "expo-constants": "^5.0.1",
-    "expo-facebook": "latest",
+    "expo-facebook": "5.0.1",
     "expo-linear-gradient": "^5.0.1",
     "expo-location": "^5.0.1",
     "firebase": "^6.2.3",
