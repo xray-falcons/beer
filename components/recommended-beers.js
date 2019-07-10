@@ -11,17 +11,17 @@ function getRecommendations (){
 	const [recommendedBeers, setRecs] = React.useState([])
 
 	useEffect(
-		async () => {
+		() => {
 			try {
-                const userId = await firebase.auth().currentUser.uid
-                const beers = await db.collection('beers')
-                const userQuery = await db.doc(`users/${userId}`).get()
+                const userId = firebase.auth().currentUser.uid
+                const beers = db.collection('beers')
+                const userQuery = db.doc(`users/${userId}`).get()
                 const preferences = userQuery.data().preferences.map(elem => elem.toLowerCase())
                 for (let i = 0; i < preferences.length; i++){
                     const beerQuery = beers
                         .where('taste', 'array-contains', preferences[i])
                         .limit(10)
-                    const unsubscribe = await beerQuery.onSnapshot(snapshot => {
+                    const unsubscribe = beerQuery.onSnapshot(snapshot => {
                         const recs = snapshot.docs.map(doc => ({
                             ...doc.data()
                         }))
