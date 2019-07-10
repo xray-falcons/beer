@@ -297,11 +297,11 @@ export default class Walk extends Component {
                                 :
                                 <Animated.View style={[ styles.frame1,  { transform: [{ translateX: Animated.multiply(Animated.add(position, -i), -200) }] } ]}>
 
-                                <UserProfile/>
+                                <UserProfile navigation={this.props.navigation}/>
                                 </Animated.View>
                                 }
                             {((i > 0) && (i < PAGES.length-1)) ?  <View style={styles.button}>
-                                <Image style={{width: 380, height: 90, justifyContent: "center", alignItems: "center" } } source={{uri: 'https://raw.githubusercontent.com/malyavka/GroupProject.FullBlastAcademy/master/20190709_210431.jpg?token=AJFKIIQKU5RWSONIDO6YL625FZ2VY'}}/>
+                                <Image style={{width: 380, height: 90, justifyContent: "center", alignItems: "center" } } source={{uri: page.imageBottom}}/>
                             </View> : <Text style={styles.buttonText}> </Text> }
 
                         </View>

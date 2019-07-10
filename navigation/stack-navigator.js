@@ -24,7 +24,6 @@ export const RandomNavigator = createStackNavigator({
 });
 export const WalkNavigator = createStackNavigator({
     Walk: { screen: Walk },
-    Check: { screen: UserProfile}
 });
 
 export const StyleNavigator = createStackNavigator({

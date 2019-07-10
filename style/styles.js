@@ -200,32 +200,47 @@ export const PAGES = [
         description: "An intelligent beer recommendation engine powered by your delightful taste! We will get your info in a moment but first let us show you around!",
         backgroundColor: '#bc6400',
         image: 'https://raw.githubusercontent.com/xray-falcons/beer/master/style/StumblrLogo.png',
-        imageBottom: ""
+        imageBottom: ''
     },
-    // {
-    //     title: 'Consectetur adipisicing',
-    //     description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor ",
-    //     backgroundColor: '#bc870c',
-    //     image: 'https://raw.githubusercontent.com/malyavka/GroupProject.FullBlastAcademy/master/20190709_210431.jpg?token=AJFKIIQKU5RWSONIDO6YL625FZ2VY'
-    // },
-    // {
-    //     title: 'Adipisicing elitt',
-    //     description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor",
-    //     backgroundColor: '#d35400',
-    //     image: 'https://unsplash.it/400/400?image=900'
-    // },
-    // {
-    //     title: 'sit amet',
-    //     description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor",
-    //     backgroundColor: '#5e3105',
-    //     image: 'https://unsplash.it/400/400?image=999'
-    // },
-    // {
-    //     title: 'Sed do eiusmod',
-    //     description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor",
-    //     backgroundColor: '#863705',
-    //     image: 'https://unsplash.it/400/400?image=1011'
-    // },
+
+
+    {
+        title: 'Choose your beer',
+        description: "You can find beer you like by category:",
+        backgroundColor: '#5e3105',
+        image: 'https://unsplash.it/400/400?image=999',
+    imageBottom: "https://raw.githubusercontent.com/malyavka/GroupProject.FullBlastAcademy/master/20190709_210409.jpg?token=AJFKIIVWFR3DAKJPMW3SPR25F2RVQ"
+    },
+    {
+        title: 'Choose your taste',
+        description: "You can find beer you like filtering your tastes",
+        backgroundColor: '#5e3105',
+        image: 'https://unsplash.it/400/400?image=999',
+        imageBottom: "https://raw.githubusercontent.com/malyavka/GroupProject.FullBlastAcademy/master/20190709_210409.jpg?token=AJFKIIVWFR3DAKJPMW3SPR25F2RVQ"
+    },
+    {
+        title: 'Know the name?',
+        description: "Perfect! Just put it in the search bar! And our smart engine will find it for you!",
+        backgroundColor: '#d35400',
+        image: 'https://unsplash.it/400/400?image=900',
+        imageBottom: "https://raw.githubusercontent.com/malyavka/GroupProject.FullBlastAcademy/master/20190709_210350.jpg?token=AJFKIIXA5ZFLVKY2SFSGBQC5F2RSW"
+    },
+    {
+        title: 'Know what you want?',
+        description: "We can find the nearest bar to you using geolocation! ",
+        backgroundColor: '#863705',
+        image: 'https://unsplash.it/400/400?image=1011',
+    imageBottom: "https://raw.githubusercontent.com/malyavka/GroupProject.FullBlastAcademy/master/20190709_210159.jpg?token=AJFKIISUB6JVYP3XFJG5ATK5F2RY6"
+    },
+    {
+        title: 'I feel lucky',
+        description: "You are curious and want to leave your comfort zone? Try random beer!",
+        backgroundColor: '#bc870c',
+        image: 'https://raw.githubusercontent.com/malyavka/GroupProject.FullBlastAcademy/master/20190709_210431.jpg?token=AJFKIIQKU5RWSONIDO6YL625FZ2VY',
+        imageBottom: "https://raw.githubusercontent.com/malyavka/GroupProject.FullBlastAcademy/master/20190709_210121.jpg?token=AJFKIIUBAAYRS5WMCUKFF425F2ROY"
+
+    },
+
     {
         description: "Please help us to prepare list of beers for you! Choose at least three preferences below!",
         backgroundColor: '#863705',
